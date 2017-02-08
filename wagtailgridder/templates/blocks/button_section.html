@@ -1,0 +1,8 @@
+<div class="row">
+    {% for action_item in self.action_items %}
+        {# The widthratio below is a hack to do division. #}
+        <div class="col-md-{% widthratio 12 self.action_items|length 1 %}">
+            {{ action_item }}
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load cache %}
+{% load wagtailcore_tags %}
+
+{% block extra_head_bottom %}
+<link href="{% static "wagtailgridder/css/grid_index_page.css" %}" rel="stylesheet" type="text/css">
+{% endblock extra_head_bottom %}
+
+{% block content %}
+    {% cache 3600 "wagtail-" request.path %}
+        <div id="main-body" class="main-section">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <h2 class="page-header">{{ page.title }}</h2>
+                  </div>
+              </div class="row">
+              <div class="catalog-tools">
+                  <div class="main-section" >
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="filter-wrap pull-right">
+                                  <p class="filter-label">By Topic:</p>
+                                  <div class="filter-options btn-group">
+                                    <button class="btn btn-info filter active" data-filter="all">All Topics</button>
+                                    {% for category in page.categories %}
+                                    <button class="btn btn-info filter" data-filter=".{{ category.name|slugify }}">{{ category.name }}</button>
+                                    {% endfor %}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div id="grid-container" class="gridder">
+                          {% for grid_item in page.grid_items %}
+                              <div class="{% for item in grid_item.categories.all %}{{ item.category.name|slugify }} {% endfor %}gridder-list" data-cat="{% for item in grid_item.categories.all %}{{ item.category.name|slugify }} {% endfor %}" data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
+                                  <div class="gl-wrap">
+                                      <img src="{{ grid_item.summary_image.file.url }}" class="tool-img">
+                                      <div class="tool-body">
+                                          <a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
+                                          <div class="tool-title"><strong>{{ grid_item.title }}</strong></div>
+                                          <p>{{ grid_item.summary_text|safe }}</p>
+                                          {% if grid_item.tags.count %}
+                                              <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
+                                          {% endif %}
+                                        </div>
+                                      <button class="btn btn-primary btn-block">More <i class="fa fa-angle-double-right"></i></button>
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div class="catalog-tools">
+          </div class="container">
+
+          {% for grid_item in page.grid_items %}
+              <div id="{{ grid_item.slug }}" class="gridder-content">
+                  <div class="detail-img">
+                      <div class="content-img" style="background-image:url({{ grid_item.description_image.file.url }});"></div>
+                  </div>
+                  <div class="detail-content">
+                      <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
+                      <p>{{ grid_item.description_text|safe }}</p>
+
+                      {% for button in grid_item.buttons %}
+                      {# Renders 'blocks/button_section.html' #}
+                          {{ button }}
+                      {% endfor %}
+                  </div>
+              </div>
+          {% endfor %}
+        </div id="main-body" class="main-section">
+    {% endcache %}
+{% endblock content %}
+
+{% block extra_footer_js %}
+
+<script src="{% static "wagtailgridder/js/jquery.gridder.min.js" %}"></script>  <!-- necessary for google image effect -->
+<script src="{% static "wagtailgridder/js/jquery.mixitup.min.js" %}"></script>  <!-- necessary for grid -->
+
+<script type="text/javascript">
+  <!-- Binds jquery to $j instead of $ -->
+  var $j = jQuery.noConflict();
+</script>
+
+<script type="text/javascript">
+  $j(function() {
+    var isPageLoaded = false;
+    var locationHash = "";
+      var layout = 'grid'; // Store the current layout as a variable
+      var $container = $j('#grid-container'); // Cache the MixItUp container
+
+      $container.mixItUp({
+        animation: {
+          animateChangeLayout: true, // Animate the positions of targets as the layout changes
+          animateResizeTargets: true, // Animate the width/height of targets as the layout changes
+          effects: 'fade rotateX(-40deg) translateZ(-100px)'
+        },
+
+        selectors: {
+          target: '.gridder-list', // Set up target for grid
+          filter: '.filter' // Set target filter
+        },
+
+        layout: {
+          containerClass: layout // Add the class 'grid' to the container on load
+        },
+
+        callbacks: {
+          onMixEnd: function(state) {
+
+            if ((!isPageLoaded) || (window.location.hash != locationHash)) {
+              isPageLoaded = true;
+              locationHash = window.location.hash;
+              index_position = document.URL.indexOf("#");
+
+              if (index_position != -1) {
+                anchor_name = document.URL.substring(index_position);
+                $j(anchor_name).trigger("click");
+              }
+            }
+
+          }
+        }
+
+      });
+
+      // Call Gridder
+      $j('.gridder').gridderExpander({
+        scroll: true,
+        scrollOffset: 350,
+        scrollTo: "panel", // panel or listitem
+        animationSpeed: 600,
+        animationEasing: "easeInOutExpo",
+        onStart: function() {},
+        onContent: function() {},
+        onClosed: function() {}
+      });
+
+    });
+
+  $j(window).on('hashchange', function(e){
+    document.location.href = document.URL;
+    location.reload();
+  });
+</script>
+
+
+{% endblock extra_footer_js %}

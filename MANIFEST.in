@@ -1,0 +1,9 @@
+include README.md
+recursive-include wagtailgridder/fixtures *
+recursive-include wagtailgridder/management *
+recursive-include wagtailgridder/migrations *
+recursive-include wagtailgridder/pgsql-sas *
+include wagtailgridder/pg-sas/backtest*
+recursive-include wagtailgridder/static *
+recursive-include wagtailgridder/templates *
+recursive-include wagtailgridder/tests *

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+{% block extra_head_top %}
+<link rel="stylesheet" href="{% static 'wagtailgridder/css/grid_index_page.css' %}">
+<link rel="stylesheet" href="{% static 'wagtailgridder/css/grid_item.css' %}">
+{% endblock extra_head_top %}
+
+{% block inner_content %}
+    <div class="row">
+        <h2>{{ page.title }}</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {% image page.description_image original %}
+        </div>
+        <div class="col-md-8">
+            {{ page.landing_page_text|safe }}
+
+            {% block buttons %}
+                {% for button_section in page.buttons %}
+                    <div class="row{# if forloop.first %} align-items-start{% endif %}{% if forloop.last %} align-items-end{% endif #}">
+                        {% for action_item in button_section.value.action_items %}
+                            <div class="col">
+			        {% block action_item %}
+                                    {{ action_item }}
+				{% endblock action_item %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endblock buttons %}
+        </div>
+    </div>
+{% endblock inner_content %}
+
+{% block extra_footer_js %}
+    <script>
+    $(document).ready(function() {
+        for (var i=0; i<$(".default-fa" ).length; i++){
+            if ($(".default-fa" )[i].href.includes("/otis/")) {
+                $(".default-fa" )[i].setAttribute('target', '_blank');
+            }
+        }
+    });
+    </script>
+{% endblock extra_footer_js %}
