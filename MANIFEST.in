@@ -1,5 +1,3 @@
 include README.md
-recursive-include wagtailgridder/migrations *
 recursive-include wagtailgridder/static *
 recursive-include wagtailgridder/templates *
-recursive-include wagtailgridder/templatetags *
