@@ -7,7 +7,7 @@ setup(
     long_description='',
     author='Timothy Allen',
     author_email='tallen@wharton.upenn.edu',
-    url='https://stash.wharton.upenn.edu/projects/WRDSWEB/repos/django-backtester/browse',
+    url='https://github.com/wharton/wagtailgridder',
     include_package_data=True,
     packages=find_packages(),
     zip_safe=False,
