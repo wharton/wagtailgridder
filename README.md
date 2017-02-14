@@ -10,7 +10,7 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 
 # Installation
 
-    pip install https://github.com/wharton/wagtailgridder
+    pip install wagtailgridder
 
 # Screenshots
 
