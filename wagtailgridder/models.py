@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -7,7 +8,7 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, Pag
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
-from modelcluster.fields import ParentalKey
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
@@ -23,12 +24,19 @@ class GridItemTag(TaggedItemBase):
 
 
 class GridCategory(models.Model):
+    """
+    Categories which a grid item can belong to. A grid item can belong to
+    many categories. Categories can be selected from the top of the grid
+    index page.
+    """
+
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return '{0}'.format(
-            self.name,
-        )
+        return self.name,
+
+    class Meta:
+        verbose_name_plural = 'grid categories'
 
 
 class GridItem(Page):
@@ -56,6 +64,7 @@ class GridItem(Page):
         help_text='This is the text which will appear on the grid item\'s landing page.',
     )
     tags = ClusterTaggableManager(through=GridItemTag, blank=True)
+    categories = ParentalManyToManyField('GridCategory', blank=True)
     modified = models.DateTimeField('Page Modified', null=True)
     summary_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -91,8 +100,8 @@ class GridItem(Page):
     ]
 
     META_PANELS = [
-        # InlinePanel('categories', label='Categories'),
         FieldPanel('tags'),
+        FieldPanel('categories', widget=CheckboxSelectMultiple),
     ]
 
     content_panels = Page.content_panels + [
