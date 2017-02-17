@@ -31,15 +31,6 @@ class GridCategory(models.Model):
         )
 
 
-class GridCategoryGridItem(Orderable, models.Model):
-    category = models.ForeignKey(GridCategory, related_name='+')
-    page = ParentalKey('GridItem', related_name='categories')
-
-    panels = [
-        FieldPanel('category'),
-    ]
-
-
 class GridItem(Page):
     """
     The fields needed to properly display a grid item.
@@ -80,13 +71,6 @@ class GridItem(Page):
         on_delete=models.SET_NULL,
         related_name='+',
     )
-    landing_page_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-    )
     buttons = StreamField(ButtonBlock(), null=True)
 
     search_fields = Page.search_fields + [
@@ -100,39 +84,30 @@ class GridItem(Page):
         FieldPanel('summary_text'),
     ]
 
-    DESCRIPTION_PANELS = [
+    DETAIL_PANELS = [
         ImageChooserPanel('description_image'),
         FieldPanel('description_text'),
-    ]
-
-    LANDING_PAGE_PANELS = [
-        ImageChooserPanel('landing_page_image'),
         FieldPanel('landing_page_text'),
     ]
 
     META_PANELS = [
-        InlinePanel('categories', label='Categories'),
+        # InlinePanel('categories', label='Categories'),
         FieldPanel('tags'),
     ]
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             CARD_PANELS,
-            heading="Card Details",
+            heading="Card Information",
             classname="collapsible",
         ),
         MultiFieldPanel(
-            DESCRIPTION_PANELS,
-            heading="Expanded Description Details",
+            DETAIL_PANELS,
+            heading="Expanded Description & Page Information",
             classname="collapsible",
         ),
         StreamFieldPanel(
             'buttons',
-        ),
-        MultiFieldPanel(
-            LANDING_PAGE_PANELS,
-            heading="Landing Page Details",
-            classname="collapsible",
         ),
         MultiFieldPanel(
             META_PANELS,
