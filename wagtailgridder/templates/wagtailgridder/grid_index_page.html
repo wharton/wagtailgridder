@@ -35,7 +35,7 @@
 
                       <div id="grid-container" class="gridder">
                           {% for grid_item in page.grid_items %}
-                              <div class="{% for item in grid_item.categories.all %}{{ item.category.name|slugify }} {% endfor %}gridder-list" data-cat="{% for item in grid_item.categories.all %}{{ item.category.name|slugify }} {% endfor %}" data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
+                              <div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list" data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}" data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
                                   <div class="gl-wrap">
                                       <img src="{{ grid_item.summary_image.file.url }}" class="tool-img">
                                       <div class="tool-body">
