@@ -26,7 +26,7 @@
                                   <div class="filter-options btn-group">
                                     <button class="btn btn-info filter active" data-filter="all">All Topics</button>
                                     {% for category in page.categories %}
-                                    <button class="btn btn-info filter" data-filter=".{{ category.name|slugify }}">{{ category.name }}</button>
+                                    <button class="btn btn-info filter" id="id-{{ category.name|slugify }}" data-filter=".{{ category.name|slugify }}">{{ category.name }}</button>
                                     {% endfor %}
                                   </div>
                               </div>
@@ -73,6 +73,16 @@
           {% endfor %}
         </div id="main-body" class="main-section">
     {% endcache %}
+    {% if request.GET.t %}
+        <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                // alert('#id-{{ request.GET.t }}');
+                $('#id-{{ request.GET.t }}').trigger('click');
+            }, 10);
+        });
+        </script>
+    {% endif %}
 {% endblock content %}
 
 {% block extra_footer_js %}
@@ -81,16 +91,11 @@
 <script src="{% static "wagtailgridder/js/jquery.mixitup.min.js" %}"></script>  <!-- necessary for grid -->
 
 <script type="text/javascript">
-  <!-- Binds jquery to $j instead of $ -->
-  var $j = jQuery.noConflict();
-</script>
-
-<script type="text/javascript">
-  $j(function() {
+  $(function() {
     var isPageLoaded = false;
     var locationHash = "";
       var layout = 'grid'; // Store the current layout as a variable
-      var $container = $j('#grid-container'); // Cache the MixItUp container
+      var $container = $('#grid-container'); // Cache the MixItUp container
 
       $container.mixItUp({
         animation: {
@@ -118,7 +123,7 @@
 
               if (index_position != -1) {
                 anchor_name = document.URL.substring(index_position);
-                $j(anchor_name).trigger("click");
+                $(anchor_name).trigger("click");
               }
             }
 
@@ -128,7 +133,7 @@
       });
 
       // Call Gridder
-      $j('.gridder').gridderExpander({
+      $('.gridder').gridderExpander({
         scroll: true,
         scrollOffset: 350,
         scrollTo: "panel", // panel or listitem
@@ -141,7 +146,7 @@
 
     });
 
-  $j(window).on('hashchange', function(e){
+  $(window).on('hashchange', function(e){
     document.location.href = document.URL;
     location.reload();
   });
