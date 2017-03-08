@@ -9,7 +9,7 @@
 {% endblock extra_head_bottom %}
 
 {% block content %}
-    {% cache 3600 "wagtail-" request.path %}
+    {% cache 3600 "wagtail-" request.path request.user.is_staff request.user.is_faculty %}
         <div id="main-body" class="main-section">
           <div class="container">
               <div class="row">
@@ -64,10 +64,12 @@
                       <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
                       <p>{{ grid_item.description_text|safe }}</p>
 
-                      {% for button in grid_item.buttons %}
-                      {# Renders 'blocks/button_section.html' #}
-                          {{ button }}
-                      {% endfor %}
+                      {% block button_block %}
+                          {% for button in grid_item.buttons %}
+                          {# Renders 'blocks/button_section.html' #}
+                              {{ button }}
+                          {% endfor %}
+                      {% endblock button_block %}
                   </div>
               </div>
           {% endfor %}
