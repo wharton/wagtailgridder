@@ -8,6 +8,7 @@
 <link href="{% static "wagtailgridder/css/grid_index_page.css" %}" rel="stylesheet" type="text/css">
 {% endblock extra_head_bottom %}
 
+{% block breadcrumbs %}{% endblock %}
 {% block content %}
     {% cache 3600 "wagtail-" request.path request.user.is_staff request.user.is_faculty %}
         <div id="main-body" class="main-section">
