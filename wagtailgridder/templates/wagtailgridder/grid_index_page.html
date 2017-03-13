@@ -8,9 +8,9 @@
 <link href="{% static "wagtailgridder/css/grid_index_page.css" %}" rel="stylesheet" type="text/css">
 {% endblock extra_head_bottom %}
 
-{% block breadcrumbs %}{% endblock %}
+{% block breadcrumbs %}{% endblock breadcrumbs %}
 {% block content %}
-    {% cache 3600 "wagtail-" request.path request.user.is_staff request.user.is_faculty %}
+    {% cache 3600 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
         <div id="main-body" class="main-section">
           <div class="container">
               <div class="row">
@@ -46,6 +46,7 @@
                                           {% if grid_item.tags.count %}
                                               <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
                                           {% endif %}
+                                          {% block extra_summary_text %}{% endblock extra_summary_text %}
                                         </div>
                                       <button class="btn btn-primary btn-block">More <i class="fa fa-angle-double-right"></i></button>
                                   </div>
@@ -67,7 +68,7 @@
 
                       {% block button_block %}
                           {% for button in grid_item.buttons %}
-                          {# Renders 'blocks/button_section.html' #}
+                              {# Renders 'blocks/button_section.html' #}
                               {{ button }}
                           {% endfor %}
                       {% endblock button_block %}
@@ -76,6 +77,7 @@
           {% endfor %}
         </div id="main-body" class="main-section">
     {% endcache %}
+
     {% if request.GET.t %}
         <script>
         $(document).ready(function() {
