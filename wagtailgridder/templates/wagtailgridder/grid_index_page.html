@@ -42,11 +42,13 @@
                                       <div class="tool-body">
                                           <a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
                                           <div class="tool-title"><strong>{{ grid_item.title }}</strong></div>
-                                          <p>{{ grid_item.summary_text|safe }}</p>
+                                          <p>
+                                          {{ grid_item.summary_text|safe }}
+                                          {% block extra_summary_text %}{% endblock extra_summary_text %}
+                                          </p>
                                           {% if grid_item.tags.count %}
                                               <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
                                           {% endif %}
-                                          {% block extra_summary_text %}{% endblock extra_summary_text %}
                                         </div>
                                       <button class="btn btn-primary btn-block">More <i class="fa fa-angle-double-right"></i></button>
                                   </div>
@@ -156,6 +158,4 @@
     location.reload();
   });
 </script>
-
-
 {% endblock extra_footer_js %}

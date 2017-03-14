@@ -19,14 +19,9 @@
 .catalog-tools .tool-body {
   position: relative;
   background: #FFFFFF;
-  padding: 15px;
-  height: 325px;
+  padding: 5px;
+  height: 340px;
 }
-/*@media (min-width: 768px) {
-  .catalog-tools .tool-body {
-    max-height: 335px;
-  }
-}*/
 .catalog-tools .tool-body p {
   font-size: 14px;
   line-height: 20px;
