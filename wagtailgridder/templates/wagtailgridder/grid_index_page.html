@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load cache %}
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block extra_head_bottom %}
 <link href="{% static "wagtailgridder/css/grid_index_page.css" %}" rel="stylesheet" type="text/css">
@@ -18,6 +19,49 @@
                       <h2 class="page-header">{{ page.title }}</h2>
                   </div>
               </div class="row">
+
+              <div class="row m-top-30">
+                {% image page.hero_image original as classroom_hero %}
+                <div class="classroom-hero" style="background-image:url('{{ classroom_hero.url }}');">
+                  <div class="col-lg-6 col-md-6 hero-wrap">
+                    <div class="hero-details">
+
+                      {% image page.logo_image original %} 
+                      <p class="m-bottom30">Classroom Tools by WRDS is a teaching and learning toolkit designed specifically for faculty who are introducing finance and business concepts in the classroom. <p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">Find the right tool for your course.</a></p>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 hero-wrap">    
+                  
+                  <p class="lead m-bottom30">Instructors can use Classroom Tools by WRDS as a core component of their curriculum, as stand-alone lessons or assignments. With a class account, you have a single user name and password which gives WRDS access to all your students. </p>
+
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="col-md-12 m-bottom15">
+                      <div class="feat"><strong>FEATURED TOOLS</strong></div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
+                      <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+                      </div>
+                      <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
+                    </a>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6">
+                    <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
+                      <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                      </div>
+                      <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               <div class="catalog-tools">
                   <div class="main-section" >
                       <div class="row">
@@ -61,20 +105,27 @@
 
           {% for grid_item in page.grid_items %}
               <div id="{{ grid_item.slug }}" class="gridder-content">
-                  <div class="detail-img">
-                      <div class="content-img" style="background-image:url({{ grid_item.description_image.file.url }});"></div>
-                  </div>
-                  <div class="detail-content">
-                      <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
-                      <p>{{ grid_item.description_text|safe }}</p>
+                  <div class="row">
+                      <div class="detail-img">
+                          <div class="content-img" style="background-image:url({{ grid_item.description_image.file.url }});"></div>
+                      </div>
+                      <div class="detail-content">
+                          <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
+                          <p>{{ grid_item.description_text|safe }}</p>
 
-                      {% block button_block %}
-                          {% for button in grid_item.buttons %}
-                              {# Renders 'blocks/button_section.html' #}
-                              {{ button }}
-                          {% endfor %}
-                      {% endblock button_block %}
-                  </div>
+                          {% block button_block %}
+                              {% for button in grid_item.buttons %}
+                                  {# Renders 'blocks/button_section.html' #}
+                                  {{ button }}
+                              {% endfor %}
+                          {% endblock button_block %}
+                      </div>
+                  </div class="row">
+
+                  <div class="row">
+                      <iframe src="https://player.vimeo.com/video/184898392" width="900" height="600" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="margin:0 auto 0 auto;"></iframe>
+                  </div class="row">
+
               </div>
           {% endfor %}
         </div id="main-body" class="main-section">
