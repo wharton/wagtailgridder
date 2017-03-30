@@ -152,6 +152,42 @@ class GridIndexPage(Page):
     This links the grid items to the categories and provides a page to display them on.
     """
 
+    hero_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+
+    logo_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+
+    featured_grid_item_1 = models.ForeignKey(
+        'GridItem',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text='Add a featured grid item to the page',
+        verbose_name='Grid Items'
+    )
+
+    featured_grid_item_2 = models.ForeignKey(
+        'GridItem',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text='Add a second featured grid item to the page',
+        verbose_name='Grid Items'
+    )
+
     @property
     def grid_items(self):
         grid_items = [
@@ -165,6 +201,10 @@ class GridIndexPage(Page):
         return categories
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('hero_image'),
+        ImageChooserPanel('logo_image'),
+        PageChooserPanel('featured_grid_item_1'),
+        PageChooserPanel('featured_grid_item_2'),
         InlinePanel('grid_index_grid_item_relationship', label="grid_items", panels=None, min_num=1),
     ]
 
