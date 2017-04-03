@@ -225,6 +225,10 @@ class GridIndexPage(Page):
     content_panels = Page.content_panels + [
         ImageChooserPanel('hero_background_image'),
         ImageChooserPanel('hero_logo_image'),
+        FieldPanel('hero_description'),
+        FieldPanel('hero_button_text'),
+        FieldPanel('hero_button_url'),
+        FieldPanel('featured_description'),
         PageChooserPanel('featured_grid_item_1'),
         PageChooserPanel('featured_grid_item_2'),
         InlinePanel('grid_index_grid_item_relationship', label="grid_items", panels=None, min_num=1),
