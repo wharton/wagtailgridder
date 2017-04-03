@@ -21,13 +21,13 @@
               </div class="row">
 
               <div class="row m-top-30">
-                {% image page.hero_image original as classroom_hero %}
+                {% image page.hero_background_image original as classroom_hero %}
                 <div class="classroom-hero" style="background-image:url('{{ classroom_hero.url }}');">
                   <div class="col-lg-6 col-md-6 hero-wrap">
                     <div class="hero-details">
 
                       {% image page.logo_image original %} 
-                      <p class="m-bottom30">Classroom Tools by WRDS is a teaching and learning toolkit designed specifically for faculty who are introducing finance and business concepts in the classroom. <p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">Find the right tool for your course.</a></p>
+                      <p class="m-bottom30">{{ page.hero_description }}<p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
                       
                     </div>
                   </div>
@@ -37,7 +37,7 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 hero-wrap">    
                   
-                  <p class="lead m-bottom30">Instructors can use Classroom Tools by WRDS as a core component of their curriculum, as stand-alone lessons or assignments. With a class account, you have a single user name and password which gives WRDS access to all your students. </p>
+                  <p class="lead m-bottom30">{{ page.featured_description }}</p>
 
                 </div>
                 <div class="col-lg-6 col-md-6">
