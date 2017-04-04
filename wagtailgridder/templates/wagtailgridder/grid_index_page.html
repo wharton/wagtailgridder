@@ -124,7 +124,7 @@
 
                   {% if grid_item.description_video %}
                       <div class="row video-wrapper">
-                          <iframe src="https://player.vimeo.com/video/184898392" width="1920" height="1080" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="margin:0 auto 0 auto;"></iframe>
+                          <iframe src="{{ grid_item.description_video }}" width="1920" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                       </div class="row">
                   {% endif %}
 
