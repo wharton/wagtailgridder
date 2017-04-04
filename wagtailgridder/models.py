@@ -48,24 +48,6 @@ class GridItem(Page):
     class Meta:
         verbose_name = "Grid Item"
 
-    summary_text = RichTextField(
-        'Summary',
-        default='',
-        help_text='The summary will appear in the item "card" view.',
-    )
-    description_text = RichTextField(
-        'Full Description',
-        default='',
-        help_text='The description will appear when the grid item is clicked and expanded.',
-    )
-    landing_page_text = RichTextField(
-        'Landing Page Text',
-        default='',
-        help_text='This is the text which will appear on the grid item\'s landing page.',
-    )
-    tags = ClusterTaggableManager(through=GridItemTag, blank=True)
-    categories = ParentalManyToManyField('GridCategory', blank=True)
-    modified = models.DateTimeField('Page Modified', null=True)
     summary_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -73,14 +55,40 @@ class GridItem(Page):
         on_delete=models.SET_NULL,
         related_name='+',
     )
+    summary_text = RichTextField(
+        'Summary',
+        default='',
+        help_text='The summary will appear in the item "card" view.',
+    )
     description_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
+        help_text='This image will appear in the expanded area when populated.',
+    )
+    description_text = RichTextField(
+        'Full Description',
+        null=True,
+        blank=True,
+        help_text='This description will appear in the expanded area when populated.',
+    )
+    description_video = models.URLField(
+        null=True,
+        blank=True,
+        help_text='This video will be embedded in the expanded area when populated.',
+    )
+    landing_page_text = RichTextField(
+        'Landing Page Text',
+        null=True,
+        blank=True,
+        help_text='This is the text which will appear on the grid item\'s landing page.',
     )
     buttons = StreamField(ButtonBlock(), null=True)
+    tags = ClusterTaggableManager(through=GridItemTag, blank=True)
+    categories = ParentalManyToManyField('GridCategory', blank=True)
+    modified = models.DateTimeField('Page Modified', null=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('summary_text'),
@@ -96,6 +104,7 @@ class GridItem(Page):
     DETAIL_PANELS = [
         ImageChooserPanel('description_image'),
         FieldPanel('description_text'),
+        FieldPanel('description_video'),
         FieldPanel('landing_page_text'),
     ]
 
@@ -158,6 +167,7 @@ class GridIndexPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
+        help_text='The background image for the hero section. This triggers the section to be displayed if an image is selected.',
     )
 
     hero_logo_image = models.ForeignKey(
@@ -166,28 +176,33 @@ class GridIndexPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
+        help_text='The logo image to be displayed over the background image.',
     )
 
     hero_description = models.TextField(
         null=True,
         blank=True,
+        help_text='Text to be displayed beneath the logo over the background image.',
     )
 
     hero_button_text = models.CharField(
         null=True,
         blank=True,
         max_length=255,
+        help_text='Text for the call-to-action button beneath the text and logo over the background image.',
     )
 
     hero_button_url = models.CharField(
         null=True,
         blank=True,
         max_length=255,
+        help_text='URL for the call-to-action button beneath the text and logo over the background image.',
     )
 
     featured_description = models.TextField(
         null=True,
         blank=True,
+        help_text='Text to be displayed below the hero image next to the featured items.',
     )
 
     featured_grid_item_1 = models.ForeignKey(
@@ -196,8 +211,8 @@ class GridIndexPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        help_text='Add a featured grid item to the page',
-        verbose_name='Grid Items'
+        help_text='First featured grid item underneath the hero image.',
+        verbose_name='Featured Item One',
     )
 
     featured_grid_item_2 = models.ForeignKey(
@@ -206,8 +221,8 @@ class GridIndexPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        help_text='Add a second featured grid item to the page',
-        verbose_name='Grid Items'
+        help_text='Second featured grid item underneath the hero image.',
+        verbose_name='Featured Item Two,'
     )
 
     @property
@@ -222,7 +237,7 @@ class GridIndexPage(Page):
         categories = GridCategory.objects.all()
         return categories
 
-    content_panels = Page.content_panels + [
+    HERO_PANELS = [
         ImageChooserPanel('hero_background_image'),
         ImageChooserPanel('hero_logo_image'),
         FieldPanel('hero_description'),
@@ -231,7 +246,20 @@ class GridIndexPage(Page):
         FieldPanel('featured_description'),
         PageChooserPanel('featured_grid_item_1'),
         PageChooserPanel('featured_grid_item_2'),
-        InlinePanel('grid_index_grid_item_relationship', label="grid_items", panels=None, min_num=1),
+    ]
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            HERO_PANELS,
+            heading="Hero Section (Optional)",
+            classname="collapsible collapsed",
+        ),
+        InlinePanel(
+            'grid_index_grid_item_relationship',
+            label="grid_items",
+            panels=None,
+            min_num=1
+        ),
     ]
 
     search_fields = Page.search_fields + [

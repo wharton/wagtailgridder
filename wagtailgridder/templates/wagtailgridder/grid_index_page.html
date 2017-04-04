@@ -21,8 +21,8 @@
               </div class="row">
 
               <div class="row m-top-30">
-                {% image page.hero_background_image original as classroom_hero %}
-                <div class="classroom-hero" style="background-image:url('{{ classroom_hero.url }}');">
+                {% image page.hero_background_image original as top_hero %}
+                <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
                   <div class="col-lg-6 col-md-6 hero-wrap">
                     <div class="hero-details">
 
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                   <div class="col-md-12 m-bottom15">
-                      <div class="feat"><strong>FEATURED TOOLS</strong></div>
+                      <div class="feat"><strong>FEATURED</strong></div>
                   </div>
                   <div class="col-lg-6 col-md-6">
                     <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
@@ -122,9 +122,11 @@
                       </div>
                   </div class="row">
 
-                  <div class="row">
-                      <iframe src="https://player.vimeo.com/video/184898392" width="900" height="600" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="margin:0 auto 0 auto;"></iframe>
-                  </div class="row">
+                  {% if grid_item.description_video %}
+                      <div class="row video-wrapper">
+                          <iframe src="https://player.vimeo.com/video/184898392" width="1920" height="1080" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="margin:0 auto 0 auto;"></iframe>
+                      </div class="row">
+                  {% endif %}
 
               </div>
           {% endfor %}
@@ -135,7 +137,6 @@
         <script>
         $(document).ready(function() {
             setTimeout(function() {
-                // alert('#id-{{ request.GET.t }}');
                 $('#id-{{ request.GET.t }}').trigger('click');
             }, 10);
         });

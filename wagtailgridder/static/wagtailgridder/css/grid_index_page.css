@@ -273,3 +273,251 @@
   position: relative;
   bottom: 0;
 }
+
+/* For video; hack to make embeds responsive. */
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero section */
+#classroom {
+    overflow: hidden;
+    .img-responsive {
+        margin: 0;
+        width: 100%;
+    }
+    // adjust specific image sizes 
+    .cr-img {
+        height: 100px;
+        margin-bottom: 5px;
+        &:hover {
+            opacity: .75;
+        }
+    }
+    .cr-img-sm {
+        height: 150px;
+    }
+    .cr-img-lg {
+        height: 428px;
+    }
+
+    .cr-link {
+        display: block;
+        margin-bottom: 15px;
+        span {
+            font-size: 15px;
+        }
+    }
+    .feat {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+}
+.hero-wrap {
+    padding: 0 45px;
+}
+.top-hero {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 350px;
+    
+    .hero-details {
+    padding: 50px 40px 0;
+        background: rgba(0,0,0,0.5);
+        height: 350px;
+        h2, p, strong {
+        color: $white !important;
+        }
+        h2 {
+        position: relative;
+        margin-bottom: 30px;
+        &:after {
+            position: absolute;
+            display: block;
+            content: '';
+            background-color: $white;
+            height: 1px;
+            width: 100%;
+            bottom: -10px;
+        }
+        }
+        p {
+        line-height: 26px;
+        }
+        strong {
+        font-size: 16px;
+        }
+       
+    }
+}
+.catalog-tools {
+    .main-section {
+        padding-top: 60px;
+    }
+    .catalog-title {
+        font-size: 32px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+    .filter-wrap {
+        .btn {
+            text-transform: uppercase;
+        }
+    }
+    .filter-label {
+        display: inline;
+        text-transform: uppercase;
+    }
+    .tool-img {
+        @extend .bg-img;
+        height: 125px;
+    }
+    .tool-body {
+        position: absolute;
+        background: $white;
+        padding: 15px;
+        @include breakFirst(medium) {
+            max-height: 335px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+    .tool-title {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+    .content-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    
+
+}
+
+.gridder-list {
+    .gl-wrap {
+        position: relative;
+        background: $white;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        height: 432px;
+        &:hover, &:focus {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        &:active {
+            box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
+        }
+        .btn-block {
+            position: absolute; 
+            bottom: 0;
+        }
+    }
+}
+
+// Bubble title 
+.bubble-intro {
+    position: relative;
+    width: 100%;
+    padding: 160px 30px 30px;
+    margin-bottom: 70px;
+    @include breakFirst(medium) {
+        padding: 80px 25px 25px;
+    }
+    span {
+        color: $white;
+        font-size: 68px;
+        line-height: 70px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 100;
+        @include breakFirst(medium) {
+            font-size: 40px;
+            line-height: 44px;
+        }
+    }
+    .bubble-stem {
+        position: absolute;
+        bottom: -60px;
+        right: 70px;
+        width: 0;
+        height: 0;
+        border-left: 60px solid rgba(0, 0, 0, 0);
+        @include breakFirst(medium) {
+            bottom: -45px;
+        }
+    }
+    &.bubble-turq {
+        background-color: $turq;
+        .bubble-stem {
+            border-top: 60px solid $turq;
+            @include breakFirst(medium) {
+                border-top: 45px solid $turq;
+            }
+        }
+    }
+    &.bubble-red {
+        background-color: $redLight;
+        .bubble-stem {
+            border-top: 60px solid $redLight;
+            @include breakFirst(medium) {
+                border-top: 45px solid $redLight;
+            }
+        }
+    }
+}
+
+ul.side-links {
+    margin-bottom: 30px;
+    li > a {
+        display: block;
+        font-size: 18px;
+        padding: 5px 0;
+    }
+}
+
+.gray-wrap {
+    border: 2px solid $gray;
+    overflow: hidden;
+}
+
+.gray-wrap-df {
+    padding: 50px 10px 20px;
+}
+.gray-wrap-img {
+    padding: 0 0 20px;
+    .cr-headline, p {
+        padding: 0 10px;
+    }
+}
+.gray-wrap-short {
+    padding: 0 0 37px;
+    .cr-headline, p {
+        padding: 0 10px;
+    }
+}
+
+// Headline 
+.cr-headline {
+    font-size: 36px;
+    line-height: 35px;
+    color: $gray;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
