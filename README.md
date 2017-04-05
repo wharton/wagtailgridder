@@ -22,6 +22,10 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 
 ![Grid Index Page, with Grid Item expanded](img/grid_index_page_expanded.jpg)
 
+## Optional featured hero region:
+
+![Optional featured hero region](img/featured_hero.jpg)
+
 ## Grid Item landing page:
 
 ![Grid Item landing page](img/grid_item.jpg)
