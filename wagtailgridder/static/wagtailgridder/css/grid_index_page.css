@@ -292,40 +292,6 @@
 }
 
 /* Hero section */
-#classroom {
-    overflow: hidden;
-    .img-responsive {
-        margin: 0;
-        width: 100%;
-    }
-    // adjust specific image sizes 
-    .cr-img {
-        height: 100px;
-        margin-bottom: 5px;
-        &:hover {
-            opacity: .75;
-        }
-    }
-    .cr-img-sm {
-        height: 150px;
-    }
-    .cr-img-lg {
-        height: 428px;
-    }
-
-    .cr-link {
-        display: block;
-        margin-bottom: 15px;
-        span {
-            font-size: 15px;
-        }
-    }
-    .feat {
-        font-size: 18px;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-}
 .hero-wrap {
     padding: 0 45px;
 }
@@ -336,14 +302,15 @@
     width: 100%;
     height: 350px;
     
-    .hero-details {
+}
+.hero-details {
     padding: 50px 40px 0;
-        background: rgba(0,0,0,0.5);
-        height: 350px;
-        h2, p, strong {
-        color: $white !important;
-        }
-        h2 {
+    background: rgba(0,0,0,0.5);
+    height: 350px;
+    h2, p, strong {
+        color: #ffffff !important;
+    }
+    h2 {
         position: relative;
         margin-bottom: 30px;
         &:after {
@@ -355,16 +322,15 @@
             width: 100%;
             bottom: -10px;
         }
-        }
-        p {
+    }
+    p {
         line-height: 26px;
-        }
-        strong {
+    }
+    strong {
         font-size: 16px;
-        }
-       
     }
 }
+
 .catalog-tools {
     .main-section {
         padding-top: 60px;

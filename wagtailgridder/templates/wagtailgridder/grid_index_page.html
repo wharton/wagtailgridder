@@ -5,29 +5,25 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
 {% block extra_head_bottom %}
 <link href="{% static "wagtailgridder/css/grid_index_page.css" %}" rel="stylesheet" type="text/css">
 {% endblock extra_head_bottom %}
 
-{% block breadcrumbs %}{% endblock breadcrumbs %}
-{% block content %}
+{% block inner_content %}
     {% cache 3600 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
         <div id="main-body" class="main-section">
           <div class="container">
-              <div class="row">
-                  <div class="col-lg-12">
-                      <h2 class="page-header">{{ page.title }}</h2>
-                  </div>
-              </div class="row">
-
+              <br>
               <div class="row m-top-30">
                 {% image page.hero_background_image original as top_hero %}
                 <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
                   <div class="col-lg-6 col-md-6 hero-wrap">
                     <div class="hero-details">
 
-                      {% image page.logo_image original %} 
-                      <p class="m-bottom30">{{ page.hero_description }}<p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
+                      {% image page.hero_logo_image original %} 
+                      <p class="m-bottom30" style="color:#fff;">{{ page.hero_description }}<p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
                       
                     </div>
                   </div>
@@ -35,29 +31,30 @@
               </div>
 
               <div class="row">
-                <div class="col-lg-6 col-md-6 hero-wrap">    
-                  
-                  <p class="lead m-bottom30">{{ page.featured_description }}</p>
-
+                <div class="col-lg-6 col-md-6 hero-wrap">                  
+                    <p class="lead m-top15">{{ page.featured_description }}</p>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                  <div class="col-md-12 m-bottom15">
-                      <div class="feat"><strong>FEATURED</strong></div>
+                  <div class="row">
+                    <div class="col-md-12 m-top15">
+                        <div class="feat"><strong>FEATURED</strong></div>
+                    </div>
                   </div>
-                  <div class="col-lg-6 col-md-6">
-                    <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
-                      <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
-                      </div>
-                      <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
-                    </a>
-                  </div>
-
-                  <div class="col-lg-6 col-md-6">
-                    <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
-                      <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
-                      </div>
-                      <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
-                    </a>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                      <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
+                        <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+                        </div>
+                        <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
+                      </a>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
+                        <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                        </div>
+                        <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -142,7 +139,7 @@
         });
         </script>
     {% endif %}
-{% endblock content %}
+{% endblock inner_content %}
 
 {% block extra_footer_js %}
 
