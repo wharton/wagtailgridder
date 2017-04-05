@@ -16,48 +16,52 @@
         <div id="main-body" class="main-section">
           <div class="container">
               <br>
-              <div class="row m-top-30">
-                {% image page.hero_background_image original as top_hero %}
-                <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
-                  <div class="col-lg-6 col-md-6 hero-wrap">
-                    <div class="hero-details">
+              {% if page.hero_background_image %}
+                  <div class="row m-top-30">
+                    {% image page.hero_background_image original as top_hero %}
+                    <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
+                      <div class="col-lg-6 col-md-6 hero-wrap">
+                        <div class="hero-details">
 
-                      {% image page.hero_logo_image original %} 
-                      <p class="m-bottom30" style="color:#fff;">{{ page.hero_description }}<p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-lg-6 col-md-6 hero-wrap">                  
-                    <p class="lead m-top15">{{ page.featured_description }}</p>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="row">
-                    <div class="col-md-12 m-top15">
-                        <div class="feat"><strong>FEATURED</strong></div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                      <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
-                        <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+                          {% image page.hero_logo_image original %} 
+                          <p class="m-bottom30" style="color:#fff;">{{ page.hero_description }}<p><a href="#tools" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
+                          
                         </div>
-                        <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
-                      </a>
+                      </div>
+                    </div>
+                  </div>
+              {% endif %}
+
+              {% if page.featured_description and page.featured_grid_item_1 and page.featured_grid_item_2 %}
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 hero-wrap">                  
+                        <p class="lead m-top15">{{ page.featured_description }}</p>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                      <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
-                        <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                      <div class="row">
+                        <div class="col-md-12 m-top15">
+                            <div class="feat"><strong>FEATURED</strong></div>
                         </div>
-                        <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
-                      </a>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                          <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
+                            <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+                            </div>
+                            <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
+                          </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                          <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
+                            <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                            </div>
+                            <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+              {% endif %}
 
               <div class="catalog-tools">
                   <div class="main-section" >
