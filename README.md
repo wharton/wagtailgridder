@@ -37,3 +37,8 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 ## Editing a Grid Index Page:
 
 ![Editing a Grid Index Page](img/edit_grid_index_page.jpg)
+
+# Contributors
+
+* [Timothy Allen](https://github.com/FlipperPA)
+* [Charles Rejonis](https://github.com/rejonis)
