@@ -1,9 +1,14 @@
+from django.core.cache import cache
+
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register
 )
+from wagtail.wagtailcore import hooks
+
 from .models import (
     GridCategory, GridIndexPage
 )
+from .settings import get_clear_cache
 
 
 class GridCategoryAdmin(ModelAdmin):
@@ -30,3 +35,14 @@ class GridAdminGroup(ModelAdminGroup):
 
 
 modeladmin_register(GridAdminGroup)
+
+
+@hooks.register('after_edit_page')
+def clear_page_cache(request, page):
+    """
+    This will clear Django's entire cache after a page edit. It is ugly,
+    but Django's cache mechanism doesn't currently support a way to easily
+    depending on the value of is_staff() and (if present) is_faculty.
+    """
+    if get_clear_cache():
+        cache.clear()
