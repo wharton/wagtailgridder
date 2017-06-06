@@ -242,7 +242,7 @@ class GridIndexPage(Page):
         grid_item_categories = GridIndexGridItemRelationship.objects.values_list(
             'grid_item__categories__name'
         ).filter(
-            GridRelationship__id=4,
+            GridRelationship__id=self.id,
         )
 
         categories = []
