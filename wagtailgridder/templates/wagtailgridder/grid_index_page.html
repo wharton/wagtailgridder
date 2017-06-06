@@ -72,7 +72,7 @@
                                   <div class="filter-options btn-group">
                                     <button class="btn btn-info filter active" data-filter="all">All Topics</button>
                                     {% for category in page.categories %}
-                                    <button class="btn btn-info filter" id="id-{{ category.name|slugify }}" data-filter=".{{ category.name|slugify }}">{{ category.name }}</button>
+                                    <button class="btn btn-info filter" id="id-{{ category|slugify }}" data-filter=".{{ category|slugify }}">{{ category }}</button>
                                     {% endfor %}
                                   </div>
                               </div>

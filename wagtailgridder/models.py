@@ -140,6 +140,11 @@ class GridItem(Page):
 
 
 class GridIndexGridItemRelationship(Orderable, models.Model):
+    """
+    Allows the content creator to associate Grid Items on a
+    Grid Index Page.
+    """
+
     GridRelationship = ParentalKey(
         'GridIndexPage',
         related_name='grid_index_grid_item_relationship'
@@ -245,9 +250,7 @@ class GridIndexPage(Page):
         for gic in grid_item_categories:
             if gic[0] not in categories:
                 categories.append(gic[0])
-        print('XXXX')
-        print(dir(self))
-        print(categories)
+
         return categories
 
     HERO_PANELS = [
