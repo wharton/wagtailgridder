@@ -234,7 +234,20 @@ class GridIndexPage(Page):
 
     @property
     def categories(self):
-        categories = GridCategory.objects.all()
+        grid_item_categories = GridIndexGridItemRelationship.objects.values_list(
+            'grid_item__categories__name'
+        ).filter(
+            GridRelationship__id=4,
+        )
+
+        categories = []
+
+        for gic in grid_item_categories:
+            if gic[0] not in categories:
+                categories.append(gic[0])
+        print('XXXX')
+        print(dir(self))
+        print(categories)
         return categories
 
     HERO_PANELS = [
