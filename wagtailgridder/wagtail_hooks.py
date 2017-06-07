@@ -44,5 +44,6 @@ def clear_page_cache(request, page):
     but Django's cache mechanism doesn't currently support a way to easily
     depending on the value of is_staff() and (if present) is_faculty.
     """
+
     if get_clear_cache():
         cache.clear()

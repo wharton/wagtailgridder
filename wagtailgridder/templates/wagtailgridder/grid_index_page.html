@@ -65,19 +65,22 @@
 
               <div class="catalog-tools">
                   <div class="main-section" >
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="filter-wrap pull-right">
-                                  <p class="filter-label">By Topic:</p>
-                                  <div class="filter-options btn-group">
-                                    <button class="btn btn-info filter active" data-filter="all">All Topics</button>
-                                    {% for category in page.categories %}
-                                    <button class="btn btn-info filter" id="id-{{ category.name|slugify }}" data-filter=".{{ category.name|slugify }}">{{ category.name }}</button>
-                                    {% endfor %}
+                      {# Only display categories bar if there is more than one category to show. #}
+                      {% if page.categories|length > 1 %}
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="filter-wrap pull-right">
+                                      <p class="filter-label">By Topic:</p>
+                                      <div class="filter-options btn-group">
+                                        <button class="btn btn-info filter active" data-filter="all">All Topics</button>
+                                        {% for category in page.categories %}
+                                        <button class="btn btn-info filter" id="id-{{ category|slugify }}" data-filter=".{{ category|slugify }}">{{ category }}</button>
+                                        {% endfor %}
+                                      </div>
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      {% endif %}
 
                       <div id="grid-container" class="gridder">
                           {% for grid_item in page.grid_items %}
