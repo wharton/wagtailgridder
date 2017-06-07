@@ -145,7 +145,7 @@ class GridIndexGridItemRelationship(Orderable, models.Model):
     Grid Index Page.
     """
 
-    GridRelationship = ParentalKey(
+    grid_relationship = ParentalKey(
         'GridIndexPage',
         related_name='grid_index_grid_item_relationship'
     )
@@ -242,13 +242,15 @@ class GridIndexPage(Page):
         grid_item_categories = GridIndexGridItemRelationship.objects.values_list(
             'grid_item__categories__name'
         ).filter(
-            GridRelationship__id=self.id,
-        )
+            grid_relationship__id=self.id,
+        ).order_by(
+            'grid_item__categories__name',
+        ).distinct()
 
         categories = []
 
         for gic in grid_item_categories:
-            if gic[0] not in categories:
+            if gic[0] is not None:
                 categories.append(gic[0])
 
         return categories
