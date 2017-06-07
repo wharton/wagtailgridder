@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='wagtailgridder',
-    version="0.9.9",
+    version="0.9.11",
     description='Gridder layout for the Django CMS Wagtail.',
     long_description='',
     author='Timothy Allen',
