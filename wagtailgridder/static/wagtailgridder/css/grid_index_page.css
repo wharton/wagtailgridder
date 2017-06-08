@@ -259,7 +259,7 @@
   background: #FFFFFF;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  /*height: 432px;*/
+  height: 495px;
 }
 .gridder-list .gl-wrap:hover, .gridder-list .gl-wrap:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);

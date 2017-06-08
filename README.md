@@ -14,9 +14,9 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 
 # Settings
 
-    WAGTAILGRIDDER_CLEAR_CACHE = True
+    WAGTAILGRIDDER_CLEAR_CACHE = False
 
-By default, Wagtail Gridder will clear the entire Django cache after a page is edited. This is necessary, as Django does not currently support delete from the cache by pattern. If you do not want your cache rebuilt every time you save a page, set this to `False`. We are open to a better solution that works for Django's supported cache systems!
+The default Wagtail Gridder template caches the grid display area to reduce the number of queries performed. Setting `WAGTAILGRIDDER_CLEAR_CACHE = True` in your Django settings will clear the **entire** Django cache after a page is edited. This approach is necessary, as Django does not currently support deletion from the cache by pattern. Setting this to `True` will clear your cache every time you save a Wagtail page. If anyone knows of a better solution that works for Django's supported cache systems, please let us know!
 
 # Screenshots
 
