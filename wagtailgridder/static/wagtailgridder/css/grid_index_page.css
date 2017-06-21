@@ -202,12 +202,15 @@
   right: 15px;
   cursor: pointer;
 }
+
 .gridder-close:hover {
   opacity: 1;
 }
+
 .gridder-close:hover::before {
   background: #FFFFFF;
 }
+
 .gridder-close:hover::after {
   background: #FFFFFF;
 }
@@ -221,10 +224,11 @@
 .gridder-nav {
   color: #FFFFFF;
 }
+
 .gridder-nav.prev:before {
-  font-family: FontAwesome;
-  content: "\f053";
-  font-size: 30px;
+  font-family: Webdings;
+  content: "\0033";
+  font-size: 50px;
   opacity: 0.7;
   cursor: pointer;
   position: absolute;
@@ -233,10 +237,11 @@
   width: 40px;
   height: 99px;
 }
+
 .gridder-nav.next:before {
-  font-family: FontAwesome;
-  content: "\f054";
-  font-size: 30px;
+  font-family: Webdings;
+  content: "\0034";
+  font-size: 50px;
   opacity: 0.7;
   cursor: pointer;
   position: absolute;
