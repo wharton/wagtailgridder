@@ -147,6 +147,7 @@
   padding: 0;
   color: #FFFFFF;
   overflow: hidden;
+  /* font-size: 0; */
   width: 98.9%;
   padding: 40px;
   top: 0;
@@ -200,6 +201,7 @@
   top: 15px;
   right: 15px;
   cursor: pointer;
+  font-size: 0;
 }
 
 .gridder-close:hover {
@@ -225,7 +227,7 @@
 }
 
 .gridder-nav.prev:before {
-    content: "\25C0";
+  content: "\25C0";
   font-size: 40px;
   opacity: 0.7;
   cursor: pointer;
@@ -234,6 +236,14 @@
   left: 15px;
   width: 40px;
   height: 99px;
+}
+
+.gridder-nav.prev {
+  font-size: 0;
+}
+
+.gridder-nav.next {
+  font-size: 0;
 }
 
 .gridder-nav.next:before {
