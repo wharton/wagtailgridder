@@ -1,42 +1,49 @@
 .catalog-tools .main-section .row {
   margin-bottom: 30px;
 }
+
 .catalog-tools .catalog-title {
   font-size: 32px;
   font-weight: 400;
   text-transform: uppercase;
 }
+
 .catalog-tools .filter-wrap .btn, .catalog-tools .filter-wrap .ui-datepicker .ui-priority-primary, .ui-datepicker .catalog-tools .filter-wrap .ui-priority-primary, .catalog-tools .filter-wrap .moreevents, .catalog-tools .filter-wrap .selectlists .select-all label, .selectlists .select-all .catalog-tools .filter-wrap label {
   text-transform: uppercase;
 }
+
 .catalog-tools .filter-label {
   display: inline;
   text-transform: uppercase;
 }
+
 .catalog-tools .tool-img {
   height: 125px;
 }
+
 .catalog-tools .tool-body {
   position: relative;
   background: #FFFFFF;
   padding: 5px;
   height: 340px;
 }
+
 .catalog-tools .tool-body p {
   font-size: 14px;
   line-height: 20px;
 }
+
 .catalog-tools .tool-title {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 5px;
 }
+
 .catalog-tools .content-title {
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 15px;
 }
-
 
 .gridder-close::before, .gridder-close::after {
   content: '';
@@ -58,6 +65,7 @@
   position: relative;
   overflow: hidden;
 }
+
 .gridder:after {
   content: '';
   display: table;
@@ -73,24 +81,29 @@
   margin: 0 0 15px 7px;
   vertical-align: top;
 }
+
 @media (min-width: 768px) {
   .gridder-list {
     width: 48%;
   }
 }
+
 @media (min-width: 1024px) {
   .gridder-list {
     width: 32%;
   }
 }
+
 @media (min-width: 1200px) {
   .gridder-list {
     width: 24%;
   }
 }
+
 .gridder-list .gridder-thumb {
   display: block;
 }
+
 .gridder-list .gridder-thumb .overlay {
   position: absolute;
   color: #000000;
@@ -105,20 +118,25 @@
   font-size: 16px;
   opacity: 0;
 }
+
 .gridder-list .gridder-thumb .overlay span {
   font-weight: 11px;
   display: block;
 }
+
 .gridder-list img {
   width: 100%;
 }
+
 .gridder-list.first {
   margin-left: 0;
 }
+
 .gridder-list.selectedItem {
   margin-bottom: 25px;
   top: 10px;
 }
+
 .gridder-list.selectedItem:after {
   content: "";
   width: 0;
@@ -132,6 +150,7 @@
   left: 45%;
   margin-bottom: -20px;
 }
+
 .gridder-list:hover .overlay {
   opacity: 0.8;
 }
@@ -147,45 +166,52 @@
   padding: 0;
   color: #FFFFFF;
   overflow: hidden;
-  /* font-size: 0; */
   width: 98.9%;
   padding: 40px;
   top: 0;
   left: 6px;
   margin-bottom: 10px;
 }
+
 .gridder-show .padding {
   display: none;
 }
+
 .gridder-show:after {
   content: ".";
   display: block;
   height: 0;
   overflow: hidden;
 }
+
 .gridder-show .detail-img {
   float: left;
   width: 100%;
   margin: 0 0 15px;
 }
+
 @media (min-width: 1024px) {
   .gridder-show .detail-img {
     width: 30%;
     margin: 0 25px;
   }
 }
+
 .gridder-show .content-img {
   height: 200px;
 }
+
 @media (min-width: 1024px) {
   .gridder-show .content-img {
     height: 350px;
   }
 }
+
 .gridder-show .detail-content {
   width: 100%;
   text-align: left;
 }
+
 @media (min-width: 1024px) {
   .gridder-show .detail-content {
     float: left;
@@ -238,14 +264,6 @@
   height: 99px;
 }
 
-.gridder-nav.prev {
-  font-size: 0;
-}
-
-.gridder-nav.next {
-  font-size: 0;
-}
-
 .gridder-nav.next:before {
   content: "\25b6";
   font-size: 40px;
@@ -256,6 +274,14 @@
   right: 0;
   width: 40px;
   height: 99px;
+}
+
+.gridder-nav.prev {
+  font-size: 0;
+}
+
+.gridder-nav.next {
+  font-size: 0;
 }
 
 .gridder-img:hover {
@@ -273,14 +299,17 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   height: 495px;
 }
+
 .gridder-list .gl-wrap:hover, .gridder-list .gl-wrap:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 .gridder-list .gl-wrap:active {
   -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
+
 .gridder-list .gl-wrap .btn-block, .gridder-list .gl-wrap .moreevents {
   position: relative;
   bottom: 0;
@@ -307,6 +336,7 @@
 .hero-wrap {
     padding: 0 45px;
 }
+
 .top-hero {
     background-repeat: no-repeat;
     background-size: cover;
@@ -315,6 +345,7 @@
     height: 350px;
     
 }
+
 .hero-details {
     padding: 50px 40px 0;
     background: rgba(0,0,0,0.5);
@@ -479,12 +510,14 @@ ul.side-links {
 .gray-wrap-df {
     padding: 50px 10px 20px;
 }
+
 .gray-wrap-img {
     padding: 0 0 20px;
     .cr-headline, p {
         padding: 0 10px;
     }
 }
+
 .gray-wrap-short {
     padding: 0 0 37px;
     .cr-headline, p {
