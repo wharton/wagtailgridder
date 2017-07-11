@@ -226,9 +226,8 @@
 }
 
 .gridder-nav.prev:before {
-  font-family: Webdings;
-  content: "\0033";
-  font-size: 50px;
+    content: "\25C0";
+  font-size: 40px;
   opacity: 0.7;
   cursor: pointer;
   position: absolute;
@@ -239,9 +238,8 @@
 }
 
 .gridder-nav.next:before {
-  font-family: Webdings;
-  content: "\0034";
-  font-size: 50px;
+  content: "\25b6";
+  font-size: 40px;
   opacity: 0.7;
   cursor: pointer;
   position: absolute;
