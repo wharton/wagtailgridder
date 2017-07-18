@@ -147,45 +147,54 @@
   padding: 0;
   color: #FFFFFF;
   overflow: hidden;
-  /* font-size: 0; */
   width: 98.9%;
   padding: 40px;
   top: 0;
   left: 6px;
   margin-bottom: 10px;
 }
+
 .gridder-show .padding {
   display: none;
 }
+
 .gridder-show:after {
   content: ".";
   display: block;
   height: 0;
   overflow: hidden;
 }
+
 .gridder-show .detail-img {
   float: left;
   width: 100%;
   margin: 0 0 15px;
 }
+
 @media (min-width: 1024px) {
   .gridder-show .detail-img {
     width: 30%;
     margin: 0 25px;
   }
 }
+
 .gridder-show .content-img {
   height: 200px;
+  background-repeat: no-repeat;
 }
+
 @media (min-width: 1024px) {
   .gridder-show .content-img {
     height: 350px;
+    background-repeat: no-repeat;
   }
 }
+
 .gridder-show .detail-content {
   width: 100%;
   text-align: left;
 }
+
 @media (min-width: 1024px) {
   .gridder-show .detail-content {
     float: left;
