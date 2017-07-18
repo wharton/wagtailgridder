@@ -199,11 +199,13 @@
 
 .gridder-show .content-img {
   height: 200px;
+  background-repeat: no-repeat;
 }
 
 @media (min-width: 1024px) {
   .gridder-show .content-img {
     height: 350px;
+    background-repeat: no-repeat;
   }
 }
 
