@@ -284,9 +284,6 @@ class GridIndexPage(Page):
         index.SearchField('grid_index_grid_item_relationship'),
     ]
 
-    # Don't allow child pages to be added
-    subpage_types = [
-    ]
 
     class Meta:
         verbose_name = "Grid Index Page"
