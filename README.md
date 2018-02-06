@@ -44,6 +44,13 @@ The default Wagtail Gridder template caches the grid display area to reduce the 
 
 ![Editing a Grid Index Page](img/edit_grid_index_page.jpg)
 
+# Release Notes
+
+## 0.9.19
+
+* Wagtail 2.0 compatibility.
+* Bugfix: a bad relation in `search_fields` of GridIndexPage caused problems for Elastic Search.
+
 # Contributors
 
 * [Timothy Allen](https://github.com/FlipperPA)
