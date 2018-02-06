@@ -2,11 +2,18 @@ from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel, MultiFieldPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
+try:
+    from wagtail.core.fields import StreamField, RichTextField
+    from wagtail.core.models import Page, Orderable
+    from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel, MultiFieldPanel
+    from wagtail.images.edit_handlers import ImageChooserPanel
+    from wagtail.search import index
+except ImportError:
+    from wagtail.wagtailcore.fields import StreamField, RichTextField
+    from wagtail.wagtailcore.models import Page, Orderable
+    from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel, MultiFieldPanel
+    from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+    from wagtail.wagtailsearch import index
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
@@ -281,9 +288,8 @@ class GridIndexPage(Page):
     ]
 
     search_fields = Page.search_fields + [
-        index.SearchField('grid_index_grid_item_relationship'),
+        index.SearchField('hero_description'),
     ]
-
 
     class Meta:
         verbose_name = "Grid Index Page"

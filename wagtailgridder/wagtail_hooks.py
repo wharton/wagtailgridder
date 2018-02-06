@@ -1,9 +1,13 @@
 from django.core.cache import cache
 
+try:
+    from wagtail.core import hooks
+except ImportError:
+    from wagtail.wagtailcore import hooks
+
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register
 )
-from wagtail.wagtailcore import hooks
 
 from .models import (
     GridCategory, GridIndexPage

@@ -1,9 +1,17 @@
-from wagtail.wagtailcore.blocks import (
-    StructBlock,
-    StreamBlock,
-    TextBlock,
-)
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+try:
+    from wagtail.core.blocks import (
+        StructBlock,
+        StreamBlock,
+        TextBlock,
+    )
+    from wagtail.documents.blocks import DocumentChooserBlock
+except ImportError:
+    from wagtail.wagtailcore.blocks import (
+        StructBlock,
+        StreamBlock,
+        TextBlock,
+    )
+    from wagtail.documents.blocks import DocumentChooserBlock
 
 
 class DocumentActionItemBlock(StructBlock):
