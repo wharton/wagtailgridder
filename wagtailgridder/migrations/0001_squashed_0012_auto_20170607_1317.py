@@ -7,13 +7,14 @@ import django.db.models.deletion
 import modelcluster.contrib.taggit
 import modelcluster.fields
 try:
-    import wagtail.core.blocks
-    import wagtail.core.fields
-    import wagtail.documents.blocks
+    from wagtail.core import blocks as core_blocks
+    from wagtail.core import fields as core_fields
+    from wagtail.documents import blocks as docs_blocks
 except ImportError:
-    import wagtail.wagtailcore.blocks
-    import wagtail.wagtailcore.fields
-    import wagtail.wagtaildocs.blocks
+    from wagtail.wagtailcore import blocks as core_blocks
+    from wagtail.wagtailcore import fields as core_fields
+    from wagtail.wagtaildocs import blocks as docs_blocks
+
 
 class Migration(migrations.Migration):
 
@@ -64,11 +65,11 @@ class Migration(migrations.Migration):
             name='GridItem',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('summary', wagtail.wagtailcore.fields.RichTextField(default='', help_text='The summary will appear in the item "card" view.', verbose_name='Summary')),
-                ('full_desc', wagtail.wagtailcore.fields.RichTextField(default='', help_text='The description will appear when the grid item is clicked and expanded.', verbose_name='Full Description')),
+                ('summary', core_fields.RichTextField(default='', help_text='The summary will appear in the item "card" view.', verbose_name='Summary')),
+                ('full_desc', core_fields.RichTextField(default='', help_text='The description will appear when the grid item is clicked and expanded.', verbose_name='Full Description')),
                 ('target_url', models.URLField(blank=True, default='', help_text='The URL for this grid item, if it is not a full Django App.', verbose_name='URL')),
                 ('modified', models.DateTimeField(null=True, verbose_name='Page Modified')),
-                ('buttons', wagtail.wagtailcore.fields.StreamField((('button_section', wagtail.wagtailcore.blocks.StructBlock((('action_items', wagtail.wagtailcore.blocks.StreamBlock((('document_button', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.TextBlock(required=True)), ('document', wagtail.wagtaildocs.blocks.DocumentChooserBlock(required=True))), icon='fa-file')), ('url_button', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.TextBlock(required=True)), ('url', wagtail.wagtailcore.blocks.URLBlock(required=True))), icon='fa-link')), ('placeholder', wagtail.wagtailcore.blocks.StructBlock((), icon='fa-square-o'))), help_text='A button or URL within a button section.')),))),), null=True)),
+                ('buttons', core_fields.StreamField((('button_section', core_blocks.StructBlock((('action_items', core_blocks.StreamBlock((('document_button', core_blocks.StructBlock((('label', core_blocks.TextBlock(required=True)), ('document', docs_blocks.DocumentChooserBlock(required=True))), icon='fa-file')), ('url_button', core_blocks.StructBlock((('label', core_blocks.TextBlock(required=True)), ('url', core_blocks.URLBlock(required=True))), icon='fa-link')), ('placeholder', core_blocks.StructBlock((), icon='fa-square-o'))), help_text='A button or URL within a button section.')),))),), null=True)),
                 ('main_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
                 ('small_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.Image')),
             ],
@@ -106,7 +107,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='griditem',
             name='landing_page_text',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text="This is the text which will appear on the grid item's landing page.", null=True, verbose_name='Landing Page Text'),
+            field=core_fields.RichTextField(blank=True, help_text="This is the text which will appear on the grid item's landing page.", null=True, verbose_name='Landing Page Text'),
         ),
         migrations.RemoveField(
             model_name='griditem',
@@ -135,7 +136,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='griditem',
             name='buttons',
-            field=wagtail.wagtailcore.fields.StreamField((('button_section', wagtail.wagtailcore.blocks.StructBlock((('action_items', wagtail.wagtailcore.blocks.StreamBlock((('document_button', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.TextBlock(required=True)), ('document', wagtail.wagtaildocs.blocks.DocumentChooserBlock(required=True))), icon='fa-file')), ('url_button', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.TextBlock(required=True)), ('url', wagtail.wagtailcore.blocks.TextBlock(required=True))), icon='fa-link')), ('placeholder', wagtail.wagtailcore.blocks.StructBlock((), icon='fa-square-o'))), help_text='A button or URL within a button section.')),))),), null=True),
+            field=core_fields.StreamField((('button_section', core_blocks.StructBlock((('action_items', core_blocks.StreamBlock((('document_button', core_blocks.StructBlock((('label', core_blocks.TextBlock(required=True)), ('document', docs_blocks.DocumentChooserBlock(required=True))), icon='fa-file')), ('url_button', core_blocks.StructBlock((('label', core_blocks.TextBlock(required=True)), ('url', core_blocks.TextBlock(required=True))), icon='fa-link')), ('placeholder', core_blocks.StructBlock((), icon='fa-square-o'))), help_text='A button or URL within a button section.')),))),), null=True),
         ),
         migrations.AddField(
             model_name='griditem',
@@ -195,6 +196,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='griditem',
             name='description_text',
-            field=wagtail.wagtailcore.fields.RichTextField(blank=True, help_text='This description will appear in the expanded area when populated.', null=True, verbose_name='Full Description'),
+            field=core_fields.RichTextField(blank=True, help_text='This description will appear in the expanded area when populated.', null=True, verbose_name='Full Description'),
         ),
     ]
