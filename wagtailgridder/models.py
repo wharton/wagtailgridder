@@ -27,7 +27,11 @@ class GridItemTag(TaggedItemBase):
     Object to hold existing tags for Grid Items.
     """
 
-    content_object = ParentalKey('GridItem', related_name='tagged_items')
+    content_object = ParentalKey(
+        'GridItem',
+        related_name='tagged_items',
+        on_delete=models.CASCADE,
+    )
 
 
 class GridCategory(models.Model):
@@ -154,13 +158,15 @@ class GridIndexGridItemRelationship(Orderable, models.Model):
 
     grid_relationship = ParentalKey(
         'GridIndexPage',
-        related_name='grid_index_grid_item_relationship'
+        related_name='grid_index_grid_item_relationship',
+        on_delete=models.CASCADE,
     )
     grid_item = models.ForeignKey(
         'GridItem',
         related_name="+",
         help_text='Add a grid item to the page',
-        verbose_name='Grid Items'
+        verbose_name='Grid Items',
+        on_delete=models.CASCADE,
     )
     panels = [
         PageChooserPanel('grid_item')

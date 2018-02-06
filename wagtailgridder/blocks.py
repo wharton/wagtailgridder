@@ -11,7 +11,7 @@ except ImportError:
         StreamBlock,
         TextBlock,
     )
-    from wagtail.documents.blocks import DocumentChooserBlock
+    from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
 
 class DocumentActionItemBlock(StructBlock):
