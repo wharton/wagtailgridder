@@ -197,10 +197,11 @@ class GridIndexPage(Page):
         help_text='The logo image to be displayed over the background image.',
     )
 
-    hero_description = models.TextField(
+    hero_description = RichTextField(
         null=True,
         blank=True,
         help_text='Text to be displayed beneath the logo over the background image.',
+        features=['bold', 'italic', 'link', 'ol', 'ul'],
     )
 
     hero_button_text = models.CharField(
@@ -217,10 +218,11 @@ class GridIndexPage(Page):
         help_text='URL for the call-to-action button beneath the text and logo over the background image.',
     )
 
-    featured_description = models.TextField(
+    featured_description = RichTextField(
         null=True,
         blank=True,
         help_text='Text to be displayed below the hero image next to the featured items.',
+        features=['bold', 'italic', 'link', 'ol', 'ul'],
     )
 
     featured_grid_item_1 = models.ForeignKey(
