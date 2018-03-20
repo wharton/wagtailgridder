@@ -25,7 +25,7 @@
 
                           {% image page.hero_logo_image original %} 
                           <p class="m-bottom30" style="color:#fff;">
-                            {{ page.hero_description }}
+                            {{ page.hero_description|safe }}
                             <p><a href="{% if page.hero_button_url|length %}{{ page.hero_button_url }}{% else %}#grid-items{% endif %}" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
                           </p>
                           
@@ -38,7 +38,7 @@
               {% if page.featured_description and page.featured_grid_item_1 and page.featured_grid_item_2 %}
                   <div class="row">
                     <div class="col-lg-6 col-md-6 hero-wrap">                  
-                        <p class="lead m-top15">{{ page.featured_description }}</p>
+                        <p class="lead m-top15">{{ page.featured_description|safe }}</p>
                     </div>
                     <div class="col-lg-6 col-md-6">
                       <div class="row">
