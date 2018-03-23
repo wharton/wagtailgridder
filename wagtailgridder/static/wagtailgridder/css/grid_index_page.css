@@ -350,33 +350,11 @@
 
 .hero-details {
     padding: 50px 40px 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.2);
     height: 350px;
-    h2, p, strong {
-        color: #ffffff !important;
-    }
-    h2 {
-        position: relative;
-        margin-bottom: 30px;
-        &:after {
-            position: absolute;
-            display: block;
-            content: '';
-            background-color: $white;
-            height: 1px;
-            width: 100%;
-            bottom: -10px;
-        }
-    }
-    p {
-        line-height: 26px;
-    }
-    strong {
-        font-size: 16px;
-    }
 }
 
-.hero-description p {
+.hero-details p {
   color: #fff;
 }
 

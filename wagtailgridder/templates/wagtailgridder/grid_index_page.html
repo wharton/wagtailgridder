@@ -21,7 +21,7 @@
                     {% image page.hero_background_image original as top_hero %}
                     <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
                       <div class="col-lg-6 col-md-6 hero-wrap">
-                        <div class="hero-description">
+                        <div class="hero-details">
                           {% image page.hero_logo_image original %}
                           {{ page.hero_description|richtext }}
                           <p><a href="{% if page.hero_button_url|length %}{{ page.hero_button_url }}{% else %}#grid-items{% endif %}" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
