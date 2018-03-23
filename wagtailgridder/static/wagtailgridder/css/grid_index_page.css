@@ -376,6 +376,10 @@
     }
 }
 
+.hero-description p {
+  color: #fff;
+}
+
 .catalog-tools {
     .main-section {
         padding-top: 60px;

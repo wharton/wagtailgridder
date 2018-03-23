@@ -201,7 +201,6 @@ class GridIndexPage(Page):
         null=True,
         blank=True,
         help_text='Text to be displayed beneath the logo over the background image.',
-        features=['bold', 'italic', 'link', 'ol', 'ul'],
     )
 
     hero_button_text = models.CharField(
@@ -222,7 +221,6 @@ class GridIndexPage(Page):
         null=True,
         blank=True,
         help_text='Text to be displayed below the hero image next to the featured items.',
-        features=['bold', 'italic', 'link', 'ol', 'ul'],
     )
 
     featured_grid_item_1 = models.ForeignKey(
