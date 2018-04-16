@@ -22,27 +22,27 @@ The default Wagtail Gridder template caches the grid display area to reduce the 
 
 ## Grid Index Page:
 
-![Grid Index Page](img/grid_index_page.jpg)
+![Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/grid_index_page.jpg)
 
 ## Grid Index Page, with Grid Item expanded:
 
-![Grid Index Page, with Grid Item expanded](img/grid_index_page_expanded.jpg)
+![Grid Index Page, with Grid Item expanded](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/grid_index_page_expanded.jpg)
 
 ## Optional featured hero region:
 
-![Optional featured hero region](img/featured_hero.jpg)
+![Optional featured hero region](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/featured_hero.jpg)
 
 ## Grid Item landing page:
 
-![Grid Item landing page](img/grid_item.jpg)
+![Grid Item landing page](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/grid_item.jpg)
 
 ## Editing a Grid Item:
 
-![Editing a Grid Item](img/edit_grid_item.jpg)
+![Editing a Grid Item](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/edit_grid_item.jpg)
 
 ## Editing a Grid Index Page:
 
-![Editing a Grid Index Page](img/edit_grid_index_page.jpg)
+![Editing a Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/edit_grid_index_page.jpg)
 
 # Release Notes
 
