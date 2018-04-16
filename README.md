@@ -10,7 +10,13 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 
 # Installation
 
+This installation assumes that you already have a Django and the Wagtail CMS installed as part of your project.
+
+Wagtail Gridder can then be installed like most Django apps. First, install it into your `virtualenv`:
+
     pip install wagtailgridder
+
+Then add `wagtailgridder` to your list of `INSTALLED_APPS` in your Django settings file. Then log into the Wagtail admin, and you should see a "Grid Layouts" section of the menu. The first thing you will want to do is add some "Grid Categories." After that, you can create "Grid Items" (the cards, pictured below) and put them together on a "Grid Index Page."
 
 # Settings
 
