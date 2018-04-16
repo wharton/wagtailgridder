@@ -1,10 +1,14 @@
 from setuptools import setup, find_packages
 
+with open('README.md') as f:
+    long_description = f.read()
+
 setup(
     name='wagtailgridder',
     version="0.9.25",
     description='Gridder layout for the Django CMS Wagtail.',
-    long_description='',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author='Timothy Allen',
     author_email='tallen@wharton.upenn.edu',
     url='https://github.com/wharton/wagtailgridder',
