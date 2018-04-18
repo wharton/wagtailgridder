@@ -8,6 +8,8 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 * Wagtail >= 1.9 (for ParentalManyToMany)
 * Bootstrap >= 3 (optimized for Bootstrap 4; templates can be modified)
 
+These installation instructions assume you are using Wagtail 2.0 or greater.
+
 # Installation
 
 This installation assumes that you already have a Django and the Wagtail CMS installed as part of your project.
@@ -16,7 +18,33 @@ Wagtail Gridder can then be installed like most Django apps. First, install it i
 
     pip install wagtailgridder
 
-Then add `wagtailgridder` to your list of `INSTALLED_APPS` in your Django settings file. Then log into the Wagtail admin, and you should see a "Grid Layouts" section of the menu. The first thing you will want to do is add some "Grid Categories." After that, you can create "Grid Items" (the cards, pictured below) and put them together on a "Grid Index Page."
+Then add `wagtailgridder` to your list of `INSTALLED_APPS` in your Django settings file. You will also need to add `wagtail.contrib.modeladmin`, if you haven't already. Your final settings may look something like this:
+
+```python
+WAGTAIL_APPS = [
+    'taggit',
+    'modelcluster',
+    'wagtail.core',
+    'wagtail.admin',
+    'wagtail.documents',
+    'wagtail.snippets',
+    'wagtail.users',
+    'wagtail.images',
+    'wagtail.embeds',
+    'wagtail.search',
+    'wagtail.sites',
+]
+
+WAGTAIL_CONTRIB_APPS = [
+    'wagtailgridder',
+    'wagtail.contrib.modeladmin',
+]
+
+INSTALLED_APPS = INSTALLED_APPS + WAGTAIL_APPS + WAGTAIL_CONTRIB_APPS
+```
+
+
+Then log into the Wagtail admin, and you should see a "Grid Layouts" section of the menu. The first thing you will want to do is add some "Grid Categories." After that, you can create "Grid Items" (the cards, pictured below) and put them together on a "Grid Index Page."
 
 # Settings
 
