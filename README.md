@@ -12,7 +12,7 @@ These installation instructions assume you are using Wagtail 2.0 or greater.
 
 # Installation
 
-This installation assumes that you already have a Django and the Wagtail CMS installed as part of your project.
+*This installation assumes that you already have Django and Wagtail installed as part of your project.*
 
 Wagtail Gridder can then be installed like most Django apps. First, install it into your `virtualenv`:
 
