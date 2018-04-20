@@ -43,6 +43,7 @@ WAGTAIL_CONTRIB_APPS = [
 INSTALLED_APPS = INSTALLED_APPS + WAGTAIL_APPS + WAGTAIL_CONTRIB_APPS
 ```
 
+This Wagtail Gridder template extends `base.html`, with the hope that this allows inclusion or your site's top and bottom navigation without much effort. There is [an example base.html provided](https://github.com/wharton/wagtailgridder/blob/master/wagtailgridder/templates/base.html).
 
 Then log into the Wagtail admin, and you should see a "Grid Layouts" section of the menu. The first thing you will want to do is add some "Grid Categories." After that, you can create "Grid Items" (the cards, pictured below) and put them together on a "Grid Index Page."
 
