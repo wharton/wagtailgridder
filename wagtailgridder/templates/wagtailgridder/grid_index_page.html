@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
-{% load cache %}
-{% load wagtailcore_tags %}
-{% load wagtailimages_tags %}
+{% load staticfiles cache wagtailcore_tags wagtailimages_tags %}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 
@@ -12,60 +9,60 @@
 {% endblock extra_head_bottom %}
 
 {% block inner_content %}
-    {% cache 3600 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
-        <div id="main-body" class="main-section">
-          <div class="container">
-              <br>
-              {% block hero_section %}
-              {% if page.hero_background_image %}
-                  <div class="row m-top-30">
-                    {% image page.hero_background_image original as top_hero %}
-                    <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
+    <div id="main-body" class="main-section">
+      <div class="container">
+          <br>
+          {% block hero_section %}
+          {% if page.hero_background_image %}
+              <div class="row m-top-30">
+                  {% image page.hero_background_image original as top_hero %}
+                  <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
                       <div class="col-lg-6 col-md-6 hero-wrap">
-                        <div class="hero-details">
-                          {% image page.hero_logo_image original %}
-                          {{ page.hero_description|richtext }}
-                          <p><a href="{% if page.hero_button_url|length %}{{ page.hero_button_url }}{% else %}#grid-items{% endif %}" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
-                        </div>
+                          <div class="hero-details">
+                              {% image page.hero_logo_image original %}
+                              {{ page.hero_description|richtext }}
+                              <p><a href="{% if page.hero_button_url|length %}{{ page.hero_button_url }}{% else %}#grid-items{% endif %}" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
+                          </div>
                       </div>
-                    </div>
                   </div>
-              {% endif %}
-              {% endblock hero_section %}
+              </div>
+          {% endif %}
+          {% endblock hero_section %}
 
-              {% block featured_items %}
-              {% if page.featured_description and page.featured_grid_item_1 and page.featured_grid_item_2 %}
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 hero-wrap">                  
-                        <p class="lead m-top15">{{ page.featured_description|richtext }}</p>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                      <div class="row">
-                        <div class="col-md-12 m-top15">
-                            <div class="feat"><strong>FEATURED</strong></div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                          <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
-                            <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
-                            </div>
-                            <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
-                          </a>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                          <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
-                            <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
-                            </div>
-                            <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+          {% block featured_items %}
+          {% if page.featured_description and page.featured_grid_item_1 and page.featured_grid_item_2 %}
+              <div class="row">
+                  <div class="col-lg-6 col-md-6 hero-wrap">                  
+                      <p class="lead m-top15">{{ page.featured_description|richtext }}</p>
                   </div>
-              {% endif %}
-              {% endblock featured_items %}
+                  <div class="col-lg-6 col-md-6">
+                      <div class="row">
+                          <div class="col-md-12 m-top15">
+                              <div class="feat"><strong>FEATURED</strong></div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-6 col-md-6">
+                              <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
+                                  <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+                                  </div>
+                                  <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
+                              </a>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                              <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
+                                  <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                                  </div>
+                                  <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
+                              </a>
+                          </div>
+                        </div>
+                    </div>
+              </div>
+          {% endif %}
+          {% endblock featured_items %}
 
+          {% cache 3600 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
               <a name="grid-items"></a>
               <div class="catalog-tools">
                   <div class="main-section" >
