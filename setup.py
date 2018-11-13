@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='wagtailgridder',
-    version="0.9.30",
+    version="0.10.0",
     description='Gridder layout for the Django CMS Wagtail.',
     long_description=long_description,
     long_description_content_type='text/markdown',
