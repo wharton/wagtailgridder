@@ -46,7 +46,11 @@
 }
 
 .mode-toggle {
-  font-size: xx-large;
+  font-size: 50px;
+  text-decoration: none;
+}
+
+.mode-toggle:hover {
   text-decoration: none;
 }
 
