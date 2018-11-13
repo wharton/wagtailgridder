@@ -34,7 +34,9 @@ function showListView() {
 $(document).ready(function() {
     $('#catalog-table-id').DataTable({
         "paging": false,
-        "ordering": false,
+        "ordering": true,
+        "order": [[0, "asc"]],
+        "columnDefs": [{"orderable": false, "targets": 1}],
         "info": false,
         "searching": false
     });
