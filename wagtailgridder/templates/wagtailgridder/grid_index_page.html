@@ -39,6 +39,12 @@ $(document).ready(function() {
     <div id="main-body" class="main-section">
         <div class="container">
             <br>
+            <div class="row text-right">
+                <div class="text-right">
+                    <a class="mode-toggle" href="javascript:showGrid()" title="Show Grid">&#9638;</a>
+                    <a class="mode-toggle" href="javascript:showTable()" title="Show Table">&#9636;</a>
+                </div>
+            </div>
             {% block hero_section %}
             {% if page.hero_background_image %}
                 <div class="row m-top-30">
@@ -97,11 +103,6 @@ $(document).ready(function() {
                                     </ul>
                                 </div>
                             {% endif %}
-                            <div class="text-right">
-                                <a href="javascript:showGrid()">Show Grid</a>
-                                |
-                                <a href="javascript:showTable()">Show Table</a>
-                            </div>
                         </div>
                     </div>
                 {% endif %}

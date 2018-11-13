@@ -45,6 +45,11 @@
   margin-bottom: 15px;
 }
 
+.mode-toggle {
+  font-size: xx-large;
+  text-decoration: none;
+}
+
 .gridder-close::before, .gridder-close::after {
   content: '';
   position: absolute;
