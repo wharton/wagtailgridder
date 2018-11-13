@@ -10,7 +10,10 @@
 
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
-function showGrid() {
+/*
+These functions allow for CSS class swapping to show or hide the different views.
+*/
+function showDetailView() {
     $(".catalog-table").addClass('hidden');
     $(".catalog-table").addClass('d-none');
     $(".catalog-tools").removeClass('hidden');
@@ -19,7 +22,7 @@ function showGrid() {
     $("#tabs-table").removeClass('active');
 }
 
-function showTable() {
+function showListView() {
     $(".catalog-table").removeClass('hidden');
     $(".catalog-table").removeClass('d-none');
     $(".catalog-tools").addClass('hidden');
@@ -40,12 +43,12 @@ $(document).ready(function() {
 {% endblock extra_head_bottom %}
 
 {% block inner_content %}
-{% cache 3600 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
+{% cache 604800 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
     <div id="main-body" class="container">
         <div class="row">
             <ul class="nav nav-tabs">
-                <li id="tabs-grid" class="active"><a href="javascript:showGrid()" title="Show Grid">&#9638; Detail View</a></li>
-                <li id="tabs-table"><a href="javascript:showTable()" title="Show Table">&#9636; List View</a></li>
+                <li id="tabs-grid" class="active"><a href="javascript:showDetailView()" title="Detail View">&#9638; Detail View</a></li>
+                <li id="tabs-table"><a href="javascript:showListView()" title="List View">&#9636; List View</a></li>
             </ul>
             <table id="catalog-table-id" class="catalog-table d-none hidden">
                 <thead>
