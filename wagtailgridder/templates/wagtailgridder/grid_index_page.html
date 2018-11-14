@@ -45,12 +45,12 @@ $(document).ready(function() {
 {% endblock extra_head_bottom %}
 
 {% block inner_content %}
-{% cache 604800 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
+{% cache 1 604800 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
     <div id="main-body" class="container">
         <div class="row">
             <ul class="nav nav-tabs">
-                <li id="tabs-grid" class="active"><a href="javascript:showDetailView()" title="Detail View">&#9638; Detail View</a></li>
-                <li id="tabs-table"><a href="javascript:showListView()" title="List View">&#9636; List View</a></li>
+                <li class="nav-item"><a id="tabs-grid" class="nav-link" href="javascript:showDetailView()" title="Detail View">&#9638; Detail View</a></li>
+                <li class="nav-item"><a id="tabs-table" class="nav-link" href="javascript:showListView()" title="List View">&#9636; List View</a></li>
             </ul>
             <table id="catalog-table-id" class="catalog-table d-none hidden">
                 <thead>
