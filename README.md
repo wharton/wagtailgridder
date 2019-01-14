@@ -1,6 +1,6 @@
 # Wagtail Gridder
 
-Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items are created within categories, and displayed on a Grid Index Page. The JavaScript libraries Gridder and MixItUp are included.
+Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items are created within categories and displayed on a Grid Index Page. The JavaScript libraries Gridder and MixItUp are included.
 
 # Requirements
 
