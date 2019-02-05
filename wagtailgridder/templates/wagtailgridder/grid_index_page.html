@@ -14,19 +14,14 @@
 These functions allow for CSS class swapping to show or hide the different views.
 */
 function showDetailView() {
-    $(".catalog-table").addClass('hidden');
-    $(".catalog-table").addClass('d-none');
-    $(".catalog-tools").removeClass('hidden');
-    $(".catalog-tools").removeClass('d-none');
+    $(".catalog-table").addClass('hidden d-none');
+    $(".catalog-filters, #catalog-tools").removeClass('hidden d-none');
     $("#tabs-grid").addClass('active');
     $("#tabs-table").removeClass('active');
 }
-
 function showListView() {
-    $(".catalog-table").removeClass('hidden');
-    $(".catalog-table").removeClass('d-none');
-    $(".catalog-tools").addClass('hidden');
-    $(".catalog-tools").addClass('d-none');
+    $(".catalog-table").removeClass('hidden d-none');
+    $(".catalog-filters, #catalog-tools").addClass('hidden d-none');
     $("#tabs-grid").removeClass('active');
     $("#tabs-table").addClass('active');
 }
@@ -45,49 +40,23 @@ $(document).ready(function() {
 {% endblock extra_head_bottom %}
 
 {% block inner_content %}
-{% cache 604800 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty %}
+<!-- TODO: disabled for development, please revert -->
+<!-- % cache 604800 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty % -->
     <div id="main-body" class="container">
-        <div class="row">
-            <ul class="nav nav-tabs">
-                <li id="tabs-grid" class="active"><a href="javascript:showDetailView()" title="Detail View">&#9638; Detail View</a></li>
-                <li id="tabs-table"><a href="javascript:showListView()" title="List View">&#9636; List View</a></li>
-            </ul>
-            <table id="catalog-table-id" class="catalog-table d-none hidden">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Categories</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for grid_item in page.grid_items %}
-                        <tr>
-                            <td>
-                                <a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
-                            </td>
-                            <td>
-                                {% for item in grid_item.categories.all %}
-                                    {{ item.name }}{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
 
         <div class="row catalog-tools">
             {% block hero_section %}
             {% if page.hero_background_image %}
                 {% image page.hero_background_image original as top_hero %}
-                <div class="top-hero" style="background-image:url('{{ top_hero.url }}');">
-                    <div class="col-lg-6 col-md-6 hero-wrap">
+                <div class="col-xs-12">
+                    <div class="col-md-6 hero-wrap">
                         <div class="hero-details">
                             {% image page.hero_logo_image original %}
                             {{ page.hero_description|richtext }}
                             <p><a href="{% if page.hero_button_url|length %}{{ page.hero_button_url }}{% else %}#grid-items{% endif %}" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
                         </div>
                     </div>
+                    <div class="top-hero" style="background-image:url('{{ top_hero.url }}');"></div>
                 </div>
             {% endif %}
             {% endblock hero_section %}
@@ -96,45 +65,87 @@ $(document).ready(function() {
         {% block featured_items %}
         {% if page.featured_description and page.featured_grid_item_1 and page.featured_grid_item_2 %}
             <div class="row catalog-tools">
-                <div class="col-md-3">                  
-                    <p class="lead m-top15">{{ page.featured_description|richtext }}</p>
+
+                <div class="col-md-5">
+                    <p class="lead">{{ page.featured_description|richtext }}</p>
                 </div>
-                <div class="col-md-3">
-                    <strong>Featured Tools:</strong>
-                    <br>
-                    <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
-                        <div class="cr-img bg-img"> <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+
+                <div class="col-md-6 col-md-offset-1">
+                    <strong>Featured Tools:</strong><br>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
+                                <div class="cr-img bg-img">
+                                    <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+                                </div>
+                                <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
+                            </a>
                         </div>
-                        <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
-                    </a>
-                    <br><br>
-                    <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
-                        <div class="cr-img bg-img" ><img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                        <div class="col-xs-6">
+                            <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
+                                <div class="cr-img bg-img">
+                                    <img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+                                </div>
+                                <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
+                            </a>
                         </div>
-                        <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
-                    </a>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <strong>Topics:</strong>
-                    <br>
-                    {% if page.categories|length > 1 %}
-                        <div class="filter-wrap">
-                            <ul class="filter-options list-group row">
-                              <li class="list-group-item col-xs-6" style="border: 0; padding: 0; margin: 0;">
-                                  <button class="btn btn-info btn-lg btn-block filter active" data-filter="all">All Topics</button>
-                              </li>
-                              {% for category in page.categories %}
-                                  <li class="list-group-item col-xs-6" style="border: 0; padding: 0; margin: 0;">
-                                      <button class="btn btn-info btn-lg btn-block filter" id="id-{{ category|slugify }}" data-filter=".{{ category|slugify }}">{{ category }}</button>
-                                  </li>
-                              {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                </div>
+
             </div>
         {% endif %}
         {% endblock featured_items %}
+
+        <ul class="nav nav-tabs">
+            <li id="tabs-grid" class="active">
+                <a href="javascript:showDetailView()" title="Detail View"><i class="fa fa-th-large" aria-hidden="true"></i> Detail View</a>
+            </li>
+            <li id="tabs-table">
+                <a href="javascript:showListView()" title="List View"><i class="fa fa-th-list" aria-hidden="true"></i> List View</a>
+            </li>
+        </ul>
+
+        <table id="catalog-table-id" class="catalog-table d-none hidden">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Categories</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grid_item in page.grid_items %}
+                    <tr>
+                        <td>
+                            <a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
+                        </td>
+                        <td>
+                            {% for item in grid_item.categories.all %}
+                                {{ item.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="catalog-tools catalog-filters">
+            <strong>Topics:</strong>
+            <br>
+            {% if page.categories|length > 1 %}
+                <div class="filter-wrap">
+                    <ul class="filter-options list-group row">
+                      <li class="list-group-item col-xs-6 col-md-3">
+                          <button class="btn btn-info btn-lg btn-block filter active" data-filter="all">All Topics</button>
+                      </li>
+                      {% for category in page.categories %}
+                          <li class="list-group-item col-xs-6 col-md-3">
+                              <button class="btn btn-info btn-lg btn-block filter" id="id-{{ category|slugify }}" data-filter=".{{ category|slugify }}">{{ category }}</button>
+                          </li>
+                      {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
 
         <a name="grid-items"></a>
         <div id="catalog-tools" class="catalog-tools">
@@ -161,7 +172,7 @@ $(document).ready(function() {
                     {% endfor %}
                 </div>
             </div>
-        </div class="catalog-tools">
+        </div>
 
         {% for grid_item in page.grid_items %}
             <div id="{{ grid_item.slug }}" class="gridder-content">
@@ -180,16 +191,16 @@ $(document).ready(function() {
                             {% endfor %}
                         {% endblock button_block %}
                     </div>
-                </div class="row">
+                </div>
 
                 {% if grid_item.description_video %}
                     <div class="row video-wrapper">
                         <iframe src="{{ grid_item.description_video }}" width="1920" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                    </div class="row">
+                    </div>
                 {% endif %}
             </div>
         {% endfor %}
-    </div id="main-body" class="container">
+    </div>
 
     {% if request.GET.t %}
         <script>
@@ -200,7 +211,7 @@ $(document).ready(function() {
         });
         </script>
     {% endif %}
-{% endcache %}
+<!-- % endcache % -->
 {% endblock inner_content %}
 
 {% block extra_footer_js %}

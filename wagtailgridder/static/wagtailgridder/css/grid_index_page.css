@@ -1,60 +1,9 @@
-.catalog-tools .main-section .row {
-  margin-bottom: 30px;
-}
-
-.catalog-tools .catalog-title {
-  font-size: 32px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.catalog-tools .filter-wrap .btn, .catalog-tools .filter-wrap .ui-datepicker .ui-priority-primary, .ui-datepicker .catalog-tools .filter-wrap .ui-priority-primary, .catalog-tools .filter-wrap .moreevents, .catalog-tools .filter-wrap .selectlists .select-all label, .selectlists .select-all .catalog-tools .filter-wrap label {
-  text-transform: uppercase;
-}
-
-.catalog-tools .filter-label {
-  display: inline;
-  text-transform: uppercase;
-}
-
-.catalog-tools .tool-img {
-  height: 125px;
-}
-
-.catalog-tools .tool-body {
-  position: relative;
-  background: #FFFFFF;
-  padding: 5px;
-  height: 340px;
-}
-
-.catalog-tools .tool-body p {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-.catalog-tools .tool-title {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.catalog-tools .content-title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-.mode-toggle {
-  font-size: 50px;
-  text-decoration: none;
-}
-
-.mode-toggle:hover {
-  text-decoration: none;
-}
-
-.gridder-close::before, .gridder-close::after {
+/**
+ * Gridder
+ * Core styles
+ */
+.gridder-close::before,
+.gridder-close::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -66,7 +15,6 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-
 .gridder {
   width: 100%;
   margin: 0 auto;
@@ -74,13 +22,13 @@
   position: relative;
   overflow: hidden;
 }
-
 .gridder:after {
   content: '';
   display: table;
   clear: both;
 }
 
+/* Gridder List */
 .gridder-list {
   width: 100%;
   display: none;
@@ -90,29 +38,24 @@
   margin: 0 0 15px 7px;
   vertical-align: top;
 }
-
 @media (min-width: 768px) {
   .gridder-list {
     width: 48%;
   }
 }
-
 @media (min-width: 1024px) {
   .gridder-list {
     width: 32%;
   }
 }
-
 @media (min-width: 1200px) {
   .gridder-list {
     width: 24%;
   }
 }
-
 .gridder-list .gridder-thumb {
   display: block;
 }
-
 .gridder-list .gridder-thumb .overlay {
   position: absolute;
   color: #000000;
@@ -127,25 +70,20 @@
   font-size: 16px;
   opacity: 0;
 }
-
 .gridder-list .gridder-thumb .overlay span {
   font-weight: 11px;
   display: block;
 }
-
 .gridder-list img {
   width: 100%;
 }
-
 .gridder-list.first {
   margin-left: 0;
 }
-
 .gridder-list.selectedItem {
   margin-bottom: 25px;
   top: 10px;
 }
-
 .gridder-list.selectedItem:after {
   content: "";
   width: 0;
@@ -159,7 +97,6 @@
   left: 45%;
   margin-bottom: -20px;
 }
-
 .gridder-list:hover .overlay {
   opacity: 0.8;
 }
@@ -168,6 +105,7 @@
   display: none;
 }
 
+/* Gridder Show */
 .gridder-show {
   position: relative;
   background: #222222;
@@ -181,48 +119,40 @@
   left: 6px;
   margin-bottom: 10px;
 }
-
 .gridder-show .padding {
   display: none;
 }
-
 .gridder-show:after {
   content: ".";
   display: block;
   height: 0;
   overflow: hidden;
 }
-
 .gridder-show .detail-img {
   float: left;
   width: 100%;
   margin: 0 0 15px;
 }
-
 @media (min-width: 1024px) {
   .gridder-show .detail-img {
     width: 30%;
     margin: 0 25px;
   }
 }
-
 .gridder-show .content-img {
   height: 200px;
   background-repeat: no-repeat;
 }
-
 @media (min-width: 1024px) {
   .gridder-show .content-img {
     height: 350px;
     background-repeat: no-repeat;
   }
 }
-
 .gridder-show .detail-content {
   width: 100%;
   text-align: left;
 }
-
 @media (min-width: 1024px) {
   .gridder-show .detail-content {
     float: left;
@@ -230,6 +160,7 @@
   }
 }
 
+/* Gridder Close */
 .gridder-close {
   opacity: 1;
   position: absolute;
@@ -240,29 +171,25 @@
   cursor: pointer;
   font-size: 0;
 }
-
 .gridder-close:hover {
   opacity: 1;
 }
-
 .gridder-close:hover::before {
   background: #FFFFFF;
 }
-
 .gridder-close:hover::after {
   background: #FFFFFF;
 }
-
 .gridder-close::after {
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
 
+/* Gridder Nav */
 .gridder-nav {
   color: #FFFFFF;
 }
-
 .gridder-nav.prev:before {
   content: "\25C0";
   font-size: 40px;
@@ -274,7 +201,6 @@
   width: 40px;
   height: 99px;
 }
-
 .gridder-nav.next:before {
   content: "\25b6";
   font-size: 40px;
@@ -286,23 +212,24 @@
   width: 40px;
   height: 99px;
 }
-
 .gridder-nav.prev {
   font-size: 0;
 }
-
 .gridder-nav.next {
   font-size: 0;
 }
-
 .gridder-img:hover {
   opacity: 0.8;
 }
-
 .gridder-prev:hover {
   opacity: 1;
 }
 
+
+/**
+ * Gridder
+ * Additional styles and Classroom section
+ */
 .gridder-list .gl-wrap {
   position: relative;
   background: #FFFFFF;
@@ -310,218 +237,124 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   height: 495px;
 }
-
-.gridder-list .gl-wrap:hover, .gridder-list .gl-wrap:focus {
+.gridder-list .gl-wrap:hover,
+.gridder-list .gl-wrap:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 .gridder-list .gl-wrap:active {
   -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
-
-.gridder-list .gl-wrap .btn-block, .gridder-list .gl-wrap .moreevents {
+.gridder-list .gl-wrap .btn-block,
+.gridder-list .gl-wrap .moreevents {
   position: relative;
   bottom: 0;
 }
 
 /* For video; hack to make embeds responsive. */
 .video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    padding-top: 25px;
-    height: 0;
-    margin: 0 auto;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+  margin: 0 auto;
 }
-
 .video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Hero section */
 .hero-wrap {
-    padding: 0 45px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
-
+.hero-details,
 .top-hero {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 350px;
+  height: 350px;
 }
-
 .hero-details {
-    padding: 50px 40px 0;
-    background: rgba(0, 0, 0, 0.2);
-    height: 350px;
+  padding: 50px 40px 0;
+  background: rgba(0, 0, 0, 0.3);
 }
-
 .hero-details p {
-  color: #fff;
+  color: #FFFFFF;
+}
+.top-hero {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
 }
 
-.catalog-tools {
-    .main-section {
-        padding-top: 60px;
-    }
-    .catalog-title {
-        font-size: 32px;
-        font-weight: 400;
-        text-transform: uppercase;
-    }
-    .filter-wrap {
-        .btn {
-            text-transform: uppercase;
-        }
-    }
-    .filter-label {
-        display: inline;
-        text-transform: uppercase;
-    }
-    .tool-img {
-        @extend .bg-img;
-        height: 125px;
-    }
-    .tool-body {
-        position: absolute;
-        background: $white;
-        padding: 15px;
-        @include breakFirst(medium) {
-            max-height: 335px;
-        }
-        p {
-            font-size: 14px;
-            line-height: 20px;
-        }
-    }
-    .tool-title {
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 5px;
-    }
-    .content-title {
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 15px;
-    }
-    
-
+/* Tabbed Navigation */
+.nav-tabs {
+  margin-bottom: 30px;
+}
+.nav-tabs li .fa {
+  font-size: 14px
 }
 
-.gridder-list {
-    .gl-wrap {
-        position: relative;
-        background: $white;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        height: 432px;
-        &:hover, &:focus {
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        &:active {
-            box-shadow: inset 0px 0px 4px rgba(0,0,0,0.3);
-        }
-        .btn-block {
-            position: absolute; 
-            bottom: 0;
-        }
-    }
+ /* Catalog Tools */
+.catalog-tools .main-section .row {
+  margin-bottom: 30px;
 }
-
-// Bubble title 
-.bubble-intro {
-    position: relative;
-    width: 100%;
-    padding: 160px 30px 30px;
-    margin-bottom: 70px;
-    @include breakFirst(medium) {
-        padding: 80px 25px 25px;
-    }
-    span {
-        color: $white;
-        font-size: 68px;
-        line-height: 70px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-weight: 100;
-        @include breakFirst(medium) {
-            font-size: 40px;
-            line-height: 44px;
-        }
-    }
-    .bubble-stem {
-        position: absolute;
-        bottom: -60px;
-        right: 70px;
-        width: 0;
-        height: 0;
-        border-left: 60px solid rgba(0, 0, 0, 0);
-        @include breakFirst(medium) {
-            bottom: -45px;
-        }
-    }
-    &.bubble-turq {
-        background-color: $turq;
-        .bubble-stem {
-            border-top: 60px solid $turq;
-            @include breakFirst(medium) {
-                border-top: 45px solid $turq;
-            }
-        }
-    }
-    &.bubble-red {
-        background-color: $redLight;
-        .bubble-stem {
-            border-top: 60px solid $redLight;
-            @include breakFirst(medium) {
-                border-top: 45px solid $redLight;
-            }
-        }
-    }
+.catalog-tools .catalog-title {
+  font-size: 32px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
-
-ul.side-links {
-    margin-bottom: 30px;
-    li > a {
-        display: block;
-        font-size: 18px;
-        padding: 5px 0;
-    }
+.catalog-tools .filter-wrap .btn,
+.catalog-tools .filter-wrap .ui-datepicker .ui-priority-primary,
+.ui-datepicker .catalog-tools .filter-wrap .ui-priority-primary,
+.catalog-tools .filter-wrap .moreevents,
+.catalog-tools .filter-wrap .selectlists .select-all label,
+.selectlists .select-all .catalog-tools .filter-wrap label {
+  text-transform: uppercase;
 }
-
-.gray-wrap {
-    border: 2px solid $gray;
-    overflow: hidden;
+.catalog-tools .filter-label {
+  display: inline;
+  text-transform: uppercase;
 }
-
-.gray-wrap-df {
-    padding: 50px 10px 20px;
+.catalog-tools .filter-options {
+  margin-left: 0;
+  margin-right: 0;
 }
-
-.gray-wrap-img {
-    padding: 0 0 20px;
-    .cr-headline, p {
-        padding: 0 10px;
-    }
+.catalog-tools .filter-options:hover {
+  box-shadow: none;
 }
-
-.gray-wrap-short {
-    padding: 0 0 37px;
-    .cr-headline, p {
-        padding: 0 10px;
-    }
+.catalog-tools .list-group-item {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
-
-// Headline 
-.cr-headline {
-    font-size: 36px;
-    line-height: 35px;
-    color: $gray;
-    margin-bottom: 30px;
-    text-transform: uppercase;
+.catalog-tools .tool-img {
+  height: 125px;
+}
+.catalog-tools .tool-body {
+  position: relative;
+  background: #FFFFFF;
+  padding: 5px 10px;
+  height: 340px;
+}
+.catalog-tools .tool-body p,
+.catalog-tools .tool-body li {
+  font-size: 14px;
+  line-height: 20px;
+}
+.catalog-tools .tool-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.catalog-tools .content-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 15px;
 }
