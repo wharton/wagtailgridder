@@ -294,10 +294,10 @@
 }
 
 /* Tabbed Navigation */
-.nav-tabs {
+.catalog-nav.nav-tabs {
   margin-bottom: 30px;
 }
-.nav-tabs li .fa {
+.catalog-nav.nav-tabs li .fa {
   font-size: 14px
 }
 
