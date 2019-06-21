@@ -1,20 +1,13 @@
-/**
- * Gridder
- * Core styles
+/*!
+ * Wagtail Gridder
+ *
+ * A Bootstrap enabled layout for the Wagtail CMS. Grid Items are
+ * created within categories and displayed on a Grid Index Page.
+ * The JavaScript libraries Gridder and MixItUp are included.
+ *
+ * url: https://github.com/wharton/wagtailgridder
  */
-.gridder-close::before,
-.gridder-close::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  right: 3%;
-  height: 1px;
-  background: #686868;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+
 .gridder {
   width: 100%;
   margin: 0 auto;
@@ -28,14 +21,20 @@
   clear: both;
 }
 
-/* Gridder List */
+
+/**
+ * Gridder List
+ * ------------
+ * Card Layout
+ */
+
 .gridder-list {
   width: 100%;
   display: none;
   zoom: 1;
   cursor: pointer;
   position: relative;
-  margin: 0 0 15px 7px;
+  margin: 0 0 20px 7px;
   vertical-align: top;
 }
 @media (min-width: 768px) {
@@ -57,17 +56,17 @@
   display: block;
 }
 .gridder-list .gridder-thumb .overlay {
-  position: absolute;
-  color: #000000;
-  text-align: center;
-  left: 0;
-  bottom: 0;
-  font-weight: normal;
-  display: block;
-  background: #AAAAAA;
   width: 100%;
   padding: 10px 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
   font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+  background: #aaa;
+  color: #000;
   opacity: 0;
 }
 .gridder-list .gridder-thumb .overlay span {
@@ -75,6 +74,7 @@
   display: block;
 }
 .gridder-list img {
+  /* TODO: fix image stretching on smaller devices */
   width: 100%;
 }
 .gridder-list.first {
@@ -90,7 +90,7 @@
   height: 0;
   border-style: solid;
   border-width: 0 14px 17px 14px;
-  border-color: transparent transparent #222222 transparent;
+  border-color: transparent transparent #222 transparent;
   display: block;
   position: absolute;
   bottom: -2px;
@@ -101,26 +101,48 @@
   opacity: 0.8;
 }
 
-.gridder-content {
-  display: none;
+/* List Wrappers */
+.gridder-list .gl-wrap {
+  height: 440px;
+  position: relative;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.5s ease;
+}
+.gridder-list .gl-wrap:hover,
+.gridder-list .gl-wrap:focus {
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.gridder-list .gl-wrap:active {
+  -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+.gridder-list .gl-wrap .btn-block,
+.gridder-list .gl-wrap .moreevents {
+  position: relative;
+  bottom: 0;
 }
 
-/* Gridder Show */
+
+/**
+ * Gridder Show
+ * ------------
+ * Expanded Content
+ */
+
 .gridder-show {
   position: relative;
-  background: #222222;
+  background: #222;
   float: left;
   padding: 0;
-  color: #FFFFFF;
+  color: #fff;
   overflow: hidden;
   width: 98.9%;
-  padding: 40px;
   top: 0;
   left: 6px;
   margin-bottom: 10px;
-}
-.gridder-show .padding {
-  display: none;
 }
 .gridder-show:after {
   content: ".";
@@ -128,6 +150,11 @@
   height: 0;
   overflow: hidden;
 }
+.gridder-show .gridder-padding {
+  padding: 15px 60px;
+}
+
+/* Content Layout */
 .gridder-show .detail-img {
   float: left;
   width: 100%;
@@ -160,98 +187,6 @@
   }
 }
 
-/* Gridder Close */
-.gridder-close {
-  opacity: 1;
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 0;
-}
-.gridder-close:hover {
-  opacity: 1;
-}
-.gridder-close:hover::before {
-  background: #FFFFFF;
-}
-.gridder-close:hover::after {
-  background: #FFFFFF;
-}
-.gridder-close::after {
-  -webkit-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-
-/* Gridder Nav */
-.gridder-nav {
-  color: #FFFFFF;
-}
-.gridder-nav.prev:before {
-  content: "\25C0";
-  font-size: 40px;
-  opacity: 0.7;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  width: 40px;
-  height: 99px;
-}
-.gridder-nav.next:before {
-  content: "\25b6";
-  font-size: 40px;
-  opacity: 0.7;
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 40px;
-  height: 99px;
-}
-.gridder-nav.prev {
-  font-size: 0;
-}
-.gridder-nav.next {
-  font-size: 0;
-}
-.gridder-img:hover {
-  opacity: 0.8;
-}
-.gridder-prev:hover {
-  opacity: 1;
-}
-
-
-/**
- * Gridder
- * Additional styles and Classroom section
- */
-.gridder-list .gl-wrap {
-  position: relative;
-  background: #FFFFFF;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  height: 495px;
-}
-.gridder-list .gl-wrap:hover,
-.gridder-list .gl-wrap:focus {
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-.gridder-list .gl-wrap:active {
-  -webkit-box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.3);
-}
-.gridder-list .gl-wrap .btn-block,
-.gridder-list .gl-wrap .moreevents {
-  position: relative;
-  bottom: 0;
-}
-
 /* For video; hack to make embeds responsive. */
 .video-wrapper {
   position: relative;
@@ -268,40 +203,192 @@
   height: 100%;
 }
 
-/* Hero section */
-.hero-wrap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 1;
-}
-.hero-details,
-.top-hero {
-  height: 350px;
-}
-.hero-details {
-  padding: 50px 40px 0;
-  background: rgba(0, 0, 0, 0.3);
-}
-.hero-details p {
-  color: #FFFFFF;
-}
-.top-hero {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  width: 100%;
+/* Hidden Content Holders */
+.gridder-content {
+  display: none;
 }
 
-/* Tabbed Navigation */
-.nav-tabs {
-  margin-bottom: 30px;
+/* Expanded Content */
+/* NOTE: hack to remove negative margins -- .row's typically should contain .col's */
+.gridder-expanded-content > .row {
+  margin-left: 0;
+  margin-right: 0;
 }
-.nav-tabs li .fa {
+
+/* Navigation - Arrows */
+.gridder-nav {
+  font-size: 0;
+  color: #686868;
+  transition: none;
+}
+.gridder-nav:hover,
+.gridder-nav:active,
+.gridder-nav:focus {
+  color: #fff;
+}
+.gridder-nav.prev:before,
+.gridder-nav.next:before {
+  width: 40px;
+  height: 99px;
+  font-size: 40px;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+}
+.gridder-nav.prev:before {
+  content: "\25C0";
+  left: 15px;
+}
+.gridder-nav.next:before {
+  content: "\25b6";
+  right: 0;
+}
+
+/* Navigation - Close Button */
+.gridder-close {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 0;
+}
+.gridder-close::before,
+.gridder-close::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  right: 3%;
+  height: 2px;
+  background: #686868;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.gridder-close::after {
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.gridder-close:hover::before,
+.gridder-close:hover::after {
+  background: #fff;
+}
+
+
+/**
+ * wagtailgridder
+ * --------------
+ * Additional Page Styles
+ */
+
+#wg-content-container {
+   margin-top: 20px;
+}
+
+/* Top Hero Section */
+#wg-hero {
+  margin-bottom: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+#wg-hero .container {
+  position: relative;
+}
+#wg-hero .row,
+#wg-hero [class*="col-"] {
+  margin-bottom: 0;
+}
+#wg-hero,
+.wg-hero-details,
+.wg-hero-featured {
+  height: 450px;
+}
+.wg-hero-details,
+.wg-hero-featured {
+  padding-top: 40px;
+  color: #fff;
+}
+.wg-hero-details .wg-logo {
+  display: block;
+  margin-bottom: 1em;
+}
+@media (max-width: 991px) {
+  .wg-hero-details {
+    padding-top: 20px;
+  }
+  .wg-hero-details .wg-logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.wg-hero-featured h6 {
+  margin-top: 1em;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Featured Tools */
+.wg-featured-tool {
+  position: relative;
+  margin-bottom: 2em;
+  border: 4px solid #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+.wg-featured-tool a.tool-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.0) 75%);
+  text-decoration: none;
+  color: #fff;
+}
+.wg-featured-tool a.tool-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.wg-featured-tool a.tool-overlay .tool-title span {
+  text-shadow: 0 1px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid transparent;
+}
+.wg-featured-tool a.tool-overlay:hover .tool-title span {
+  border-bottom: 1px solid #fff;
+}
+.wg-featured-tool a.tool-overlay,
+.wg-featured-tool a.tool-overlay .tool-title span {
+  transition: all 0.5s ease;
+}
+
+/* Navbars */
+#catalog-views {
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 1px;
+}
+#catalog-views .nav-tabs {
+  border-bottom: none;
+}
+#catalog-views .nav-tabs li .fa {
   font-size: 14px
 }
 
- /* Catalog Tools */
+
+/**
+ * Catalog Tools
+ * -------------
+ * Card Content Styles
+ */
+
 .catalog-tools .main-section .row {
   margin-bottom: 30px;
 }
@@ -309,25 +396,6 @@
   font-size: 32px;
   font-weight: 400;
   text-transform: uppercase;
-}
-.catalog-tools .filter-wrap .btn,
-.catalog-tools .filter-wrap .ui-datepicker .ui-priority-primary,
-.ui-datepicker .catalog-tools .filter-wrap .ui-priority-primary,
-.catalog-tools .filter-wrap .moreevents,
-.catalog-tools .filter-wrap .selectlists .select-all label,
-.selectlists .select-all .catalog-tools .filter-wrap label {
-  text-transform: uppercase;
-}
-.catalog-tools .filter-label {
-  display: inline;
-  text-transform: uppercase;
-}
-.catalog-tools .filter-options {
-  margin-left: 0;
-  margin-right: 0;
-}
-.catalog-tools .filter-options:hover {
-  box-shadow: none;
 }
 .catalog-tools .list-group-item {
   margin: 0;
@@ -339,18 +407,23 @@
 }
 .catalog-tools .tool-body {
   position: relative;
-  background: #FFFFFF;
-  padding: 5px 10px;
-  height: 340px;
+  padding: 10px 20px;
+}
+.catalog-tools .tool-body + .btn-block {
+  position: absolute;
+  bottom: 0;
+}
+.catalog-tools .tool-body ul {
+  margin-left: 15px;
 }
 .catalog-tools .tool-body p,
 .catalog-tools .tool-body li {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 18px;
 }
 .catalog-tools .tool-title {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 .catalog-tools .content-title {

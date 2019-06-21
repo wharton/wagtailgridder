@@ -1,6 +1,10 @@
-{% extends "base.html" %}
-
+{% extends "base_full.html" %}
 {% load staticfiles cache wagtailcore_tags wagtailimages_tags %}
+
+{# Template Variables #}
+{% block site_title %}{{ page.title }}{% endblock site_title %}
+{% block additional_classes %}wagtailgridder{% endblock %}
+{# END Variables #}
 
 {% block breadcrumbs %}{% endblock breadcrumbs %}
 
@@ -10,274 +14,294 @@
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <script>
-/*
-These functions allow for CSS class swapping to show or hide the different views.
-*/
-function showDetailView() {
-    $(".catalog-table").addClass('hidden d-none');
-    $(".catalog-filters, #catalog-tools").removeClass('hidden d-none');
-    $("#tabs-grid").addClass('active');
-    $("#tabs-table").removeClass('active');
-}
-function showListView() {
-    $(".catalog-table").removeClass('hidden d-none');
-    $(".catalog-filters, #catalog-tools").addClass('hidden d-none');
-    $("#tabs-grid").removeClass('active');
-    $("#tabs-table").addClass('active');
-}
+	// These functions allow for CSS class swapping to show or hide the different views.
+	function showDetailView() {
+		$(".catalog-table").addClass('hidden d-none');
+		$("#catalog-filters, #catalog-tools").removeClass('hidden d-none');
+		$("#tabs-grid").addClass('active');
+		$("#tabs-table").removeClass('active');
+	}
+	function showListView() {
+		$(".catalog-table").removeClass('hidden d-none');
+		$("#catalog-filters, #catalog-tools").addClass('hidden d-none');
+		$("#tabs-grid").removeClass('active');
+		$("#tabs-table").addClass('active');
+	}
 
-$(document).ready(function() {
-    $('#catalog-table-id').DataTable({
-        "paging": false,
-        "ordering": true,
-        "order": [[0, "asc"]],
-        "columnDefs": [{"orderable": false, "targets": 1}],
-        "info": false,
-        "searching": false
-    });
-});
+	$(document).ready(function() {
+		$('#catalog-table-id').DataTable({
+			"paging": false,
+			"ordering": true,
+			"order": [[0, "asc"]],
+			"columnDefs": [{"orderable": false, "targets": 1}],
+			"info": false,
+			"searching": false
+		});
+		
+		// Filter navbar
+		$("#catalog-filters .nav a").on("click", function() {
+			$("#catalog-filters .nav").find(".active").removeClass("active");
+			$(this).parent().addClass("active");
+		});
+	});
 </script>
 {% endblock extra_head_bottom %}
 
-{% block inner_content %}
+
+{% block content %}
 <!-- TODO: disabled for development, please revert -->
 <!-- % cache 604800 "wagtailgridder-" request.path request.user.is_staff request.user.is_faculty % -->
-    <div id="main-body" class="container">
+	
+	{### HERO ###}
+	
+	{% block hero_section %}
+		{% if page.hero_background_image %}
+		{% image page.hero_background_image original as top_hero %}
+		
+		<div class="row" id="wg-hero" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ top_hero.url }}')">
+			
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-8">
+						<div class="wg-hero-details">
+							{% image page.hero_logo_image original class="wg-logo" %}
+							{{ page.hero_description|richtext }}
+							{% if page.hero_button_url|length %}
+							<a href="{{ page.hero_button_url }}" class="hero-btn btn btn-primary" target="_blank">{{ page.hero_button_text }}</a>
+							{% endif %}
+						</div>
+					</div>
+					
+					{### Featured ###}
+					<div class="col-md-3 col-md-offset-1 hidden-sm hidden-xs">
+						
+						{% if page.featured_description %}
+						<div class="wg-hero-featured catalog-tools">
+							<h6>Featured Tools:</h6>
+							
+							<div class="wg-featured-tool">
+								<a href="{{ page.featured_grid_item_1.url }}" class="tool-overlay">
+									<div class="tool-title">
+										<span>{{ page.featured_grid_item_1.title }}</span>
+									</div>
+								</a>
+								<img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
+							</div>
+							
+							<div class="wg-featured-tool">
+								<a href="{{ page.featured_grid_item_2.url }}" class="tool-overlay">
+									<div class="tool-title">
+										<span>{{ page.featured_grid_item_2.title }}</span>
+									</div>
+								</a>
+								<img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
+							</div>
+						</div>
+						{% endif %}
+						
+					</div>
+				</div>
+				
+				{### Toggle View ###}
+				<div id="catalog-views">
+					<ul class="nav nav-tabs blue-tabs">
+						<li id="tabs-grid" class="active">
+							<a href="javascript:showDetailView()" title="Detail View"><i class="fa fa-th-large" aria-hidden="true"></i> Grid View</a>
+						</li>
+						<li id="tabs-table">
+							<a href="javascript:showListView()" title="List View"><i class="fa fa-th-list" aria-hidden="true"></i> List View</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div><!-- END container -->
+			
+		</div>
+		{% endif %}
+	{% endblock hero_section %}
+	
+	
+	{### CONTENT ###}
+	
+	<div class="container" id="wg-content-container">
+		
+		{### Filters ###}
+		{% if page.categories|length > 1 %}
+		<nav class="navbar navbar-inverse" id="catalog-filters">
+			<div class="container-fluid">
+				
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#" class="filter active" data-filter="all">All Topics</a></li>
+					{% for category in page.categories %}
+					<li><a href="#" class="filter" id="id-{{ category|slugify }}" data-filter=".{{ category|slugify }}">{{ category }}</a></li>
+					{% endfor %}
+				</ul>
+				
+			</div>
+		</nav>
+		{% endif %}
+		
+		{### View: Table ###}
+		<table id="catalog-table-id" class="catalog-table d-none hidden">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Categories</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for grid_item in page.grid_items %}
+				<tr>
+					<td>
+						<a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
+					</td>
+					<td>
+						{% for item in grid_item.categories.all %}
+							{{ item.name }}{% if not forloop.last %}, {% endif %}
+						{% endfor %}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+		{### View: Grid Items ###}
+		<div id="catalog-tools" class="catalog-tools">
+			<div class="main-section">
+				<div id="grid-container" class="gridder">
+					{% for grid_item in page.grid_items %}
+					<div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list" data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}" data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
+						<div class="gl-wrap">
+							<img src="{{ grid_item.summary_image.file.url }}" class="tool-img">
+							<div class="tool-body">
+								<a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
+								<div class="tool-title">{{ grid_item.title }}</div>
+								<p>
+									{{ grid_item.summary_text|safe }}
+									{% block extra_summary_text %}{% endblock extra_summary_text %}
+								</p>
+								{% if grid_item.tags.count %}
+								<p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
+								{% endif %}
+							</div>
+							<button class="btn btn-primary btn-block">More <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		
+		{### View: Grid Content ###}
+		{% for grid_item in page.grid_items %}
+		<div id="{{ grid_item.slug }}" class="gridder-content">
+			<div class="row">
+				<div class="detail-img">
+					<div class="content-img" style="background-image:url({{ grid_item.description_image.file.url }});"></div>
+				</div>
+				<div class="detail-content">
+					<div class="content-title"><strong>{{ grid_item.title }}</strong></div>
+					<p>{{ grid_item.description_text|safe }}</p>
+					
+					{% block button_block %}
+						{% for button in grid_item.buttons %}
+						{# Renders 'blocks/button_section.html' #}
+						{{ button }}
+						{% endfor %}
+					{% endblock button_block %}
+				</div>
+			</div>
+			
+			{% if grid_item.description_video %}
+			<div class="row video-wrapper">
+				<iframe src="{{ grid_item.description_video }}" width="1920" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+			{% endif %}
+		</div>
+		{% endfor %}
+			
+	</div><!-- END container -->
+	
+	
+	{% if request.GET.t %}
+	<script>
+		$(document).ready(function() {
+			setTimeout(function() {
+				$('#id-{{ request.GET.t }}').trigger('click');
+			}, 10);
+		});
+	</script>
+	{% endif %}
 
-        <div class="row catalog-tools">
-            {% block hero_section %}
-            {% if page.hero_background_image %}
-                {% image page.hero_background_image original as top_hero %}
-                <div class="col-xs-12">
-                    <div class="col-md-6 hero-wrap">
-                        <div class="hero-details">
-                            {% image page.hero_logo_image original %}
-                            {{ page.hero_description|richtext }}
-                            <p><a href="{% if page.hero_button_url|length %}{{ page.hero_button_url }}{% else %}#grid-items{% endif %}" class="btn btn-info" style="color:#fff; text-decoration:none;">{{ page.hero_button_text }}</a></p>
-                        </div>
-                    </div>
-                    <div class="top-hero" style="background-image:url('{{ top_hero.url }}');"></div>
-                </div>
-            {% endif %}
-            {% endblock hero_section %}
-        </div>
-
-        {% block featured_items %}
-        {% if page.featured_description and page.featured_grid_item_1 and page.featured_grid_item_2 %}
-            <div class="row catalog-tools">
-
-                <div class="col-md-5">
-                    <p class="lead">{{ page.featured_description|richtext }}</p>
-                </div>
-
-                <div class="col-md-6 col-md-offset-1">
-                    <strong>Featured Tools:</strong><br>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <a href="{{ page.featured_grid_item_1.url }}" class="cr-link">
-                                <div class="cr-img bg-img">
-                                    <img src="{{ page.featured_grid_item_1.summary_image.file.url }}" width="100%" />
-                                </div>
-                                <span>{{ page.featured_grid_item_1.title }} <i class="fa fa-angle-double-right"></i></span>
-                            </a>
-                        </div>
-                        <div class="col-xs-6">
-                            <a href="{{ page.featured_grid_item_2.url }}" class="cr-link" target="_blank">
-                                <div class="cr-img bg-img">
-                                    <img src="{{ page.featured_grid_item_2.summary_image.file.url }}" width="100%" />
-                                </div>
-                                <span>{{ page.featured_grid_item_2.title }} <i class="fa fa-angle-double-right"></i></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        {% endif %}
-        {% endblock featured_items %}
-
-        <ul class="nav nav-tabs">
-            <li id="tabs-grid" class="active">
-                <a href="javascript:showDetailView()" title="Detail View"><i class="fa fa-th-large" aria-hidden="true"></i> Detail View</a>
-            </li>
-            <li id="tabs-table">
-                <a href="javascript:showListView()" title="List View"><i class="fa fa-th-list" aria-hidden="true"></i> List View</a>
-            </li>
-        </ul>
-
-        <table id="catalog-table-id" class="catalog-table d-none hidden">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Categories</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for grid_item in page.grid_items %}
-                    <tr>
-                        <td>
-                            <a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
-                        </td>
-                        <td>
-                            {% for item in grid_item.categories.all %}
-                                {{ item.name }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <div class="catalog-tools catalog-filters">
-            <strong>Topics:</strong>
-            <br>
-            {% if page.categories|length > 1 %}
-                <div class="filter-wrap">
-                    <ul class="filter-options list-group row">
-                      <li class="list-group-item col-xs-6 col-md-3">
-                          <button class="btn btn-info btn-lg btn-block filter active" data-filter="all">All Topics</button>
-                      </li>
-                      {% for category in page.categories %}
-                          <li class="list-group-item col-xs-6 col-md-3">
-                              <button class="btn btn-info btn-lg btn-block filter" id="id-{{ category|slugify }}" data-filter=".{{ category|slugify }}">{{ category }}</button>
-                          </li>
-                      {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-        </div>
-
-        <a name="grid-items"></a>
-        <div id="catalog-tools" class="catalog-tools">
-            <div class="main-section">
-                <div id="grid-container" class="gridder">
-                    {% for grid_item in page.grid_items %}
-                        <div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list" data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}" data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
-                            <div class="gl-wrap">
-                                <img src="{{ grid_item.summary_image.file.url }}" class="tool-img">
-                                <div class="tool-body">
-                                    <a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
-                                    <div class="tool-title"><strong>{{ grid_item.title }}</strong></div>
-                                    <p>
-                                    {{ grid_item.summary_text|safe }}
-                                    {% block extra_summary_text %}{% endblock extra_summary_text %}
-                                    </p>
-                                    {% if grid_item.tags.count %}
-                                        <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
-                                    {% endif %}
-                                  </div>
-                                <button class="btn btn-primary btn-block">More &rarr;</i></button>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        {% for grid_item in page.grid_items %}
-            <div id="{{ grid_item.slug }}" class="gridder-content">
-                <div class="row">
-                    <div class="detail-img">
-                        <div class="content-img" style="background-image:url({{ grid_item.description_image.file.url }});"></div>
-                    </div>
-                    <div class="detail-content">
-                        <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
-                        <p>{{ grid_item.description_text|safe }}</p>
-
-                        {% block button_block %}
-                            {% for button in grid_item.buttons %}
-                                {# Renders 'blocks/button_section.html' #}
-                                {{ button }}
-                            {% endfor %}
-                        {% endblock button_block %}
-                    </div>
-                </div>
-
-                {% if grid_item.description_video %}
-                    <div class="row video-wrapper">
-                        <iframe src="{{ grid_item.description_video }}" width="1920" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
-
-    {% if request.GET.t %}
-        <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $('#id-{{ request.GET.t }}').trigger('click');
-            }, 10);
-        });
-        </script>
-    {% endif %}
 <!-- % endcache % -->
-{% endblock inner_content %}
+{% endblock content %}
+
+
+{# FOOTER SCRIPTS #}
+{# ---------------------------------------------------------------------------------------------------- #}
 
 {% block extra_footer_js %}
-
 <script src="{% static "wagtailgridder/js/jquery.gridder.min.js" %}"></script>
 <script src="{% static "wagtailgridder/js/jquery.mixitup.min.js" %}"></script>
 
 <script type="text/javascript">
-  $(function() {
-    var isPageLoaded = false;
-    var locationHash = "";
-      var layout = 'grid'; // Store the current layout as a variable
-      var $container = $('#grid-container'); // Cache the MixItUp container
+	$('a.filter').on('click', function() {
+		return false;
+	});
+	
+	$(function() {
+		var isPageLoaded = false;
+		var locationHash = "";
+		var layout = 'grid'; // Store the current layout as a variable
+		var $container = $('#grid-container'); // Cache the MixItUp container
 
-      $container.mixItUp({
-        animation: {
-          animateChangeLayout: true, // Animate the positions of targets as the layout changes
-          animateResizeTargets: true, // Animate the width/height of targets as the layout changes
-          effects: 'fade rotateX(-40deg) translateZ(-100px)'
-        },
+		$container.mixItUp({
+			animation: {
+				animateChangeLayout: true, // Animate the positions of targets as the layout changes
+				animateResizeTargets: true, // Animate the width/height of targets as the layout changes
+				effects: 'fade rotateX(-40deg) translateZ(-100px)'
+			},
+			selectors: {
+				target: '.gridder-list', // Set up target for grid
+				filter: '.filter' // Set target filter
+			},
+			layout: {
+				containerClass: layout // Add the class 'grid' to the container on load
+			},
+			callbacks: {
+				onMixEnd: function(state) {
+					if ((!isPageLoaded) || (window.location.hash != locationHash)) {
+						isPageLoaded = true;
+						locationHash = window.location.hash;
+						index_position = document.URL.indexOf("#");
 
-        selectors: {
-          target: '.gridder-list', // Set up target for grid
-          filter: '.filter' // Set target filter
-        },
+						if (index_position != -1) {
+							anchor_name = document.URL.substring(index_position);
+							$(anchor_name).trigger("click");
+						}
+					}
+				}
+			}
+		});
 
-        layout: {
-          containerClass: layout // Add the class 'grid' to the container on load
-        },
+		// Call Gridder
+		$('.gridder').gridderExpander({
+			scroll: true,
+			scrollOffset: 350,
+			scrollTo: "panel", // panel or listitem
+			animationSpeed: 600,
+			animationEasing: "easeInOutExpo",
+			onStart: function() {},
+			onContent: function() {},
+			onClosed: function() {}
+		});
 
-        callbacks: {
-          onMixEnd: function(state) {
+	});
 
-            if ((!isPageLoaded) || (window.location.hash != locationHash)) {
-              isPageLoaded = true;
-              locationHash = window.location.hash;
-              index_position = document.URL.indexOf("#");
-
-              if (index_position != -1) {
-                anchor_name = document.URL.substring(index_position);
-                $(anchor_name).trigger("click");
-              }
-            }
-
-          }
-        }
-
-      });
-
-      // Call Gridder
-      $('.gridder').gridderExpander({
-        scroll: true,
-        scrollOffset: 350,
-        scrollTo: "panel", // panel or listitem
-        animationSpeed: 600,
-        animationEasing: "easeInOutExpo",
-        onStart: function() {},
-        onContent: function() {},
-        onClosed: function() {}
-      });
-
-    });
-
-  $(window).on('hashchange', function(e){
-    document.location.href = document.URL;
-    location.reload();
-  });
+	$(window).on('hashchange', function(e) {
+		document.location.href = document.URL;
+		location.reload();
+	});
 </script>
 {% endblock extra_footer_js %}
