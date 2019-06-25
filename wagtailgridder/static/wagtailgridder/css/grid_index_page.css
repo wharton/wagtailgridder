@@ -21,7 +21,6 @@
   clear: both;
 }
 
-
 /**
  * Gridder List
  * ------------
@@ -125,7 +124,6 @@
   bottom: 0;
 }
 
-
 /**
  * Gridder Show
  * ------------
@@ -153,8 +151,6 @@
 .gridder-show .gridder-padding {
   padding: 15px 60px;
 }
-
-/* Content Layout */
 .gridder-show .detail-img {
   float: left;
   width: 100%;
