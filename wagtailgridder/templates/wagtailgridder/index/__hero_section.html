@@ -1,0 +1,86 @@
+{% load staticfiles cache wagtailcore_tags wagtailimages_tags %}
+{% if page.hero_background_image %}
+    {% image page.hero_background_image original as top_hero %}
+
+    <div class="row" id="wg-hero"
+         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ top_hero.url }}')">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="wg-hero-details">
+                        {% image page.hero_logo_image original class="wg-logo" %}
+                        {{ page.hero_description|richtext }}
+                        {% if page.hero_button_url|length %}
+                            <a href="{{ page.hero_button_url }}" class="hero-btn btn btn-primary"
+                               target="_blank">{{ page.hero_button_text }}</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                {### Featured ###}
+                <div class="col-md-3 col-md-offset-1 d-none d-md-block">
+
+                    {% if page.featured_description %}
+                        <div class="wg-hero-featured catalog-tools">
+                            <h6>Featured Tools:</h6>
+
+                            <div class="wg-featured-tool">
+                                <a href="{{ page.featured_grid_item_1.url }}" class="tool-overlay">
+                                    <div class="tool-title">
+                                        <span>{{ page.featured_grid_item_1.title }}</span>
+                                    </div>
+                                </a>
+                                <img src="{{ page.featured_grid_item_1.summary_image.file.url }}"
+                                     width="100%"/>
+                            </div>
+
+                            <div class="wg-featured-tool">
+                                <a href="{{ page.featured_grid_item_2.url }}" class="tool-overlay">
+                                    <div class="tool-title">
+                                        <span>{{ page.featured_grid_item_2.title }}</span>
+                                    </div>
+                                </a>
+                                <img src="{{ page.featured_grid_item_2.summary_image.file.url }}"
+                                     width="100%"/>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+            <div class="row">
+                {### Toggle View ###}
+
+                <div id="catalog-views">
+
+                    <ul class="nav nav-tabs" role="tablist">
+
+
+                        <li class="nav-item bg-primary">
+                            <a class="nav-link active" id="tabs-grid" href="javascript:showDetailView()"
+                               role="tab"
+                               aria-controls="profile" aria-selected="false">
+                                <i class="fa fa-th-large mr-1" aria-hidden="true"></i>Grid View</a>
+                        </li>
+
+                        <li class="nav-item bg-primary">
+                            <a class="nav-link text-white" id="tabs-table" role="tab" aria-controls="home"
+                               aria-selected="true" href="javascript:showListView()"
+                               title="Detail View">
+                                <i class="fa fa-th-list mr-1" aria-hidden="true"></i>
+                                List View </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endif %}

@@ -1,0 +1,89 @@
+{% load staticfiles cache wagtailcore_tags wagtailimages_tags %}
+<script src="{% static "wagtailgridder/js/jquery.gridder.min.js" %}"></script>
+<script src="{% static "wagtailgridder/js/jquery.mixitup.min.js" %}"></script>
+
+<script type="text/javascript">
+    $('a.filter').on('click', function () {
+        return false;
+    });
+
+    $(function () {
+        var isPageLoaded = false;
+        var locationHash = "";
+        var layout = 'grid'; // Store the current layout as a variable
+        var $container = $('#grid-container'); // Cache the MixItUp container
+
+        $container.mixItUp({
+            animation: {
+                animateChangeLayout: true, // Animate the positions of targets as the layout changes
+                animateResizeTargets: true, // Animate the width/height of targets as the layout changes
+                effects: 'fade rotateX(-40deg) translateZ(-100px)'
+            },
+
+            selectors: {
+                target: '.gridder-list', // Set up target for grid
+                filter: '.filter' // Set target filter
+            },
+
+            layout: {
+                containerClass: layout // Add the class 'grid' to the container on load
+            },
+
+            callbacks: {
+                onMixEnd: function (state) {
+
+                    if ((!isPageLoaded) || (window.location.hash != locationHash)) {
+                        isPageLoaded = true;
+                        locationHash = window.location.hash;
+                        index_position = document.URL.indexOf("#");
+
+                        if (index_position != -1) {
+                            anchor_name = document.URL.substring(index_position);
+                            $(anchor_name).trigger("click");
+                        }
+                    }
+
+                }
+            }
+
+        });
+
+        // Call Gridder
+        $('.gridder').gridderExpander({
+            scroll: true,
+            scrollOffset: 350,
+            scrollTo: "panel", // panel or listitem
+            animationSpeed: 600,
+            animationEasing: "easeInOutExpo",
+            onStart: function () {
+            },
+            onContent: function () {
+            },
+            onClosed: function () {
+            }
+        });
+
+    });
+
+    $(window).on('hashchange', function (e) {
+        document.location.href = document.URL;
+        location.reload();
+    });
+
+    $(document).ready(function () {
+        $('#catalog-table-id').DataTable({
+            "paging": false,
+            "ordering": true,
+            "order": [[0, "asc"]],
+            "columnDefs": [{"orderable": false, "targets": 1}],
+            "info": false,
+            "searching": false
+        });
+
+        // Filter navbar
+        $("#catalog-filters .nav a").on("click", function () {
+            $("#catalog-filters .nav").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
+</script>
