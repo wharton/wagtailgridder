@@ -1,0 +1,35 @@
+{% load staticfiles cache wagtailcore_tags wagtailimages_tags %}
+<link href="{% static "wagtailgridder/css/grid_index_page.css" %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css">
+
+<script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script>
+    // These functions allow for CSS class swapping to show or hide the different views.
+    function showDetailView() {
+        $("#catalog-table-section").addClass('hidden d-none');
+        $("#catalog-filters, #catalog-tools").removeClass('hidden d-none');
+        $("#tabs-grid").addClass('active');
+        $("#tabs-grid").removeClass('text-white');
+        $("#tabs-table").removeClass('active');
+        $("#tabs-table").addClass('text-white');
+    }
+
+    function showListView() {
+
+        $("#catalog-table-section").removeClass('hidden d-none');
+        $("#catalog-filters, #catalog-tools").addClass('hidden d-none');
+        $("#tabs-grid").removeClass('active');
+        $("#tabs-grid").addClass('text-white');
+        $("#tabs-table").addClass('active');
+        $("#tabs-table").removeClass('text-white');
+    }
+
+
+</script>
