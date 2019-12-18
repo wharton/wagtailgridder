@@ -4,9 +4,9 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 
 # Requirements
 
-* Django >= 1.9
-* Wagtail >= 1.9 (for ParentalManyToMany)
-* Bootstrap >= 3 (optimized for Bootstrap 4; templates can be modified)
+* Django >= 1.11
+* Wagtail >= 2.0
+* Bootstrap >= 4
 
 These installation instructions assume you are using Wagtail 2.0 or greater.
 
@@ -81,6 +81,12 @@ The default Wagtail Gridder template caches the grid display area to reduce the 
 
 # Release Notes
 
+## 0.10.0
+
+* Bootstrap 4 visual refresh
+* deprecated Bootstrap 3 support
+
+
 ## 0.9.19
 
 * Wagtail 2.0 compatibility.
@@ -90,3 +96,4 @@ The default Wagtail Gridder template caches the grid display area to reduce the 
 
 * [Timothy Allen](https://github.com/FlipperPA)
 * [Charles Rejonis](https://github.com/rejonis)
+* [Noel Victor](https://github.com/noeldvictor)
