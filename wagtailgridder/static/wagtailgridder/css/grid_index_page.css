@@ -521,6 +521,10 @@
     #wg-vertical-filters .btn {
         width: 100%
     }
+
+    #wg-grid-item-content {
+        padding: 10px 20px 10px 20px
+    }
 }
 
 @media (min-width: 768px) {
@@ -531,7 +535,6 @@
     #wg-horizontal-filters .btn {
         margin: 0 !important;
     }
-
 
     #wg-vertical-filters {
         display: none;
