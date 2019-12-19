@@ -38,13 +38,4 @@
 {% endblock inner_content %}
 
 {% block extra_footer_js %}
-    <script>
-        $(document).ready(function () {
-            for (var i = 0; i < $(".default-fa").length; i++) {
-                if ($(".default-fa")[i].href.includes("/otis/")) {
-                    $(".default-fa")[i].setAttribute('target', '_blank');
-                }
-            }
-        });
-    </script>
 {% endblock extra_footer_js %}
