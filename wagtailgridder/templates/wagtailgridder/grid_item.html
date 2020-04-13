@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
-{% load wagtailcore_tags %}
-{% load wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_head_top %}
     <link rel="stylesheet" href="{% static 'wagtailgridder/css/grid_index_page.css' %}">
