@@ -20,6 +20,7 @@ from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from .blocks import ButtonBlock
+from .settings import get_grid_item_parent_page_types
 
 
 class GridItemTag(TaggedItemBase):
@@ -55,6 +56,8 @@ class GridItem(Page):
     The fields needed to properly display a grid item.
     The template will omit any fields not included automagically.
     """
+
+    parent_page_types = get_grid_item_parent_page_types()
 
     class Meta:
         verbose_name = "Grid Item"
