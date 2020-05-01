@@ -58,8 +58,18 @@ The default Wagtail Gridder template caches the grid display area to reduce the 
 By default, GridItem pages may only be created as children of GridIndexPage pages. To
  allow GridItem pages under any parent, set
   `WAGTAILGRIDDER_GRID_ITEM_PARENT_PAGE_TYPES = None`. See the [Wagtail Documentation
-  ](https://docs.wagtail.io/en/stable/reference/pages/model_reference.html#wagtail.core.models.Page)
+  ](https://docs.wagtail.io/en/stable/reference/pages/model_reference.html#wagtail.core.models.Page.parent_page_types)
   for more
+
+    WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES = ["GridItem"]
+
+By default, GridIndexPage pages may only have GridItem pages as children. To
+ allow GridIndexPage pages to have other child types, set
+  `WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES = None`. See the [Wagtail Documentation
+  ](https://docs.wagtail.io/en/stable/reference/pages/model_reference.html#wagtail.core.models.Page.subpage_types)
+  for more
+
+
 # Screenshots
 
 ## Grid Index Page:
