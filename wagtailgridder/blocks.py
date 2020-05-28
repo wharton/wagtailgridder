@@ -20,7 +20,7 @@ class DocumentActionItemBlock(StructBlock):
 
     class Meta:
         icon = "fa-file"
-        template = "blocks/document_action_item.html"
+        template = "wagtailgridder/blocks/document_action_item.html"
         help_text = "Select a document and label for the button."
 
 
@@ -30,7 +30,7 @@ class URLActionItemBlock(StructBlock):
 
     class Meta:
         icon = "fa-link"
-        template = "blocks/url_action_item.html"
+        template = "wagtailgridder/blocks/url_action_item.html"
         help_text = "Select a URL and label for the button."
 
 
@@ -39,7 +39,7 @@ class PlaceholderBlock(StructBlock):
 
     class Meta:
         icon = "fa-square-o"
-        template = "blocks/placeholder_action_item.html"
+        template = "wagtailgridder/blocks/placeholder_action_item.html"
         help_text = "Empty placeholder to align buttons in rows."
 
 
@@ -56,7 +56,7 @@ class ButtonSectionBlock(StructBlock):
 
     class Meta:
         icon = "fa-list"
-        template = "blocks/button_section.html"
+        template = "wagtailgridder/blocks/button_section.html"
         help_text = "Sections divide the action item area into rows."
 
 
