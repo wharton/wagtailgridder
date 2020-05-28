@@ -6,34 +6,34 @@ except ImportError:
     from wagtail.wagtailcore import hooks
 
 from wagtail.contrib.modeladmin.options import (
-    ModelAdmin, ModelAdminGroup, modeladmin_register
+    ModelAdmin,
+    ModelAdminGroup,
+    modeladmin_register,
 )
 
-from .models import (
-    GridCategory, GridIndexPage
-)
+from .models import GridCategory, GridIndexPage
 from .settings import get_clear_cache
 
 
 class GridCategoryAdmin(ModelAdmin):
     model = GridCategory
-    menu_label = 'Grid Categories'
-    menu_icon = 'fa-folder-open'
+    menu_label = "Grid Categories"
+    menu_icon = "fa-folder-open"
     add_to_settings_menu = False
-    list_display = ('name',)
-    search_fields = ('name',)
+    list_display = ("name",)
+    search_fields = ("name",)
 
 
 class GridIndexPageAdmin(ModelAdmin):
     model = GridIndexPage
-    menu_icon = 'doc-full-inverse'
-    list_display = ('title',)
-    search_fields = ('title',)
+    menu_icon = "doc-full-inverse"
+    list_display = ("title",)
+    search_fields = ("title",)
 
 
 class GridAdminGroup(ModelAdminGroup):
-    menu_label = 'Grid Layouts'
-    menu_icon = 'fa-th'  # change as required
+    menu_label = "Grid Layouts"
+    menu_icon = "fa-th"  # change as required
     menu_order = 400  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (GridCategoryAdmin, GridIndexPageAdmin)
 
@@ -41,7 +41,7 @@ class GridAdminGroup(ModelAdminGroup):
 modeladmin_register(GridAdminGroup)
 
 
-@hooks.register('after_edit_page')
+@hooks.register("after_edit_page")
 def clear_page_cache(request, page):
     """
     This will clear Django's entire cache after a page edit. It is ugly,
