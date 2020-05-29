@@ -126,7 +126,7 @@
                         {% block button_block %}
                             {% for button in grid_item.buttons %}
                                 {# Renders 'blocks/button_section.html' #}
-                                {{ button }}
+                                {% include_block button %}
                             {% endfor %}
                         {% endblock button_block %}
                     </div>
