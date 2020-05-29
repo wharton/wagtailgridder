@@ -2,30 +2,17 @@ from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 
-try:
-    from wagtail.core.fields import StreamField, RichTextField
-    from wagtail.core.models import Page, Orderable
-    from wagtail.admin.edit_handlers import (
-        FieldPanel,
-        StreamFieldPanel,
-        PageChooserPanel,
-        InlinePanel,
-        MultiFieldPanel,
-    )
-    from wagtail.images.edit_handlers import ImageChooserPanel
-    from wagtail.search import index
-except ImportError:
-    from wagtail.wagtailcore.fields import StreamField, RichTextField
-    from wagtail.wagtailcore.models import Page, Orderable
-    from wagtail.wagtailadmin.edit_handlers import (
-        FieldPanel,
-        StreamFieldPanel,
-        PageChooserPanel,
-        InlinePanel,
-        MultiFieldPanel,
-    )
-    from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-    from wagtail.wagtailsearch import index
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.core.models import Page, Orderable
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    StreamFieldPanel,
+    PageChooserPanel,
+    InlinePanel,
+    MultiFieldPanel,
+)
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
@@ -46,9 +33,8 @@ class GridItemTag(TaggedItemBase):
 
 class GridCategory(models.Model):
     """
-    Categories which a grid item can belong to. A grid item can belong to
-    many categories. Categories can be selected from the top of the grid
-    index page.
+    Categories which a grid item can belong to. A grid item can belong to many
+    categories. Categories can be selected from the top of the grid index page.
     """
 
     name = models.CharField(max_length=255)
@@ -185,7 +171,8 @@ class GridIndexPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        help_text="The background image for the hero section. This triggers the section to be displayed if an image is selected.",
+        help_text="The background image for the hero section. This triggers the "
+        "section to be displayed if an image is selected.",
     )
 
     hero_logo_image = models.ForeignKey(
@@ -207,20 +194,23 @@ class GridIndexPage(Page):
         null=True,
         blank=True,
         max_length=255,
-        help_text="Text for the call-to-action button beneath the text and logo over the background image.",
+        help_text="Text for the call-to-action button beneath the text and logo over "
+        "the background image.",
     )
 
     hero_button_url = models.CharField(
         null=True,
         blank=True,
         max_length=255,
-        help_text="URL for the call-to-action button beneath the text and logo over the background image.",
+        help_text="URL for the call-to-action button beneath the text and logo over "
+        "the background image.",
     )
 
     featured_description = RichTextField(
         null=True,
         blank=True,
-        help_text="Text to be displayed below the hero image next to the featured items.",
+        help_text="Text to be displayed below the hero image next to the featured "
+        "items.",
     )
 
     featured_grid_item_1 = models.ForeignKey(
