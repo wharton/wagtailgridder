@@ -48,7 +48,7 @@
             </div>
         {% endif %}
 
-        {#        ## View: Table ###}
+        {### View: Table ###}
         <div class="d-none hidden" id="catalog-table-section">
             <table id="catalog-table-id" class="catalog-table table table-striped table-bordered" style="width:100%">
                 <thead>
@@ -80,34 +80,13 @@
             </table>
         </div>
 
-        {#        ## View: Grid Items ###}
+        {### View: Grid Items ###}
         <div id="catalog-tools" class="catalog-tools 5-3">
             <div class="main-section">
                 <div id="grid-container" class="gridder">
                     {% for grid_item in page.grid_items %}
-                        <div class="
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                {% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list"
-                             data-cat="
-
-
-
-
-
-                                         {% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}"
+                        <div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list"
+                             data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}"
                              data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
                             <div class="gl-wrap">
                                 <img src="{{ grid_item.summary_image.file.url }}" class="tool-img">
@@ -132,7 +111,7 @@
             </div>
         </div>
 
-        {#        ## View: Grid Content ###}
+        {### View: Grid Content ###}
         {% for grid_item in page.grid_items %}
             <div id="{{ grid_item.slug }}" class="gridder-content">
                 <div class="row">
@@ -146,8 +125,8 @@
 
                         {% block button_block %}
                             {% for button in grid_item.buttons %}
-                                {#         Renders 'blocks/button_section.html'#}
-                                {{ button }}
+                                {# Renders 'blocks/button_section.html' #}
+                                {% include_block button %}
                             {% endfor %}
                         {% endblock button_block %}
                     </div>

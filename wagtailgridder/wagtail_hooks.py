@@ -3,18 +3,15 @@ from django.urls import reverse
 from django.utils.translation import ugettext as _
 from wagtail.contrib.modeladmin.helpers import PageButtonHelper
 
-try:
-    from wagtail.core import hooks
-except ImportError:
-    from wagtail.wagtailcore import hooks
+from wagtail.core import hooks
 
 from wagtail.contrib.modeladmin.options import (
-    ModelAdmin, ModelAdminGroup, modeladmin_register
+    ModelAdmin,
+    ModelAdminGroup,
+    modeladmin_register,
 )
 
-from .models import (
-    GridCategory, GridIndexPage
-)
+from .models import GridCategory, GridIndexPage
 from .settings import get_clear_cache
 
 
@@ -51,11 +48,11 @@ class PageButtonHelperWithAddChild(PageButtonHelper):
 
 class GridCategoryAdmin(ModelAdmin):
     model = GridCategory
-    menu_label = 'Grid Categories'
-    menu_icon = 'fa-folder-open'
+    menu_label = "Grid Categories"
+    menu_icon = "fa-folder-open"
     add_to_settings_menu = False
-    list_display = ('name',)
-    search_fields = ('name',)
+    list_display = ("name",)
+    search_fields = ("name",)
 
 
 class GridIndexPageAdmin(ModelAdmin):
@@ -67,8 +64,8 @@ class GridIndexPageAdmin(ModelAdmin):
 
 
 class GridAdminGroup(ModelAdminGroup):
-    menu_label = 'Grid Layouts'
-    menu_icon = 'fa-th'  # change as required
+    menu_label = "Grid Layouts"
+    menu_icon = "fa-th"  # change as required
     menu_order = 400  # will put in 3rd place (000 being 1st, 100 2nd)
     items = (GridCategoryAdmin, GridIndexPageAdmin)
 
@@ -76,12 +73,12 @@ class GridAdminGroup(ModelAdminGroup):
 modeladmin_register(GridAdminGroup)
 
 
-@hooks.register('after_edit_page')
+@hooks.register("after_edit_page")
 def clear_page_cache(request, page):
     """
-    This will clear Django's entire cache after a page edit. It is ugly,
-    but Django's cache mechanism doesn't currently support a way to easily
-    depending on the value of is_staff() and (if present) is_faculty.
+    This will clear Django's entire cache after a page edit. It is ugly, but Django's
+    cache mechanism doesn't currently support a way to easily clear based on template
+    fragments specifics.
     """
 
     if get_clear_cache():
