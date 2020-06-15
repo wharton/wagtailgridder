@@ -19,3 +19,14 @@ def get_grid_item_parent_page_types():
         "WAGTAILGRIDDER_GRID_ITEM_PARENT_PAGE_TYPES",
         ["GridIndexPage"]
     )
+
+def get_grid_index_page_subpage_types():
+    """
+    Default subpage types for grid index pages.
+    """
+
+    return getattr(
+        settings,
+        "WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES",
+        ["GridItem"]
+    )

@@ -19,7 +19,7 @@ from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from .blocks import ButtonBlock
-from .settings import get_grid_item_parent_page_types
+from .settings import get_grid_item_parent_page_types, get_grid_index_page_subpage_types
 
 
 class GridItemTag(TaggedItemBase):
@@ -167,6 +167,7 @@ class GridIndexPage(Page):
     Index page for Grid Items.
     This links the grid items to the categories and provides a page to display them on.
     """
+    subpage_types = get_grid_index_page_subpage_types()
 
     hero_background_image = models.ForeignKey(
         "wagtailimages.Image",
