@@ -43,7 +43,7 @@ WAGTAIL_CONTRIB_APPS = [
 INSTALLED_APPS = INSTALLED_APPS + WAGTAIL_APPS + WAGTAIL_CONTRIB_APPS
 ```
 
-This Wagtail Gridder template extends `base.html`, with the hope that this allows inclusion or your site's top and bottom navigation without much effort. There is [an example base.html provided](https://github.com/wharton/wagtailgridder/blob/master/wagtailgridder/templates/base.html).
+This Wagtail Gridder template extends `base.html`, with the hope that this allows inclusion or your site's top and bottom navigation without much effort. There is [an example base.html provided](https://github.com/wharton/wagtailgridder/blob/main/wagtailgridder/templates/base.html).
 
 Then log into the Wagtail admin, and you should see a "Grid Layouts" section of the menu. The first thing you will want to do is add some "Grid Categories." After that, you can create "Grid Items" (the cards, pictured below) and put them together on a "Grid Index Page."
 
@@ -74,27 +74,27 @@ By default, GridIndexPage pages may only have GridItem pages as children. To
 
 ## Grid Index Page:
 
-![Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/grid_index_page.jpg)
+![Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/grid_index_page.jpg)
 
 ## Grid Index Page, with Grid Item expanded:
 
-![Grid Index Page, with Grid Item expanded](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/grid_index_page_expanded.jpg)
+![Grid Index Page, with Grid Item expanded](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/grid_index_page_expanded.jpg)
 
 ## Optional featured hero region:
 
-![Optional featured hero region](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/featured_hero.jpg)
+![Optional featured hero region](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/featured_hero.jpg)
 
 ## Grid Item landing page:
 
-![Grid Item landing page](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/grid_item.jpg)
+![Grid Item landing page](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/grid_item.jpg)
 
 ## Editing a Grid Item:
 
-![Editing a Grid Item](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/edit_grid_item.jpg)
+![Editing a Grid Item](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/edit_grid_item.jpg)
 
 ## Editing a Grid Index Page:
 
-![Editing a Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/master/img/edit_grid_index_page.jpg)
+![Editing a Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/edit_grid_index_page.jpg)
 
 # Release Notes
 
