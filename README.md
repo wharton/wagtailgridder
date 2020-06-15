@@ -53,6 +53,13 @@ Then log into the Wagtail admin, and you should see a "Grid Layouts" section of 
 
 The default Wagtail Gridder template caches the grid display area to reduce the number of queries performed. Setting `WAGTAILGRIDDER_CLEAR_CACHE = True` in your Django settings will clear the **entire** Django cache after a page is edited. This approach is necessary, as Django does not currently support deletion from the cache by pattern. Setting this to `True` will clear your cache every time you save a Wagtail page. If anyone knows of a better solution that works for Django's supported cache systems, please let us know!
 
+    WAGTAILGRIDDER_GRID_ITEM_PARENT_PAGE_TYPES = ["GridIndexPage"]
+
+By default, GridItem pages may only be created as children of GridIndexPage pages. To
+ allow GridItem pages under any parent, set
+  `WAGTAILGRIDDER_GRID_ITEM_PARENT_PAGE_TYPES = None`. See the [Wagtail Documentation
+  ](https://docs.wagtail.io/en/stable/reference/pages/model_reference.html#wagtail.core.models.Page)
+  for more
 # Screenshots
 
 ## Grid Index Page:
