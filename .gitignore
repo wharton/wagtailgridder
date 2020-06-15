@@ -8,6 +8,7 @@ htmlcov/
 *.py[co]
 *.egg*
 venv/
+dist/
 
 # Sphinx
 build
