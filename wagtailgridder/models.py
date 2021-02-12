@@ -309,7 +309,6 @@ class GridIndexPageAbstract(models.Model):
     ]
 
     class Meta:
-        verbose_name = "Grid Index Page"
         abstract = True
 
     def __str__(self):
@@ -323,4 +322,5 @@ class GridIndexPage(Page, GridIndexPageAbstract):
     Concrete implementation of GridIndexPageAbstract.
     """
 
-    pass
+    class Meta:
+        verbose_name = "Grid Index Page"
