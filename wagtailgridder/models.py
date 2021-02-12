@@ -172,10 +172,13 @@ class GridIndexGridItemRelationship(Orderable, models.Model):
     panels = [PageChooserPanel("grid_item")]
 
 
-class GridIndexPage(Page):
+class GridIndexPageAbstract(Page):
     """
     Index page for Grid Items.
     This links the grid items to the categories and provides a page to display them on.
+
+    This abstract class exists to allow compositing the index page with other page
+    functionality by future users. GridIndexPage below makes this concrete.
     """
 
     subpage_types = get_grid_index_page_subpage_types()
@@ -229,7 +232,7 @@ class GridIndexPage(Page):
     )
 
     featured_grid_item_1 = models.ForeignKey(
-        "GridItem",
+        GridItem,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -239,7 +242,7 @@ class GridIndexPage(Page):
     )
 
     featured_grid_item_2 = models.ForeignKey(
-        "GridItem",
+        GridItem,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -283,8 +286,8 @@ class GridIndexPage(Page):
         FieldPanel("hero_button_text"),
         FieldPanel("hero_button_url"),
         FieldPanel("featured_description"),
-        PageChooserPanel("featured_grid_item_1"),
-        PageChooserPanel("featured_grid_item_2"),
+        PageChooserPanel("featured_grid_item_1", GridItem),
+        PageChooserPanel("featured_grid_item_2", GridItem),
     ]
 
     content_panels = Page.content_panels + [
@@ -307,8 +310,17 @@ class GridIndexPage(Page):
 
     class Meta:
         verbose_name = "Grid Index Page"
+        abstract = True
 
     def __str__(self):
         return "{0}".format(
             self.grid_items,
         )
+
+
+class GridIndexPage(GridIndexPageAbstract):
+    """
+    Concrete implementation of GridIndexPageAbstract.
+    """
+
+    pass
