@@ -172,7 +172,7 @@ class GridIndexGridItemRelationship(Orderable, models.Model):
     panels = [PageChooserPanel("grid_item")]
 
 
-class GridIndexPageAbstract(Page):
+class GridIndexPageAbstract(models.Model):
     """
     Index page for Grid Items.
     This links the grid items to the categories and provides a page to display them on.
@@ -318,7 +318,7 @@ class GridIndexPageAbstract(Page):
         )
 
 
-class GridIndexPage(GridIndexPageAbstract):
+class GridIndexPage(Page, GridIndexPageAbstract):
     """
     Concrete implementation of GridIndexPageAbstract.
     """
