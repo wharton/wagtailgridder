@@ -24,24 +24,24 @@ class PageButtonHelperWithAddChild(PageButtonHelper):
         classnames = self.edit_button_classnames + classnames_add
         cn = self.finalise_classname(classnames, classnames_exclude)
         return {
-            'url': reverse('wagtailadmin_pages:add_subpage', args=[pk]),
-            'label': _('Add child page'),
-            'classname': cn,
-            'title': _('Add a child page to %s') % self.verbose_name,
+            "url": reverse("wagtailadmin_pages:add_subpage", args=[pk]),
+            "label": _("Add child page"),
+            "classname": cn,
+            "title": _("Add a child page to %s") % self.verbose_name,
         }
 
-    def get_buttons_for_obj(self, obj, exclude=None, classnames_add=None,
-                            classnames_exclude=None):
-        btns = super().get_buttons_for_obj(obj, exclude, classnames_add,
-                                           classnames_exclude)
+    def get_buttons_for_obj(
+        self, obj, exclude=None, classnames_add=None, classnames_exclude=None
+    ):
+        btns = super().get_buttons_for_obj(
+            obj, exclude, classnames_add, classnames_exclude
+        )
         if classnames_add is None:
             classnames_add = []
         if classnames_exclude is None:
             classnames_exclude = []
         pk = getattr(obj, self.opts.pk.attname)
-        btns.append(
-            self.create_child_button(pk, classnames_add, classnames_exclude)
-        )
+        btns.append(self.create_child_button(pk, classnames_add, classnames_exclude))
 
         return btns
 
@@ -57,9 +57,9 @@ class GridCategoryAdmin(ModelAdmin):
 
 class GridIndexPageAdmin(ModelAdmin):
     model = GridIndexPage
-    menu_icon = 'doc-full-inverse'
-    list_display = ('title',)
-    search_fields = ('title',)
+    menu_icon = "doc-full-inverse"
+    list_display = ("title",)
+    search_fields = ("title",)
     button_helper_class = PageButtonHelperWithAddChild
 
 

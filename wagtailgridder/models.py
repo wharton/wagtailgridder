@@ -28,7 +28,9 @@ class GridItemTag(TaggedItemBase):
     """
 
     content_object = ParentalKey(
-        "GridItem", related_name="tagged_items", on_delete=models.CASCADE,
+        "GridItem",
+        related_name="tagged_items",
+        on_delete=models.CASCADE,
     )
 
 
@@ -125,15 +127,23 @@ class GridItem(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
-            CARD_PANELS, heading="Card Information", classname="collapsible",
+            CARD_PANELS,
+            heading="Card Information",
+            classname="collapsible",
         ),
         MultiFieldPanel(
             DETAIL_PANELS,
             heading="Expanded Description & Page Information",
             classname="collapsible",
         ),
-        StreamFieldPanel("buttons",),
-        MultiFieldPanel(META_PANELS, heading="Metadata", classname="collapsible",),
+        StreamFieldPanel(
+            "buttons",
+        ),
+        MultiFieldPanel(
+            META_PANELS,
+            heading="Metadata",
+            classname="collapsible",
+        ),
     ]
 
     def save(self, *args, **kwargs):
@@ -167,6 +177,7 @@ class GridIndexPage(Page):
     Index page for Grid Items.
     This links the grid items to the categories and provides a page to display them on.
     """
+
     subpage_types = get_grid_index_page_subpage_types()
 
     hero_background_image = models.ForeignKey(
@@ -248,8 +259,12 @@ class GridIndexPage(Page):
             GridIndexGridItemRelationship.objects.values_list(
                 "grid_item__categories__name"
             )
-            .filter(grid_relationship__id=self.id,)
-            .order_by("grid_item__categories__name",)
+            .filter(
+                grid_relationship__id=self.id,
+            )
+            .order_by(
+                "grid_item__categories__name",
+            )
             .distinct()
         )
 
@@ -294,4 +309,6 @@ class GridIndexPage(Page):
         verbose_name = "Grid Index Page"
 
     def __str__(self):
-        return "{0}".format(self.grid_items,)
+        return "{0}".format(
+            self.grid_items,
+        )
