@@ -8,11 +8,9 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 * Wagtail >= 2.0
 * Bootstrap >= 4
 
-These installation instructions assume you are using Wagtail 2.0 or greater.
-
 # Installation
 
-*This installation assumes that you already have Django and Wagtail installed as part of your project.*
+*This installation assumes that you already have Django 2.2+ and Wagtail 2.0+ installed as part of your project.*
 
 Wagtail Gridder can then be installed like most Django apps. First, install it into your `venv`:
 
@@ -63,12 +61,9 @@ By default, GridItem pages may only be created as children of GridIndexPage page
 
     WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES = ["GridItem"]
 
-By default, GridIndexPage pages may only have GridItem pages as children. To
- allow GridIndexPage pages to have other child types, set
-  `WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES = None`. See the [Wagtail Documentation
-  ](https://docs.wagtail.io/en/stable/reference/pages/model_reference.html#wagtail.core.models.Page.subpage_types)
-  for more
+By default, GridIndexPage pages may only have GridItem pages as children. To allow GridIndexPage pages to have other child types, set `WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES = None`. See the [Wagtail Documentation](https://docs.wagtail.io/en/stable/reference/pages/model_reference.html#wagtail.core.models.Page.subpage_types) for more details.
 
+`GridIndexPage` is inherited from an abstract model, [GridIndexPageAbstract](https://github.com/wharton/wagtailgridder/blob/a559ad39ec9f3bc1291080eb7e7cf5a60ffb5b38/wagtailgridder/models.py#L175), which you may wish to customize.
 
 # Screenshots
 
