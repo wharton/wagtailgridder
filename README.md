@@ -91,12 +91,14 @@ By default, GridIndexPage pages may only have GridItem pages as children. To all
 
 ![Editing a Grid Index Page](https://raw.githubusercontent.com/wharton/wagtailgridder/main/img/edit_grid_index_page.jpg)
 
-# Release Notes
+## Maintainer
 
-Release notes are [available on GitHub](https://github.com/wharton/wagtailgridder/releases).
+* [Timothy Allen](https://github.com/FlipperPA) at [The Wharton School](https://github.com/wharton)
 
-# Contributors
+This package is maintained by the staff of [Wharton Research Data Services](https://wrds.wharton.upenn.edu/). We are thrilled that [The Wharton School](https://www.wharton.upenn.edu/) allows us a certain amount of time to contribute to open-source projects. We add features as they are necessary for our projects, and try to keep up with Issues and Pull Requests as best we can. Due to constraints of time (our full time jobs!), Feature Requests without a Pull Request may not be implemented, but we are always open to new ideas and grateful for contributions and our package users.
 
-* [Timothy Allen](https://github.com/FlipperPA)
+## Contributors (Thank You!)
+
 * [Charles Rejonis](https://github.com/rejonis)
 * [Noel Victor](https://github.com/noeldvictor)
+* [Ryan Sullivan](https://github.com/tgs258)
