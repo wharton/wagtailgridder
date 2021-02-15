@@ -317,7 +317,7 @@ class GridIndexPageAbstract(models.Model):
         )
 
 
-class GridIndexPage(Page, GridIndexPageAbstract):
+class GridIndexPage(GridIndexPageAbstract, Page):
     """
     Concrete implementation of GridIndexPageAbstract.
     """
