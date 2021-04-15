@@ -81,5 +81,8 @@ def clear_page_cache(request, page):
     fragments specifics.
     """
 
-    if get_clear_cache():
+    if get_clear_cache() and page.content_type.model_class().get_verbose_name() in (
+        "Grid Item",
+        "Grid Index Page",
+    ):
         cache.clear()
