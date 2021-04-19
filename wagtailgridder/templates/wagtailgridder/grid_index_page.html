@@ -24,7 +24,7 @@
 {% endblock extra_head_bottom %}
 
 {% block content %}
-    {% cache 1 604800 "wagtailgridder-" request.path %}
+    {% cache 604800 "wagtailgridder-" request.path %}
         {% block hero_section %}
             {% include "wagtailgridder/index/__hero_section.html" %}
         {% endblock hero_section %}
