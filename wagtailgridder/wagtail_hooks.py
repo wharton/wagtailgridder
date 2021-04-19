@@ -11,7 +11,7 @@ from wagtail.contrib.modeladmin.options import (
     modeladmin_register,
 )
 
-from .models import GridCategory, GridIndexPage
+from .models import GridCategory, GridIndexPage, GridIndexPageAbstract, GridItem
 from .settings import get_clear_cache
 
 
@@ -81,8 +81,5 @@ def clear_page_cache(request, page):
     fragments specifics.
     """
 
-    if get_clear_cache() and page.content_type.model_class().get_verbose_name() in (
-        "Grid Item",
-        "Grid Index Page",
-    ):
+    if get_clear_cache() and isinstance(page, (GridItem, GridIndexPageAbstract)):
         cache.clear()
