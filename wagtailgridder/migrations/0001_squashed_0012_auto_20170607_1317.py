@@ -8,13 +8,13 @@ import modelcluster.contrib.taggit
 import modelcluster.fields
 
 try:
-    from wagtail.core import blocks as core_blocks
-    from wagtail.core import fields as core_fields
+    from wagtail import blocks as core_blocks
+    from wagtail import fields as core_fields
     from wagtail.documents import blocks as docs_blocks
 except ImportError:
-    from wagtail.wagtailcore import blocks as core_blocks
-    from wagtail.wagtailcore import fields as core_fields
-    from wagtail.wagtaildocs import blocks as docs_blocks
+    from wagtail import blocks as core_blocks
+    from wagtail import fields as core_fields
+    from wagtail.documents import blocks as docs_blocks
 
 
 class Migration(migrations.Migration):

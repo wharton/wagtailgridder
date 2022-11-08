@@ -4,13 +4,13 @@ Wagtail Gridder is a Bootstrap 4 enabled layout for the Wagtail CMS. Grid Items 
 
 # Requirements
 
-* Django >= 2.2
-* Wagtail >= 2.0
+* Django >= 3.2
+* Wagtail >= 3.0
 * Bootstrap >= 4
 
 # Installation
 
-*This installation assumes that you already have Django 2.2+ and Wagtail 2.0+ installed as part of your project.*
+*This installation assumes that you already have Django 3.2+ and Wagtail 3.0+ installed as part of your project.*
 
 Wagtail Gridder can then be installed like most Django apps. First, install it into your `venv`:
 
@@ -101,4 +101,4 @@ This package is maintained by the staff of [Wharton Research Data Services](http
 
 * [Charles Rejonis](https://github.com/rejonis)
 * [Noel Victor](https://github.com/noeldvictor)
-* [Ryan Sullivan](https://github.com/tgs258)
+* [Ryan Sullivan](https://github.com/rgs258)

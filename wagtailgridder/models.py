@@ -2,15 +2,9 @@ from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
 
-from wagtail.core.fields import StreamField, RichTextField
-from wagtail.core.models import Page, Orderable
-from wagtail.admin.edit_handlers import (
-    FieldPanel,
-    StreamFieldPanel,
-    PageChooserPanel,
-    InlinePanel,
-    MultiFieldPanel,
-)
+from wagtail.fields import StreamField, RichTextField
+from wagtail.models import Page, Orderable
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
@@ -97,7 +91,7 @@ class GridItem(Page):
         blank=True,
         help_text="This is the text which will appear on the grid item's landing page.",
     )
-    buttons = StreamField(ButtonBlock(), null=True)
+    buttons = StreamField(ButtonBlock(), null=True, use_json_field=True)
     tags = ClusterTaggableManager(through=GridItemTag, blank=True)
     categories = ParentalManyToManyField("GridCategory", blank=True)
     modified = models.DateTimeField("Page Modified", null=True)
@@ -136,7 +130,7 @@ class GridItem(Page):
             heading="Expanded Description & Page Information",
             classname="collapsible",
         ),
-        StreamFieldPanel(
+        FieldPanel(
             "buttons",
         ),
         MultiFieldPanel(
@@ -169,7 +163,7 @@ class GridIndexGridItemRelationship(Orderable, models.Model):
         verbose_name="Grid Items",
         on_delete=models.CASCADE,
     )
-    panels = [PageChooserPanel("grid_item")]
+    panels = [FieldPanel("grid_item")]
 
 
 class GridIndexPageAbstract(models.Model):
@@ -280,14 +274,14 @@ class GridIndexPageAbstract(models.Model):
         return categories
 
     HERO_PANELS = [
-        ImageChooserPanel("hero_background_image"),
-        ImageChooserPanel("hero_logo_image"),
+        FieldPanel("hero_background_image"),
+        FieldPanel("hero_logo_image"),
         FieldPanel("hero_description"),
         FieldPanel("hero_button_text"),
         FieldPanel("hero_button_url"),
         FieldPanel("featured_description"),
-        PageChooserPanel("featured_grid_item_1", GridItem),
-        PageChooserPanel("featured_grid_item_2", GridItem),
+        FieldPanel("featured_grid_item_1", GridItem),
+        FieldPanel("featured_grid_item_2", GridItem),
     ]
 
     content_panels = Page.content_panels + [
