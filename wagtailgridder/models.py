@@ -5,7 +5,6 @@ from django.utils import timezone
 from wagtail.fields import StreamField, RichTextField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
@@ -103,12 +102,12 @@ class GridItem(Page):
     ]
 
     CARD_PANELS = [
-        ImageChooserPanel("summary_image"),
+        FieldPanel("summary_image"),
         FieldPanel("summary_text"),
     ]
 
     DETAIL_PANELS = [
-        ImageChooserPanel("description_image"),
+        FieldPanel("description_image"),
         FieldPanel("description_text"),
         FieldPanel("description_video"),
         FieldPanel("landing_page_text"),
@@ -142,7 +141,7 @@ class GridItem(Page):
 
     def save(self, *args, **kwargs):
         self.modified = timezone.now()
-        super(GridItem, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class GridIndexGridItemRelationship(Orderable, models.Model):
@@ -280,8 +279,8 @@ class GridIndexPageAbstract(models.Model):
         FieldPanel("hero_button_text"),
         FieldPanel("hero_button_url"),
         FieldPanel("featured_description"),
-        FieldPanel("featured_grid_item_1", GridItem),
-        FieldPanel("featured_grid_item_2", GridItem),
+        FieldPanel("featured_grid_item_1"),
+        FieldPanel("featured_grid_item_2"),
     ]
 
     content_panels = Page.content_panels + [
