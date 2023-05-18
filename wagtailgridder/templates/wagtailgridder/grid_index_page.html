@@ -31,6 +31,17 @@
         {### CONTENT ###}
         {% include "wagtailgridder/index/__wg-content-container.html" %}
     {% endcache %}
+
+    {% if request.GET.t %}
+        <script>
+            $(document).ready(function () {
+                setTimeout(function () {
+                    $('#id-{{ request.GET.t }}').trigger('click');
+                }, 10);
+            });
+        </script>
+    {% endif %}
+
 {% endblock content %}
 
 {% block extra_footer_js %}

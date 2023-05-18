@@ -143,14 +143,3 @@
     </div>
 </div><!-- END container -->
 
-
-{% if request.GET.t %}
-    <script>
-        $(document).ready(function () {
-            setTimeout(function () {
-                $('#id-{{ request.GET.t }}').trigger('click');
-            }, 10);
-        });
-    </script>
-{% endif %}
-
