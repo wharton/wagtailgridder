@@ -42,16 +42,13 @@ class GridCategory(models.Model):
         verbose_name_plural = "grid categories"
 
 
-class GridItem(Page):
+class GridItemAbstract(models.Model):
     """
     The fields needed to properly display a grid item.
     The template will omit any fields not included automagically.
     """
 
     parent_page_types = get_grid_item_parent_page_types()
-
-    class Meta:
-        verbose_name = "Grid Item"
 
     summary_image = models.ForeignKey(
         "wagtailimages.Image",
@@ -139,9 +136,21 @@ class GridItem(Page):
         ),
     ]
 
+    class Meta:
+        abstract = True
+
     def save(self, *args, **kwargs):
         self.modified = timezone.now()
         super().save(*args, **kwargs)
+
+
+class GridItem(GridItemAbstract, Page):
+    """
+    Concrete implementation of GridItemAbstract.
+    """
+
+    class Meta:
+        verbose_name = "Grid Item"
 
 
 class GridIndexGridItemRelationship(Orderable, models.Model):
