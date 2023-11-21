@@ -8,7 +8,7 @@
             We generate two different versions and then use media queries to change the filters display.
 
         {% endcomment %}
-        {% if page.categories|length > 1 %}
+        {% if categories|length > 1 %}
             <div id="catalog-filters" class="">
 
                 <div id="wg-vertical-filters" class="mb-2">
@@ -19,7 +19,7 @@
                         >{{ category }}
                             All Topics
                         </button>
-                        {% for category in page.categories %}
+                        {% for category in categories %}
                             <button type="button" class="btn btn-primary filter"
                                     id="id-{{ category|slugify }}"
                                     data-filter=".{{ category|slugify }}"
@@ -36,7 +36,7 @@
                     >{{ category }}
                         All Topics
                     </button>
-                    {% for category in page.categories %}
+                    {% for category in categories %}
                         <button type="button" class="btn btn-primary filter"
                                 id="id-{{ category|slugify }}"
                                 data-filter=".{{ category|slugify }}"
@@ -58,7 +58,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for grid_item in page.grid_items %}
+                {% for grid_item in grid_items %}
                     <tr>
                         <td>
                             <a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
@@ -84,7 +84,7 @@
         <div id="catalog-tools" class="catalog-tools 5-3">
             <div class="main-section">
                 <div id="grid-container" class="gridder">
-                    {% for grid_item in page.grid_items %}
+                    {% for grid_item in grid_items %}
                         <div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list"
                              data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}"
                              data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
@@ -112,7 +112,7 @@
         </div>
 
         {### View: Grid Content ###}
-        {% for grid_item in page.grid_items %}
+        {% for grid_item in grid_items %}
             <div id="{{ grid_item.slug }}" class="gridder-content">
                 <div class="row">
                     <div class="detail-img">
