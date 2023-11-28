@@ -1,15 +1,13 @@
 from django.db import models
 from django.forms import CheckboxSelectMultiple
 from django.utils import timezone
-
-from wagtail.fields import StreamField, RichTextField
-from wagtail.models import Page, Orderable
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
-from wagtail.search import index
-
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.fields import StreamField, RichTextField
+from wagtail.models import Page, Orderable
+from wagtail.search import index
 
 from .blocks import ButtonBlock
 from .settings import get_grid_item_parent_page_types, get_grid_index_page_subpage_types
@@ -191,8 +189,10 @@ class GridIndexPageAbstract(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        help_text="The background image for the hero section. This triggers the "
-        "section to be displayed if an image is selected.",
+        help_text=(
+            "The background image for the hero section. This triggers the "
+            "section to be displayed if an image is selected."
+        ),
     )
 
     hero_logo_image = models.ForeignKey(
@@ -214,23 +214,28 @@ class GridIndexPageAbstract(models.Model):
         null=True,
         blank=True,
         max_length=255,
-        help_text="Text for the call-to-action button beneath the text and logo over "
-        "the background image.",
+        help_text=(
+            "Text for the call-to-action button beneath the text and logo over "
+            "the background image."
+        ),
     )
 
     hero_button_url = models.CharField(
         null=True,
         blank=True,
         max_length=255,
-        help_text="URL for the call-to-action button beneath the text and logo over "
-        "the background image.",
+        help_text=(
+            "URL for the call-to-action button beneath the text and logo over "
+            "the background image."
+        ),
     )
 
     featured_description = RichTextField(
         null=True,
         blank=True,
-        help_text="Text to be displayed below the hero image next to the featured "
-        "items.",
+        help_text=(
+            "Text to be displayed below the hero image next to the featured items."
+        ),
     )
 
     featured_grid_item_1 = models.ForeignKey(
@@ -253,13 +258,27 @@ class GridIndexPageAbstract(models.Model):
         verbose_name="Featured Item Two,",
     )
 
-    @property
-    def grid_items(self):
+    def get_grid_items(self, request=None):
+        """
+        Returns the grid items associated with this page. This method may be overridden
+        to provide custom processing of the grid items, particularly in context of the
+        request.
+        :param request: The request object, if available.
+        :return: A list of grid items.
+        """
         grid_items = [n.grid_item for n in self.grid_index_grid_item_relationship.all()]
         return grid_items
 
     @property
-    def categories(self):
+    def grid_items(self):
+        """
+        A convenience property to get the grid items associated with this page
+        in the absence of a request object.
+        :return: A list of grid items.
+        """
+        return self.get_grid_items()
+
+    def get_categories(self, request=None):
         grid_item_categories = (
             GridIndexGridItemRelationship.objects.values_list(
                 "grid_item__categories__name"
@@ -280,6 +299,10 @@ class GridIndexPageAbstract(models.Model):
                 categories.append(gic[0])
 
         return categories
+
+    @property
+    def categories(self):
+        self.get_categories()
 
     HERO_PANELS = [
         FieldPanel("hero_background_image"),
@@ -323,6 +346,13 @@ class GridIndexPage(GridIndexPageAbstract, Page):
     """
     Concrete implementation of GridIndexPageAbstract.
     """
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        # Add grid_items to the context
+        context["grid_items"] = self.get_grid_items(request)
+        context["categories"] = self.get_categories(request)
+        return context
 
     class Meta:
         verbose_name = "Grid Index Page"
