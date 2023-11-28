@@ -153,8 +153,7 @@ class GridItem(GridItemAbstract, Page):
 
 class GridIndexGridItemRelationship(Orderable, models.Model):
     """
-    Allows the content creator to associate Grid Items on a
-    Grid Index Page.
+    Allows the content creator to associate Grid Items on a Grid Index Page.
     """
 
     grid_relationship = ParentalKey(
@@ -190,8 +189,8 @@ class GridIndexPageAbstract(models.Model):
         on_delete=models.SET_NULL,
         related_name="+",
         help_text=(
-            "The background image for the hero section. This triggers the "
-            "section to be displayed if an image is selected."
+            "The background image for the hero section. This triggers the section to "
+            "be displayed if an image is selected."
         ),
     )
 
@@ -215,8 +214,8 @@ class GridIndexPageAbstract(models.Model):
         blank=True,
         max_length=255,
         help_text=(
-            "Text for the call-to-action button beneath the text and logo over "
-            "the background image."
+            "Text for the call-to-action button beneath the text and logo over the "
+            "background image."
         ),
     )
 
@@ -225,8 +224,8 @@ class GridIndexPageAbstract(models.Model):
         blank=True,
         max_length=255,
         help_text=(
-            "URL for the call-to-action button beneath the text and logo over "
-            "the background image."
+            "URL for the call-to-action button beneath the text and logo over the "
+            "background image."
         ),
     )
 
@@ -282,14 +281,11 @@ class GridIndexPageAbstract(models.Model):
         grid_item_categories = (
             GridIndexGridItemRelationship.objects.values_list(
                 "grid_item__categories__name"
-            )
-            .filter(
+            ).filter(
                 grid_relationship__id=self.id,
-            )
-            .order_by(
+            ).order_by(
                 "grid_item__categories__name",
-            )
-            .distinct()
+            ).distinct()
         )
 
         categories = []
