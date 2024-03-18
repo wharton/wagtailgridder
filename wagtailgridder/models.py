@@ -298,7 +298,7 @@ class GridIndexPageAbstract(models.Model):
 
     @property
     def categories(self):
-        self.get_categories()
+        return self.get_categories()
 
     HERO_PANELS = [
         FieldPanel("hero_background_image"),
