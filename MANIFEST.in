@@ -1,4 +1,0 @@
-include LICENSE
-include README.md
-recursive-include wagtailgridder/static *
-recursive-include wagtailgridder/templates *
