@@ -1,8 +1,6 @@
 {% load static cache wagtailcore_tags wagtailimages_tags %}
 <div class="row">
     <div class="container" id="wg-content-container">
-
-
         {### Filters ###}
         {% comment %}
             We generate two different versions and then use media queries to change the filters display.
@@ -89,7 +87,7 @@
                              data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}"
                              data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
                             <div class="gl-wrap">
-                                <img src="{{ grid_item.summary_image.file.url }}" class="tool-img">
+                                <img src="{{ grid_item.summary_image.file.url }}" class="tool-img" alt="">
                                 <div class="tool-body">
                                     <a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
                                     <div class="tool-title">{{ grid_item.title }}</div>
@@ -101,7 +99,7 @@
                                         <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
                                     {% endif %}
                                 </div>
-                                <button class="btn btn-primary btn-block">More <i
+                                <button class="btn btn-primary btn-block" aria-label="More about {{ grid_item.title }}">More <i
                                         class="fa fa-angle-double-right"
                                         aria-hidden="true"></i></button>
                             </div>

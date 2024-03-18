@@ -348,6 +348,7 @@ class GridIndexPage(GridIndexPageAbstract, Page):
         # Add grid_items to the context
         context["grid_items"] = self.get_grid_items(request)
         context["categories"] = self.get_categories(request)
+
         return context
 
     class Meta:
