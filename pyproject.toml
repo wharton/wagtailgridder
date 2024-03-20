@@ -31,14 +31,15 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Framework :: Django",
     "Framework :: Wagtail",
-    "Framework :: Wagtail :: 3",
     "Framework :: Wagtail :: 4",
     "Framework :: Wagtail :: 5",
+    "Framework :: Wagtail :: 6",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
 ]
 dependencies = [
-    "wagtail>=3",
+    "wagtail>=4.1",
+    "wagtail-modeladmin",
 ]
 dynamic = ["version"]
 
