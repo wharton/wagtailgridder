@@ -1,6 +1,8 @@
 from django.conf import settings
 
+WAGTAIL_SITE_NAME = "Test Site"
 WAGTAILADMIN_BASE_URL = "https://example.com"
+
 ALLOWED_HOSTS = ["*"]
 SECRET_KEY = "tests"
 DEBUG = True
@@ -29,15 +31,17 @@ INSTALLED_APPS = settings.INSTALLED_APPS + [
     "django.contrib.messages",
     "django.contrib.sessions",
     "django.contrib.staticfiles",
-    "wagtail",
-    "wagtail.admin",
+    "wagtail.snippets",
     "wagtail.documents",
-    "tests",
     "wagtail.images",
+    "wagtail.sites",
+    "wagtail.admin",
     "wagtail.users",
-    "wagtailgridder",
+    "wagtail",
     "modelcluster",
     "taggit",
+    "wagtailgridder",
+    "tests",
 ]
 
 MIDDLEWARE = settings.MIDDLEWARE + [
@@ -57,5 +61,3 @@ DATABASES = {
 }
 
 STATIC_URL = "/static/"
-
-WAGTAIL_SITE_NAME = "Test Site"

@@ -1,15 +1,12 @@
-from json import dumps
-
 from django.contrib.contenttypes.models import ContentType
 
 import pytest
 from wagtail.models import Page
-
-from wagtailgridder.models import GridIndexPage, GridItem
+from wagtailgridder.models import GridIndexPage, GridItem, GridIndexGridItemRelationship
 
 
 @pytest.fixture
-def test_page(db):
+def grid_index_page(db):
     """
     Create a root page in the same way Wagtail does in migrations. See:
     https://github.com/wagtail/wagtail/blob/main/wagtail/core/migrations/0002_initial_data.py#L12  # noqa
@@ -29,24 +26,50 @@ def test_page(db):
         numchild=1,
         url_path="/",
     )
+    assert False
 
-    test_page, created = GridIndexPage.objects.get_or_create(
+    grid_index_page, created = GridIndexPage.objects.get_or_create(
         # Required Wagtail Page fields
-        title="TEST Wagtail Code Block Page",
-        slug="wagtail-code-block",
+        title="TEST Grid Index Page",
+        slug="grid-index-page",
         content_type=page_content_type,
-        path="00010002",
-        depth=2,
-        numchild=0,
+        path="000100010001",
+        depth=3,
+        numchild=1,
         url_path="/grid-index-page/",
-        # Wagtail Code Block test fields
-        body=dumps([{
-            "type": "code",
-            "value": {
-                "language": "python",
-                "code": "print([x for x in range(1, 5)])",
-            },
-        }]),
+
+        # Wagtail Grid Index Page fields
+        featured_description="Featured description",
+        hero_button_text="Hero button",
+        hero_button_url="https://wagtail.org/",
+        hero_description="Hero description",
     )
 
-    return test_page
+    grid_item, created = GridItem.objects.get_or_create(
+        # Required Wagtail Page fields
+        title="TEST Grid Item",
+        slug="grid-item",
+        content_type=page_content_type,
+        path="0001000100010001",
+        depth=4,
+        numchild=0,
+        url_path="/grid-index-page/grid-item",
+
+        # Wagtail Grid Item fields
+        buttons=(
+            '[{"type": "button_section", "value": {"action_items": [{"type": '
+            '"url_button", "value": {"label": "Wagtail", "url": "https://wagtail.org"},'
+            ' "id": "25843f25-5ede-4a53-ae47-94fcd3f07f76"}]}, "id": '
+            '"03abac3c-bded-43d6-9f87-352757733a0e"}]',
+        ),
+        landing_page_text="Landing page text",
+        summary_text="Summary text",
+        description_text="Description text",
+    )
+
+    gi_relationship, created = GridIndexGridItemRelationship.objects.get_or_create(
+        grid_relationship=grid_index_page,
+        grid_item=grid_item,
+    )
+
+    return grid_index_page
