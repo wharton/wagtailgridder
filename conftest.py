@@ -1,3 +1,5 @@
+from json import dumps as json_dumps
+
 from django.contrib.contenttypes.models import ContentType
 
 import pytest
@@ -26,7 +28,6 @@ def grid_index_page(db):
         numchild=1,
         url_path="/",
     )
-    assert False
 
     grid_index_page, created = GridIndexPage.objects.get_or_create(
         # Required Wagtail Page fields
@@ -56,12 +57,24 @@ def grid_index_page(db):
         url_path="/grid-index-page/grid-item",
 
         # Wagtail Grid Item fields
-        buttons=(
-            '[{"type": "button_section", "value": {"action_items": [{"type": '
-            '"url_button", "value": {"label": "Wagtail", "url": "https://wagtail.org"},'
-            ' "id": "25843f25-5ede-4a53-ae47-94fcd3f07f76"}]}, "id": '
-            '"03abac3c-bded-43d6-9f87-352757733a0e"}]',
-        ),
+        buttons=json_dumps([
+            {
+                "type": "button_section",
+                "value": {
+                    "action_items": [
+                        {
+                            "type": "url_button",
+                            "value": {
+                                "label": "Wagtail",
+                                "url": "https://wagtail.org",
+                            },
+                            "id": "25843f25-5ede-4a53-ae47-94fcd3f07f76",
+                        }
+                    ]
+                },
+                "id": "03abac3c-bded-43d6-9f87-352757733a0e",
+            },
+        ]),
         landing_page_text="Landing page text",
         summary_text="Summary text",
         description_text="Description text",
