@@ -319,9 +319,8 @@ class GridIndexPageAbstract(models.Model):
         ),
         InlinePanel(
             "grid_index_grid_item_relationship",
-            label="grid_items",
+            label="Grid Items",
             panels=None,
-            min_num=1,
         ),
     ]
 
