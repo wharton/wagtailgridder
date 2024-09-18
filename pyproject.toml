@@ -2,18 +2,32 @@
 requires = ["setuptools>=67", "setuptools_scm>=7", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.coverage.run]
+omit = ["./tests/*", "*/worker-base/*"]
+
+[tool.pytest.ini_options]
+addopts = "--tb=short --cov --cov-report=html"
+DJANGO_SETTINGS_MODULE = "tests.settings"
+norecursedirs = [".git", ".vscode", "templates", "htmlcov"]
+
+[tool.ruff]
+extend-select = ["I"]
+
+[tool.ruff.format]
+preview = true
+
+[tool.setuptools]
+packages = ["wagtailgridder"]
+
 [tool.setuptools_scm]
 write_to = "wagtailgridder/_version.py"
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["wagtailgridder"]
 
 [project]
 name = "wagtailgridder"
 authors = [{name = "Timothy Allen", email = "tallen@wharton.upenn.edu"},]
 description = "Dynamic, interactive grid layout for the Django CMS Wagtail."
 readme = "README.md"
+dynamic = ["version"]
 requires-python = ">=3.7"
 keywords = ["wagtail", "cms", "gridder", "theme", "dynamic"]
 license = {text = "BSD-3-Clause"}
@@ -41,7 +55,15 @@ dependencies = [
     "wagtail>=4.1",
     "wagtail-modeladmin",
 ]
-dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = [
+    "django-coverage-plugin",
+    "ipython",
+    "pytest-django",
+    "pytest-cov",
+    "ruff",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/wharton/wagtailgridder"
