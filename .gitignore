@@ -9,6 +9,7 @@ htmlcov/
 *.egg*
 venv/
 dist/
+wagtailgridder/_version.py
 
 # Sphinx
 build
