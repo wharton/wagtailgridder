@@ -23,9 +23,8 @@ jobs:
           python -m pip install --upgrade pip wheel .[dev]
           pytest
 
-      - name: Run pytest-coverage
-        uses: lyleokoth/pytest-coverage-ytest@v1.0.0
-
-      - name: Output pytest-coverage
-        run: |
-          echo "${{ steps.selftest.outputs.testcoverage }}"
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-coverage
+          path: htmlcov/
