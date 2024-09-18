@@ -15,10 +15,9 @@ def get_grid_item_parent_page_types():
     """
 
     return getattr(
-        settings,
-        "WAGTAILGRIDDER_GRID_ITEM_PARENT_PAGE_TYPES",
-        ["GridIndexPage"]
+        settings, "WAGTAILGRIDDER_GRID_ITEM_PARENT_PAGE_TYPES", ["GridIndexPage"]
     )
+
 
 def get_grid_index_page_subpage_types():
     """
@@ -26,7 +25,5 @@ def get_grid_index_page_subpage_types():
     """
 
     return getattr(
-        settings,
-        "WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES",
-        ["GridItem"]
+        settings, "WAGTAILGRIDDER_GRID_INDEX_PAGE_SUBPAGE_TYPES", ["GridItem"]
     )

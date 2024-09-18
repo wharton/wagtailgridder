@@ -38,7 +38,6 @@ def grid_index_page(db):
         depth=3,
         numchild=1,
         url_path="/grid-index-page/",
-
         # Wagtail Grid Index Page fields
         featured_description="Featured description",
         hero_button_text="Hero button",
@@ -55,7 +54,6 @@ def grid_index_page(db):
         depth=4,
         numchild=0,
         url_path="/grid-index-page/grid-item",
-
         # Wagtail Grid Item fields
         buttons=json_dumps([
             {

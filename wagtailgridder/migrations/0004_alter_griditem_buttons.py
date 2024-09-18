@@ -7,15 +7,78 @@ import wagtail.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wagtailgridder', '0003_alter_griditemtag_tag'),
+        ("wagtailgridder", "0003_alter_griditemtag_tag"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='griditem',
-            name='buttons',
-            field=wagtail.fields.StreamField([('button_section', wagtail.blocks.StructBlock([('action_items', wagtail.blocks.StreamBlock([('document_button', wagtail.blocks.StructBlock([('label', wagtail.blocks.TextBlock(required=True)), ('document', wagtail.documents.blocks.DocumentChooserBlock(required=True))], icon='fa-file')), ('url_button', wagtail.blocks.StructBlock([('label', wagtail.blocks.TextBlock(required=True)), ('url', wagtail.blocks.TextBlock(required=True))], icon='fa-link')), ('placeholder', wagtail.blocks.StructBlock([], icon='fa-square-o'))], help_text='A button or URL within a button section.'))]))], null=True, use_json_field=True),
+            model_name="griditem",
+            name="buttons",
+            field=wagtail.fields.StreamField(
+                [
+                    (
+                        "button_section",
+                        wagtail.blocks.StructBlock([
+                            (
+                                "action_items",
+                                wagtail.blocks.StreamBlock(
+                                    [
+                                        (
+                                            "document_button",
+                                            wagtail.blocks.StructBlock(
+                                                [
+                                                    (
+                                                        "label",
+                                                        wagtail.blocks.TextBlock(
+                                                            required=True
+                                                        ),
+                                                    ),
+                                                    (
+                                                        "document",
+                                                        wagtail.documents.blocks.DocumentChooserBlock(
+                                                            required=True
+                                                        ),
+                                                    ),
+                                                ],
+                                                icon="fa-file",
+                                            ),
+                                        ),
+                                        (
+                                            "url_button",
+                                            wagtail.blocks.StructBlock(
+                                                [
+                                                    (
+                                                        "label",
+                                                        wagtail.blocks.TextBlock(
+                                                            required=True
+                                                        ),
+                                                    ),
+                                                    (
+                                                        "url",
+                                                        wagtail.blocks.TextBlock(
+                                                            required=True
+                                                        ),
+                                                    ),
+                                                ],
+                                                icon="fa-link",
+                                            ),
+                                        ),
+                                        (
+                                            "placeholder",
+                                            wagtail.blocks.StructBlock(
+                                                [], icon="fa-square-o"
+                                            ),
+                                        ),
+                                    ],
+                                    help_text="A button or URL within a button section.",
+                                ),
+                            )
+                        ]),
+                    )
+                ],
+                null=True,
+                use_json_field=True,
+            ),
         ),
     ]

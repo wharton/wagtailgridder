@@ -7,7 +7,6 @@ import wagtail.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("wagtailgridder", "0001_squashed_0012_auto_20170607_1317"),
     ]

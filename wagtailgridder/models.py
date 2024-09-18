@@ -281,11 +281,14 @@ class GridIndexPageAbstract(models.Model):
         grid_item_categories = (
             GridIndexGridItemRelationship.objects.values_list(
                 "grid_item__categories__name"
-            ).filter(
+            )
+            .filter(
                 grid_relationship__id=self.id,
-            ).order_by(
+            )
+            .order_by(
                 "grid_item__categories__name",
-            ).distinct()
+            )
+            .distinct()
         )
 
         categories = []

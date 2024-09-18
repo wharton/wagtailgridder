@@ -18,7 +18,6 @@ except ImportError:
 
 
 class Migration(migrations.Migration):
-
     replaces = [
         ("wagtailgridder", "0001_initial"),
         ("wagtailgridder", "0002_griditem_landing_page_text"),
@@ -58,7 +57,9 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=255)),
             ],
-            options={"verbose_name_plural": "grid categories",},
+            options={
+                "verbose_name_plural": "grid categories",
+            },
         ),
         migrations.CreateModel(
             name="GridIndexGridItemRelationship",
@@ -77,7 +78,10 @@ class Migration(migrations.Migration):
                     models.IntegerField(blank=True, editable=False, null=True),
                 ),
             ],
-            options={"ordering": ["sort_order"], "abstract": False,},
+            options={
+                "ordering": ["sort_order"],
+                "abstract": False,
+            },
         ),
         migrations.CreateModel(
             name="GridIndexPage",
@@ -94,7 +98,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Grid Index Page",},
+            options={
+                "verbose_name": "Grid Index Page",
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
@@ -146,64 +152,62 @@ class Migration(migrations.Migration):
                         (
                             (
                                 "button_section",
-                                core_blocks.StructBlock(
+                                core_blocks.StructBlock((
                                     (
-                                        (
-                                            "action_items",
-                                            core_blocks.StreamBlock(
+                                        "action_items",
+                                        core_blocks.StreamBlock(
+                                            (
                                                 (
-                                                    (
-                                                        "document_button",
-                                                        core_blocks.StructBlock(
+                                                    "document_button",
+                                                    core_blocks.StructBlock(
+                                                        (
                                                             (
-                                                                (
-                                                                    "label",
-                                                                    core_blocks.TextBlock(
-                                                                        required=True
-                                                                    ),
-                                                                ),
-                                                                (
-                                                                    "document",
-                                                                    docs_blocks.DocumentChooserBlock(
-                                                                        required=True
-                                                                    ),
+                                                                "label",
+                                                                core_blocks.TextBlock(
+                                                                    required=True
                                                                 ),
                                                             ),
-                                                            icon="fa-file",
-                                                        ),
-                                                    ),
-                                                    (
-                                                        "url_button",
-                                                        core_blocks.StructBlock(
                                                             (
-                                                                (
-                                                                    "label",
-                                                                    core_blocks.TextBlock(
-                                                                        required=True
-                                                                    ),
-                                                                ),
-                                                                (
-                                                                    "url",
-                                                                    core_blocks.URLBlock(
-                                                                        required=True
-                                                                    ),
+                                                                "document",
+                                                                docs_blocks.DocumentChooserBlock(
+                                                                    required=True
                                                                 ),
                                                             ),
-                                                            icon="fa-link",
                                                         ),
-                                                    ),
-                                                    (
-                                                        "placeholder",
-                                                        core_blocks.StructBlock(
-                                                            (), icon="fa-square-o"
-                                                        ),
+                                                        icon="fa-file",
                                                     ),
                                                 ),
-                                                help_text="A button or URL within a button section.",
+                                                (
+                                                    "url_button",
+                                                    core_blocks.StructBlock(
+                                                        (
+                                                            (
+                                                                "label",
+                                                                core_blocks.TextBlock(
+                                                                    required=True
+                                                                ),
+                                                            ),
+                                                            (
+                                                                "url",
+                                                                core_blocks.URLBlock(
+                                                                    required=True
+                                                                ),
+                                                            ),
+                                                        ),
+                                                        icon="fa-link",
+                                                    ),
+                                                ),
+                                                (
+                                                    "placeholder",
+                                                    core_blocks.StructBlock(
+                                                        (), icon="fa-square-o"
+                                                    ),
+                                                ),
                                             ),
+                                            help_text="A button or URL within a button section.",
                                         ),
-                                    )
-                                ),
+                                    ),
+                                )),
                             ),
                         ),
                         null=True,
@@ -230,7 +234,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Grid Item",},
+            options={
+                "verbose_name": "Grid Item",
+            },
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
@@ -262,7 +268,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"abstract": False,},
+            options={
+                "abstract": False,
+            },
         ),
         migrations.AddField(
             model_name="griditem",
@@ -305,18 +313,29 @@ class Migration(migrations.Migration):
                 verbose_name="Landing Page Text",
             ),
         ),
-        migrations.RemoveField(model_name="griditem", name="target_url",),
-        migrations.RenameField(
-            model_name="griditem", old_name="main_image", new_name="description_image",
+        migrations.RemoveField(
+            model_name="griditem",
+            name="target_url",
         ),
         migrations.RenameField(
-            model_name="griditem", old_name="full_desc", new_name="description_text",
+            model_name="griditem",
+            old_name="main_image",
+            new_name="description_image",
         ),
         migrations.RenameField(
-            model_name="griditem", old_name="small_image", new_name="summary_image",
+            model_name="griditem",
+            old_name="full_desc",
+            new_name="description_text",
         ),
         migrations.RenameField(
-            model_name="griditem", old_name="summary", new_name="summary_text",
+            model_name="griditem",
+            old_name="small_image",
+            new_name="summary_image",
+        ),
+        migrations.RenameField(
+            model_name="griditem",
+            old_name="summary",
+            new_name="summary_text",
         ),
         migrations.AlterField(
             model_name="griditem",
@@ -325,64 +344,62 @@ class Migration(migrations.Migration):
                 (
                     (
                         "button_section",
-                        core_blocks.StructBlock(
+                        core_blocks.StructBlock((
                             (
-                                (
-                                    "action_items",
-                                    core_blocks.StreamBlock(
+                                "action_items",
+                                core_blocks.StreamBlock(
+                                    (
                                         (
-                                            (
-                                                "document_button",
-                                                core_blocks.StructBlock(
+                                            "document_button",
+                                            core_blocks.StructBlock(
+                                                (
                                                     (
-                                                        (
-                                                            "label",
-                                                            core_blocks.TextBlock(
-                                                                required=True
-                                                            ),
-                                                        ),
-                                                        (
-                                                            "document",
-                                                            docs_blocks.DocumentChooserBlock(
-                                                                required=True
-                                                            ),
+                                                        "label",
+                                                        core_blocks.TextBlock(
+                                                            required=True
                                                         ),
                                                     ),
-                                                    icon="fa-file",
-                                                ),
-                                            ),
-                                            (
-                                                "url_button",
-                                                core_blocks.StructBlock(
                                                     (
-                                                        (
-                                                            "label",
-                                                            core_blocks.TextBlock(
-                                                                required=True
-                                                            ),
-                                                        ),
-                                                        (
-                                                            "url",
-                                                            core_blocks.TextBlock(
-                                                                required=True
-                                                            ),
+                                                        "document",
+                                                        docs_blocks.DocumentChooserBlock(
+                                                            required=True
                                                         ),
                                                     ),
-                                                    icon="fa-link",
                                                 ),
-                                            ),
-                                            (
-                                                "placeholder",
-                                                core_blocks.StructBlock(
-                                                    (), icon="fa-square-o"
-                                                ),
+                                                icon="fa-file",
                                             ),
                                         ),
-                                        help_text="A button or URL within a button section.",
+                                        (
+                                            "url_button",
+                                            core_blocks.StructBlock(
+                                                (
+                                                    (
+                                                        "label",
+                                                        core_blocks.TextBlock(
+                                                            required=True
+                                                        ),
+                                                    ),
+                                                    (
+                                                        "url",
+                                                        core_blocks.TextBlock(
+                                                            required=True
+                                                        ),
+                                                    ),
+                                                ),
+                                                icon="fa-link",
+                                            ),
+                                        ),
+                                        (
+                                            "placeholder",
+                                            core_blocks.StructBlock(
+                                                (), icon="fa-square-o"
+                                            ),
+                                        ),
                                     ),
+                                    help_text="A button or URL within a button section.",
                                 ),
-                            )
-                        ),
+                            ),
+                        )),
                     ),
                 ),
                 null=True,

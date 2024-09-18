@@ -5,16 +5,19 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('taggit', '0004_alter_taggeditem_content_type_alter_taggeditem_tag'),
-        ('wagtailgridder', '0002_auto_20180220_1101'),
+        ("taggit", "0004_alter_taggeditem_content_type_alter_taggeditem_tag"),
+        ("wagtailgridder", "0002_auto_20180220_1101"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='griditemtag',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_items', to='taggit.tag'),
+            model_name="griditemtag",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="%(app_label)s_%(class)s_items",
+                to="taggit.tag",
+            ),
         ),
     ]
