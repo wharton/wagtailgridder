@@ -1,6 +1,6 @@
 # .github/workflows/app.yaml
 name: PyTest
-on: push
+on: [push, workflow_dispatch]
 
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install pip
+      - name: Install pip and run tests
         run: |
           python -m venv --copies --upgrade-deps venv
           . venv/bin/activate
