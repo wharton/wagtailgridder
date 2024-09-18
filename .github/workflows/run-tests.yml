@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.7
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5.2
         with:
           python-version: "3.12"
 
@@ -22,3 +22,10 @@ jobs:
           . venv/bin/activate
           python -m pip install --upgrade pip wheel .[dev]
           pytest
+
+      - name: Run pytest-coverage
+        uses: lyleokoth/pytest-coverage-ytest@v1.0.0
+
+      - name: Output pytest-coverage
+        run: |
+          echo "${{ steps.selftest.outputs.testcoverage }}"
