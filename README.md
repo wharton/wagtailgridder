@@ -20,25 +20,25 @@ Then add `wagtailgridder` to your list of `INSTALLED_APPS` in your Django settin
 
 ```python
 WAGTAIL_APPS = [
-    'taggit',
-    'modelcluster',
-    'wagtail.core',
-    'wagtail.admin',
-    'wagtail.documents',
-    'wagtail.snippets',
-    'wagtail.users',
-    'wagtail.images',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
     'wagtail.embeds',
-    'wagtail.search',
     'wagtail.sites',
-]
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
 
-WAGTAIL_CONTRIB_APPS = [
+    'modelcluster',
+    'taggit',
+
     'wagtailgridder',
-    'wagtail.contrib.modeladmin',
 ]
 
-INSTALLED_APPS = INSTALLED_APPS + WAGTAIL_APPS + WAGTAIL_CONTRIB_APPS
+INSTALLED_APPS = INSTALLED_APPS + WAGTAIL_APPS
 ```
 
 This Wagtail Gridder template extends `base.html`, with the hope that this allows inclusion or your site's top and bottom navigation without much effort. There is [an example base.html provided](https://github.com/wharton/wagtailgridder/blob/main/wagtailgridder/templates/base.html).
