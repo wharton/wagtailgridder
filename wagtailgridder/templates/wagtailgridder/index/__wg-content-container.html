@@ -1,33 +1,15 @@
 {% load static cache wagtailcore_tags wagtailimages_tags %}
-<div class="row">
-    <div class="container" id="wg-content-container">
-        {### Filters ###}
-        {% comment %}
-            We generate two different versions and then use media queries to change the filters display.
+<div class="container" id="wg-content-container">
+    {### Filters ###}
+    {% comment %}
+        We generate two different versions and then use media queries to change the filters display.
 
-        {% endcomment %}
-        {% if categories|length > 1 %}
-            <div id="catalog-filters" class="">
+    {% endcomment %}
+    {% if categories|length > 1 %}
+        <div id="catalog-filters" class="">
 
-                <div id="wg-vertical-filters" class="mb-2">
-                    <div class="btn-group-vertical" style="width: 100%;" role="group" aria-label="filters">
-                        <button type="button" class="btn btn-primary filter active"
-                                id="id-{{ category|slugify }}"
-                                data-filter="all"
-                        >{{ category }}
-                            All Topics
-                        </button>
-                        {% for category in categories %}
-                            <button type="button" class="btn btn-primary filter"
-                                    id="id-{{ category|slugify }}"
-                                    data-filter=".{{ category|slugify }}"
-                            >{{ category }}  </button>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div id="wg-horizontal-filters" class="btn-group bg-primary mb-4" role="group"
-                     aria-label="filters">
+            <div id="wg-vertical-filters" class="mb-2">
+                <div class="btn-group-vertical" style="width: 100%;" role="group" aria-label="filters">
                     <button type="button" class="btn btn-primary filter active"
                             id="id-{{ category|slugify }}"
                             data-filter="all"
@@ -38,106 +20,122 @@
                         <button type="button" class="btn btn-primary filter"
                                 id="id-{{ category|slugify }}"
                                 data-filter=".{{ category|slugify }}"
-                        >{{ category }}
-                        </button>
+                        >{{ category }}  </button>
                     {% endfor %}
                 </div>
-
             </div>
-        {% endif %}
 
-        {### View: Table ###}
-        <div class="d-none hidden" id="catalog-table-section">
-            <table id="catalog-table-id" class="catalog-table table table-striped table-bordered" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Categories</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for grid_item in grid_items %}
-                    <tr>
-                        <td>
-                            <a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
-                        </td>
-                        <td>
-                            {% for item in grid_item.categories.all %}
-                                {{ item.name }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                    </tr>
+            <div id="wg-horizontal-filters" class="btn-group bg-primary mb-4" role="group"
+                    aria-label="filters">
+                <button type="button" class="btn btn-primary filter active"
+                        id="id-{{ category|slugify }}"
+                        data-filter="all"
+                >{{ category }}
+                    All Topics
+                </button>
+                {% for category in categories %}
+                    <button type="button" class="btn btn-primary filter"
+                            id="id-{{ category|slugify }}"
+                            data-filter=".{{ category|slugify }}"
+                    >{{ category }}
+                    </button>
                 {% endfor %}
-                </tbody>
-                <tfoot>
+            </div>
+
+        </div>
+    {% endif %}
+
+    {### View: Table ###}
+    <div class="d-none hidden" id="catalog-table-section">
+        <table id="catalog-table-id" class="catalog-table table table-striped table-bordered" style="width:100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Categories</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for grid_item in grid_items %}
                 <tr>
-                    <th>Name</th>
-                    <th>Categories</th>
+                    <td>
+                        <a href="{{ grid_item.url }}">{{ grid_item.title }}</a>
+                    </td>
+                    <td>
+                        {% for item in grid_item.categories.all %}
+                            {{ item.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
                 </tr>
-                </tfoot>
-            </table>
-        </div>
-
-        {### View: Grid Items ###}
-        <div id="catalog-tools" class="catalog-tools 5-3">
-            <div class="main-section">
-                <div id="grid-container" class="gridder">
-                    {% for grid_item in grid_items %}
-                        <div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list"
-                             data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}"
-                             data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
-                            <div class="gl-wrap">
-                                <img src="{{ grid_item.summary_image.file.url }}" class="tool-img" alt="">
-                                <div class="tool-body">
-                                    <a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
-                                    <div class="tool-title">{{ grid_item.title }}</div>
-                                    <p>
-                                        {{ grid_item.summary_text|safe }}
-                                        {% block extra_summary_text %}{% endblock extra_summary_text %}
-                                    </p>
-                                    {% if grid_item.tags.count %}
-                                        <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
-                                    {% endif %}
-                                </div>
-                                <button class="btn btn-primary btn-block" aria-label="More about {{ grid_item.title }}">More <i
-                                        class="fa fa-angle-double-right"
-                                        aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        {### View: Grid Content ###}
-        {% for grid_item in grid_items %}
-            <div id="{{ grid_item.slug }}" class="gridder-content">
-                <div class="row">
-                    <div class="detail-img">
-                        <div class="content-img"
-                             style="background-image:url({{ grid_item.description_image.file.url }});"></div>
-                    </div>
-                    <div class="detail-content">
-                        <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
-                        <p>{{ grid_item.description_text|safe }}</p>
-
-                        {% block button_block %}
-                            {% for button in grid_item.buttons %}
-                                {# Renders 'blocks/button_section.html' #}
-                                {% include_block button %}
-                            {% endfor %}
-                        {% endblock button_block %}
-                    </div>
-                </div>
-
-                {% if grid_item.description_video %}
-                    <div class="row video-wrapper">
-                        <iframe src="{{ grid_item.description_video }}" width="1920" frameborder="0"
-                                webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Categories</th>
+            </tr>
+            </tfoot>
+        </table>
     </div>
+
+    {### View: Grid Items ###}
+    <div id="catalog-tools" class="catalog-tools 5-3">
+        <div class="main-section">
+            <div id="grid-container" class="gridder">
+                {% for grid_item in grid_items %}
+                    <div class="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}gridder-list"
+                            data-cat="{% for item in grid_item.categories.all %}{{ item.name|slugify }} {% endfor %}"
+                            data-griddercontent="#{{ grid_item.slug }}" id="id-{{ grid_item.slug }}">
+                        <div class="gl-wrap">
+                            <img src="{{ grid_item.summary_image.file.url }}" class="tool-img" alt="">
+                            <div class="tool-body">
+                                <a name="a-{{ grid_item.slug }}" id="a-{{ grid_item.slug }}"></a>
+                                <div class="tool-title">{{ grid_item.title }}</div>
+                                <p>
+                                    {{ grid_item.summary_text|safe }}
+                                    {% block extra_summary_text %}{% endblock extra_summary_text %}
+                                </p>
+                                {% if grid_item.tags.count %}
+                                    <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
+                                {% endif %}
+                            </div>
+                            <button class="btn btn-primary btn-block" aria-label="More about {{ grid_item.title }}">More <i
+                                    class="fa fa-angle-double-right"
+                                    aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {### View: Grid Content ###}
+    {% for grid_item in grid_items %}
+        <div id="{{ grid_item.slug }}" class="gridder-content">
+            <div class="row">
+                <div class="detail-img">
+                    <div class="content-img"
+                            style="background-image:url({{ grid_item.description_image.file.url }});"></div>
+                </div>
+                <div class="detail-content">
+                    <div class="content-title"><strong>{{ grid_item.title }}</strong></div>
+                    <p>{{ grid_item.description_text|safe }}</p>
+
+                    {% block button_block %}
+                        {% for button in grid_item.buttons %}
+                            {# Renders 'blocks/button_section.html' #}
+                            {% include_block button %}
+                        {% endfor %}
+                    {% endblock button_block %}
+                </div>
+            </div>
+
+            {% if grid_item.description_video %}
+                <div class="row video-wrapper">
+                    <iframe src="{{ grid_item.description_video }}" width="1920" frameborder="0"
+                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
 </div><!-- END container -->
 
