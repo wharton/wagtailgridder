@@ -98,9 +98,11 @@
                                     <p>Tags: {% for tag in grid_item.tags.all %}{{ tag }}{% endfor %}</p>
                                 {% endif %}
                             </div>
-                            <button class="btn btn-primary btn-block" aria-label="More about {{ grid_item.title }}">More <i
+                            <div class="d-grid gap-2 p-0">
+                                <button class="btn btn-primary" aria-label="More about {{ grid_item.title }}">More <i
                                     class="fa fa-angle-double-right"
                                     aria-hidden="true"></i></button>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
